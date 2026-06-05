@@ -8,6 +8,9 @@ export const metadata: Metadata = {
     default: 'CycleHub - Privacy-first Period Tracker',
   },
   description: 'Track your cycle visually, predict key dates instantly, and save everything locally on your device.',
+  other: {
+    'google-adsense-account': 'ca-pub-6393936268623951',
+  },
 };
 
 export default function RootLayout({
