@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import { SchemaMarkup } from '@/components/SchemaMarkup';
+import faqsData from '@/data/faqs.json';
 
 export const metadata: Metadata = {
   title: 'Frequently Asked Questions',
@@ -6,8 +8,22 @@ export const metadata: Metadata = {
 };
 
 export default function FAQPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqsData.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
     <div className="max-w-3xl mx-auto space-y-8">
+      <SchemaMarkup schema={faqSchema} />
       <div>
         <h1 className="heading-1 mb-4">Frequently Asked Questions</h1>
         <p className="text-[var(--muted)] text-lg">

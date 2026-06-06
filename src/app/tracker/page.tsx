@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { CycleCalendar } from '@/components/CycleCalendar';
 import { PredictionCard } from '@/components/PredictionCard';
 import { HistoryChart } from '@/components/HistoryChart';
+import { SchemaMarkup } from '@/components/SchemaMarkup';
 
 export const metadata: Metadata = {
   title: 'Tracker Dashboard',
@@ -9,8 +10,23 @@ export const metadata: Metadata = {
 };
 
 export default function TrackerPage() {
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CycleHub Tracker",
+    "url": "https://cyclehub.example.com/tracker",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Any",
+    "description": "A privacy-first, local-only menstrual cycle tracker and prediction tool.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0"
+    }
+  };
+
   return (
     <div className="space-y-8">
+      <SchemaMarkup schema={softwareSchema} />
       <div>
         <h1 className="heading-2 mb-2">Your Cycle Dashboard</h1>
         <p className="text-[var(--muted)]">Tap any date on the calendar to log the start of your period.</p>
