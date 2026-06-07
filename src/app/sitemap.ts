@@ -1,44 +1,57 @@
 import { MetadataRoute } from 'next';
 import { getGuideSlugs } from '@/lib/mdx';
+import seoData from '@/data/pSeoData.json';
+import { siteConfig, absoluteUrl } from '@/lib/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://cyclehub.example.com'; // Replace with actual production domain when known
   const currentDate = new Date();
 
   // Static core pages
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}`,
+      url: absoluteUrl('/'),
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/tracker`,
+      url: absoluteUrl('/tracker'),
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/guides`,
+      url: absoluteUrl('/guides'),
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/faq`,
+      url: absoluteUrl('/faq'),
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/about`,
+      url: absoluteUrl('/about'),
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/privacy`,
+      url: absoluteUrl('/privacy'),
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.6,
+    },
+    {
+      url: absoluteUrl('/terms-of-service'),
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.6,
+    },
+    {
+      url: absoluteUrl('/contact'),
       lastModified: currentDate,
       changeFrequency: 'yearly',
       priority: 0.6,
@@ -48,11 +61,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Dynamic programmatic SEO pages
   const guideSlugs = getGuideSlugs();
   const guideRoutes: MetadataRoute.Sitemap = guideSlugs.map((slug) => ({
-    url: `${baseUrl}/guides/${slug}`,
+    url: absoluteUrl(`/guides/${slug}`),
     lastModified: currentDate,
     changeFrequency: 'monthly',
     priority: 0.7, // Internal programmatic pages get high but sub-core priority
   }));
 
-  return [...staticRoutes, ...guideRoutes];
+  const toolRoutes: MetadataRoute.Sitemap = seoData.map((tool) => ({
+    url: absoluteUrl(`/tools/${tool.slug}`),
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.9,
+  }));
+
+  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
 }

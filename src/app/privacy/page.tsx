@@ -1,9 +1,11 @@
 import { Metadata } from 'next';
+import { constructMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = constructMetadata({
   title: 'Privacy Policy',
   description: 'Understand how CycleHub handles your data locally and protects your privacy.',
-};
+  path: '/privacy',
+});
 
 export default function PrivacyPage() {
   return (
