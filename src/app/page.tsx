@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { PredictionCard } from '@/components/PredictionCard';
 import { CycleCalendar } from '@/components/CycleCalendar';
 import { ArrowRight, Shield, Activity, CalendarDays } from 'lucide-react';
+import { RelatedToolsWidget } from '@/components/RelatedToolsWidget';
 
 export default function Home() {
   return (
@@ -73,6 +74,9 @@ export default function Home() {
           <p className="text-sm text-[var(--muted)]">Our algorithm learns your unique rhythm over time to give you more accurate next-period estimates.</p>
         </div>
       </section>
+
+      {/* Internal Traffic Engine - Related Tools Widget */}
+      <RelatedToolsWidget />
     </div>
   );
 }

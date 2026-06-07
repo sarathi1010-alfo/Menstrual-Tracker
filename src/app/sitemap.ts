@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next';
 import { getGuideSlugs } from '@/lib/mdx';
+import seoData from '@/data/pSeoData.json';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://cyclehub.example.com'; // Replace with actual production domain when known
+  const baseUrl = 'https://cyclehub.alfo.online'; // Updated to production domain
   const currentDate = new Date();
 
   // Static core pages
@@ -43,6 +44,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.6,
     },
+    {
+      url: `${baseUrl}/terms-of-service`,
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.6,
+    },
   ];
 
   // Dynamic programmatic SEO pages
@@ -54,5 +67,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7, // Internal programmatic pages get high but sub-core priority
   }));
 
-  return [...staticRoutes, ...guideRoutes];
+  const toolRoutes: MetadataRoute.Sitemap = seoData.map((tool) => ({
+    url: `${baseUrl}/tools/${tool.slug}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.9,
+  }));
+
+  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
 }

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Calendar, Home, Info, HelpCircle, Shield, ChevronDown } from 'lucide-react';
 import { TrackerProvider } from '@/components/TrackerContext';
+import { AdPlaceholder } from '@/components/AdPlaceholder';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
@@ -46,6 +47,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </header>
 
+        <div className="w-full flex justify-center border-b border-gray-100 dark:border-gray-800/50 bg-[var(--surface)]/50">
+          <AdPlaceholder type="leaderboard" />
+          <AdPlaceholder type="mobile" />
+        </div>
+
         <main className="flex-grow w-full max-w-5xl mx-auto p-4 md:p-8">
           {children}
         </main>
@@ -67,6 +73,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
         </nav>
+
+        <div className="w-full flex justify-center mt-8">
+          <AdPlaceholder type="leaderboard" />
+        </div>
 
         <footer className="bg-[var(--surface)] border-t border-gray-200 dark:border-gray-800 py-12 mt-12 pb-24 md:pb-12">
           <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm text-[var(--muted)]">

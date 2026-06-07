@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Script from 'next/script';
 import Layout from '@/components/Layout';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 import './globals.css';
@@ -29,8 +30,6 @@ export const metadata: Metadata = {
     'google-adsense-account': 'ca-pub-6393936268623951',
   },
 };
-
-import Script from 'next/script';
 
 const defaultSchema = {
   "@context": "https://schema.org",

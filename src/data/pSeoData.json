@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "ovulation-calculator",
+    "keyword": "free ovulation calculator",
+    "title": "Free Ovulation Calculator & Tracker | CycleHub",
+    "description": "Calculate your ovulation days instantly for free. A completely private, local-storage based ovulation calculator that helps you find your fertile window.",
+    "h1": "Free Ovulation Calculator",
+    "intro": "Understanding your fertile window is key whether you are trying to conceive or simply want to know your body better. Our free ovulation calculator uses your cycle length and last period date to estimate when you are most likely to ovulate.",
+    "faq": [
+      {
+        "question": "How accurate is the ovulation calculator?",
+        "answer": "This calculator uses standard calendar-based methods to estimate ovulation (typically 14 days before your next expected period). While useful for general tracking, it should not be used as primary birth control."
+      },
+      {
+        "question": "Is my ovulation data private?",
+        "answer": "Yes. CycleHub stores all your data directly in your browser's local storage. We have no servers, no databases, and no way to access your personal health information."
+      }
+    ]
+  },
+  {
+    "slug": "safe-days-calculator",
+    "keyword": "safe days calculator",
+    "title": "Safe Days Calculator | Period Tracking | CycleHub",
+    "description": "Track your safe days and fertile window with our privacy-first calendar. Understand your cycle phases without compromising your data.",
+    "h1": "Safe Days Calculator",
+    "intro": "Tracking your cycle can help you understand the different phases of your body's monthly rhythm. Our local-first safe days calculator helps you visualize your estimated fertile and non-fertile days right in your browser.",
+    "faq": [
+      {
+        "question": "What are 'safe days' in a cycle?",
+        "answer": "Safe days generally refer to the days in your menstrual cycle where you are least likely to be fertile, typically immediately before and after your period. However, calendar calculations are estimates and cycles can vary."
+      },
+      {
+        "question": "Can I trust calendar methods for birth control?",
+        "answer": "No. The calendar method is not a highly reliable form of birth control on its own, as cycle lengths can fluctuate due to stress, illness, or hormonal changes."
+      }
+    ]
+  },
+  {
+    "slug": "next-period-predictor",
+    "keyword": "next period predictor",
+    "title": "Next Period Predictor | Free Cycle Tracking | CycleHub",
+    "description": "Predict exactly when your next period will arrive. A fast, free, and completely private period predictor.",
+    "h1": "Next Period Predictor",
+    "intro": "Never be caught off guard again. Use our free next period predictor to estimate when your cycle will start based on your personal historical data. The more you log, the smarter the prediction gets, all while keeping your data strictly on your device.",
+    "faq": [
+      {
+        "question": "How does the predictor work?",
+        "answer": "It calculates your average cycle length based on the past periods you've logged and adds that average to the start date of your most recent period."
+      },
+      {
+        "question": "Why is my prediction changing?",
+        "answer": "As you log more cycles, the average length adjusts to reflect your true biological rhythm, making future predictions more accurate."
+      }
+    ]
+  }
+]

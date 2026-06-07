@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://cyclehub.example.com'; // Replace with actual production domain
+  const baseUrl = 'https://cyclehub.alfo.online'; // Updated to production domain
 
   return {
     rules: {

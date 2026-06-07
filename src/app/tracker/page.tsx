@@ -3,6 +3,7 @@ import { CycleCalendar } from '@/components/CycleCalendar';
 import { PredictionCard } from '@/components/PredictionCard';
 import { HistoryChart } from '@/components/HistoryChart';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
+import { RelatedToolsWidget } from '@/components/RelatedToolsWidget';
 
 export const metadata: Metadata = {
   title: 'Tracker Dashboard',
@@ -51,6 +52,8 @@ export default function TrackerPage() {
           </div>
         </div>
       </div>
+
+      <RelatedToolsWidget />
     </div>
   );
 }
