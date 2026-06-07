@@ -2,10 +2,13 @@ import { Metadata } from 'next';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 import faqsData from '@/data/faqs.json';
 
-export const metadata: Metadata = {
+import { constructMetadata } from '@/lib/seo';
+
+export const metadata = constructMetadata({
   title: 'Frequently Asked Questions',
   description: 'Answers to common questions about using CycleHub and understanding your cycle.',
-};
+  path: '/faq',
+});
 
 export default function FAQPage() {
   const faqSchema = {

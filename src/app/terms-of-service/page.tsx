@@ -1,7 +1,10 @@
-export const metadata = {
+import { constructMetadata } from '@/lib/seo';
+
+export const metadata = constructMetadata({
   title: 'Terms of Service',
   description: 'Terms of Service for CycleHub',
-};
+  path: '/terms-of-service',
+});
 
 export default function TermsOfService() {
   return (

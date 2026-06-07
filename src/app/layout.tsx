@@ -2,41 +2,20 @@ import { Metadata } from 'next';
 import Script from 'next/script';
 import Layout from '@/components/Layout';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
+import { constructMetadata, siteConfig, absoluteUrl } from '@/lib/seo';
 import './globals.css';
 
-export const metadata: Metadata = {
-  title: {
-    template: '%s | CycleHub',
-    default: 'CycleHub - Privacy-first Period Tracker',
-  },
+export const metadata: Metadata = constructMetadata({
+  title: 'CycleHub - Privacy-first Period Tracker',
   description: 'Track your cycle visually, predict key dates instantly, and save everything locally on your device.',
-  keywords: ['period tracker', 'menstrual cycle', 'ovulation calculator', 'privacy period tracker', 'local storage cycle tracker'],
-  alternates: {
-    canonical: 'https://cyclehub.alfo.online',
-  },
-  openGraph: {
-    title: 'CycleHub - Privacy-first Period Tracker',
-    description: 'Track your cycle visually, predict key dates instantly, and save everything locally on your device.',
-    url: 'https://cyclehub.alfo.online',
-    siteName: 'CycleHub',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'CycleHub - Privacy-first Period Tracker',
-    description: 'Track your cycle visually, predict key dates instantly, and save everything locally on your device.',
-  },
-  other: {
-    'google-adsense-account': 'ca-pub-6393936268623951',
-  },
-};
+});
 
 const defaultSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "CycleHub",
-  "url": "https://cyclehub.alfo.online",
-  "description": "Privacy-first menstrual cycle tracking tool. Calculate ovulation and track your period locally.",
+  "name": siteConfig.name,
+  "url": absoluteUrl('/'),
+  "description": siteConfig.description,
   "applicationCategory": "HealthApplication",
   "operatingSystem": "All"
 };

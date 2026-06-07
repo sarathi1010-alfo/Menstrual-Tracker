@@ -1,7 +1,10 @@
-export const metadata = {
+import { constructMetadata } from '@/lib/seo';
+
+export const metadata = constructMetadata({
   title: 'Contact Us',
   description: 'Get in touch with the CycleHub team.',
-};
+  path: '/contact',
+});
 
 export default function Contact() {
   return (

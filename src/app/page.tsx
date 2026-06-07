@@ -1,8 +1,14 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
 import { PredictionCard } from '@/components/PredictionCard';
 import { CycleCalendar } from '@/components/CycleCalendar';
 import { ArrowRight, Shield, Activity, CalendarDays } from 'lucide-react';
 import { RelatedToolsWidget } from '@/components/RelatedToolsWidget';
+import { constructMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = constructMetadata({
+  path: '/',
+});
 
 export default function Home() {
   return (

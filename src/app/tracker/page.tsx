@@ -4,11 +4,13 @@ import { PredictionCard } from '@/components/PredictionCard';
 import { HistoryChart } from '@/components/HistoryChart';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 import { RelatedToolsWidget } from '@/components/RelatedToolsWidget';
+import { constructMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = constructMetadata({
   title: 'Tracker Dashboard',
   description: 'View your cycle calendar, predictions, and history.',
-};
+  path: '/tracker',
+});
 
 export default function TrackerPage() {
   const softwareSchema = {

@@ -5,6 +5,7 @@ import { CycleCalendar } from '@/components/CycleCalendar';
 import { PredictionCard } from '@/components/PredictionCard';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 import { RelatedToolsWidget } from '@/components/RelatedToolsWidget';
+import { constructMetadata } from '@/lib/seo';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -24,19 +25,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {};
   }
 
-  return {
+  return constructMetadata({
     title: pageData.title,
     description: pageData.description,
-    keywords: [pageData.keyword, 'period tracker', 'cyclehub local storage'],
-    alternates: {
-      canonical: `https://cyclehub.alfo.online/tools/${pageData.slug}`,
-    },
-    openGraph: {
-      title: pageData.title,
-      description: pageData.description,
-      url: `https://cyclehub.alfo.online/tools/${pageData.slug}`,
-    }
-  };
+    path: `/tools/${pageData.slug}`,
+  });
 }
 
 export default async function ToolPage({ params }: Props) {

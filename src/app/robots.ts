@@ -1,13 +1,13 @@
 import { MetadataRoute } from 'next';
+import { absoluteUrl } from '@/lib/seo';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://cyclehub.alfo.online'; // Updated to production domain
-
   return {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: ['/api/'], // Standard practice to block APIs
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: absoluteUrl('/sitemap.xml'),
   };
 }
