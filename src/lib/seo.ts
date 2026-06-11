@@ -84,6 +84,7 @@ export function constructMetadata({
     },
     other: {
       'google-adsense-account': 'ca-pub-6393936268623951', // Assuming this remains the same
+      monetag: '86950f5308b2a836fd804730ef0e5e7d',
     },
   };
 }
