@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 // Centralized configuration for the site
 export const siteConfig = {
   // Use environment variable in production, fallback for local dev
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://cyclehub.alfo.online',
   name: 'CycleHub',
   description: 'Track your cycle visually, predict key dates instantly, and save everything locally on your device.',
   creator: 'alfo.online',
