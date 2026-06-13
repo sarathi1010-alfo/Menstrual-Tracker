@@ -19,12 +19,12 @@ export default function TermsOfService() {
 
       <section className="space-y-4">
         <h2 className="text-xl font-semibold">2. Description of Service</h2>
-        <p>CycleHub provides a set of tools for menstrual cycle tracking. The tools are provided "as is" and are for informational purposes only. They do not constitute medical advice.</p>
+        <p>CycleHub provides a set of tools for menstrual cycle tracking. The tools are provided &quot;as is&quot; and are for informational purposes only. They do not constitute medical advice.</p>
       </section>
 
       <section className="space-y-4">
         <h2 className="text-xl font-semibold">3. Privacy and Data Storage</h2>
-        <p>All data entered into CycleHub is stored locally on your device using your browser's local storage. We do not transmit, collect, or store your personal health data on any external servers.</p>
+        <p>All data entered into CycleHub is stored locally on your device using your browser&apos;s local storage. We do not transmit, collect, or store your personal health data on any external servers.</p>
       </section>
 
       <section className="space-y-4">

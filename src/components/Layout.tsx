@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Calendar, Home, Info, HelpCircle, Shield, ChevronDown } from 'lucide-react';
+import { Calendar, Home, HelpCircle, ChevronDown } from 'lucide-react';
 import { TrackerProvider } from '@/components/TrackerContext';
 import { AdPlaceholder } from '@/components/AdPlaceholder';
 

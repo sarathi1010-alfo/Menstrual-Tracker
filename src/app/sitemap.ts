@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getGuideSlugs } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
-import { siteConfig, absoluteUrl } from '@/lib/seo';
+import { absoluteUrl } from '@/lib/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const currentDate = new Date();

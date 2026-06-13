@@ -12,8 +12,8 @@ export default function Contact() {
       <div>
         <h1 className="text-3xl font-bold mb-4">Contact Us</h1>
         <p className="text-[var(--muted)]">
-          Have a question, suggestion, or found a bug? We'd love to hear from you.
-          Fill out the form below and we'll get back to you as soon as possible.
+          Have a question, suggestion, or found a bug? We&apos;d love to hear from you.
+          Fill out the form below and we&apos;ll get back to you as soon as possible.
         </p>
       </div>
 
