@@ -2,7 +2,11 @@ import { Metadata } from 'next';
 
 // Centralized configuration for the site
 export const siteConfig = {
+fix/seo-sitemap-url-15757905475816566380
   // Use environment variable in production, fallback for local dev
+
+  // Use environment variable in production, fallback to production domain
+ feature/mvp-setup-13479668950272014118
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://cyclehub.alfo.online',
   name: 'CycleHub',
   description: 'Track your cycle visually, predict key dates instantly, and save everything locally on your device.',
@@ -17,7 +21,17 @@ export const siteConfig = {
 export function absoluteUrl(path: string) {
   // Prevent double slashes
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  return `${siteConfig.url}${cleanPath}`;
+  let base = siteConfig.url;
+
+  // Force HTTPS if not localhost
+  if (base.startsWith('http://') && !base.includes('localhost')) {
+    base = base.replace('http://', 'https://');
+  }
+
+  // Ensure no trailing slash on base before combining
+  base = base.replace(/\/$/, '');
+
+  return `${base}${cleanPath}`;
 }
 
 /**

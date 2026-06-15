@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 import faqsData from '@/data/faqs.json';
 

@@ -5,6 +5,11 @@ import { SchemaMarkup } from '@/components/SchemaMarkup';
 import { constructMetadata, siteConfig, absoluteUrl } from '@/lib/seo';
 import './globals.css';
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export const metadata: Metadata = constructMetadata({
   title: 'CycleHub - Privacy-first Period Tracker',
   description: 'Track your cycle visually, predict key dates instantly, and save everything locally on your device.',
