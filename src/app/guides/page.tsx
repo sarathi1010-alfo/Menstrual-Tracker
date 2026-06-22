@@ -4,8 +4,8 @@ import { Metadata } from 'next';
 import { BookOpen, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Cycle Health Guides & Education',
-  description: 'Evidence-based, privacy-first guides to understanding your menstrual cycle, tracking, and reproductive health.',
+  title: 'Cycle Health Guides & Education - Period Tracking Resources',
+  description: 'Free evidence-based guides to understanding your menstrual cycle, tracking methods, and reproductive health. Privacy-first educational resources from CycleHub.',
 };
 
 export default function GuidesIndexPage() {

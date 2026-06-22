@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Privacy Policy',
-  description: 'Understand how CycleHub handles your data locally and protects your privacy.',
+  title: 'Privacy Policy - CycleHub Data Protection & Local Storage',
+  description: 'CycleHub stores your period tracking data locally on your device only. No servers, no accounts, no cloud storage. Read our complete privacy policy.',
   path: '/privacy',
 });
 

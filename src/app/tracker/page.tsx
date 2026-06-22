@@ -7,8 +7,8 @@ import { RelatedToolsWidget } from '@/components/RelatedToolsWidget';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Tracker Dashboard',
-  description: 'View your cycle calendar, predictions, and history.',
+  title: 'Cycle Tracker Dashboard - Track Your Period Locally | CycleHub',
+  description: 'Track your menstrual cycle privately with our local-only dashboard. Log periods, view predictions, see your fertile window, and analyze cycle history securely.',
   path: '/tracker',
 });
 
