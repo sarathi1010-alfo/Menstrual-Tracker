@@ -31,12 +31,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   Tools Hub <ChevronDown size={14} />
                 </button>
                 {isToolsDropdownOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-[var(--surface)] border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg py-2">
-                    <a href="https://resumeforge.alfo.online" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">Resume Forge</a>
-                    <a href="https://pdfutility.app" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">PDF Utility</a>
-                    <a href="https://paletteflow.alfo.online" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">Palette Flow</a>
-                    <a href="https://qrgenerator.alfo.online" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">QR Generator</a>
-                    <a href="https://emicalculator.alfo.online" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">EMI Calculator</a>
+                  <div className="absolute top-full left-0 mt-2 w-56 bg-[var(--surface)] border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg py-2">
+                    {/* Internal CycleHub Tools */}
+                    <Link href="/tools/next-period-predictor" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">Next Period Predictor</Link>
+                    <Link href="/tools/safe-days-calculator" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">Safe Days Calculator</Link>
+                    <Link href="/tools/ovulation-calculator" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">Ovulation Calculator</Link>
+                    <div className="my-2 border-t border-gray-200 dark:border-gray-700"></div>
+                    {/* External Partner Tools (nofollow) */}
+                    <a href="https://resumeforge.alfo.online" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">Resume Forge</a>
+                    <a href="https://pdfutility.app" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">PDF Utility</a>
+                    <a href="https://paletteflow.alfo.online" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">Palette Flow</a>
+                    <a href="https://qrgenerator.alfo.online" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">QR Generator</a>
+                    <a href="https://emicalculator.alfo.online" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">EMI Calculator</a>
                   </div>
                 )}
               </div>
@@ -88,16 +94,23 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 CycleHub
               </div>
               <p>Privacy-first menstrual cycle tracking. Save everything locally on your device.</p>
-              <p className="mt-4">© {new Date().getFullYear()} <a href="https://alfo.online" className="hover:text-[var(--foreground)]">alfo.online</a>. All rights reserved.</p>
+              <p className="mt-4">© {new Date().getFullYear()} <a href="https://alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)]">alfo.online</a>. All rights reserved.</p>
             </div>
 
             <div className="flex flex-col gap-2">
-              <h3 className="font-semibold text-[var(--foreground)] mb-2">Tools Hub</h3>
-              <a href="https://resumeforge.alfo.online" className="hover:text-[var(--foreground)] transition-colors">Resume Forge</a>
-              <a href="https://pdfutility.app" className="hover:text-[var(--foreground)] transition-colors">PDF Utility</a>
-              <a href="https://paletteflow.alfo.online" className="hover:text-[var(--foreground)] transition-colors">Palette Flow</a>
-              <a href="https://qrgenerator.alfo.online" className="hover:text-[var(--foreground)] transition-colors">QR Generator</a>
-              <a href="https://emicalculator.alfo.online" className="hover:text-[var(--foreground)] transition-colors">EMI Calculator</a>
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">Cycle Tools</h3>
+              <Link href="/tools/next-period-predictor" className="hover:text-[var(--foreground)] transition-colors">Next Period Predictor</Link>
+              <Link href="/tools/safe-days-calculator" className="hover:text-[var(--foreground)] transition-colors">Safe Days Calculator</Link>
+              <Link href="/tools/ovulation-calculator" className="hover:text-[var(--foreground)] transition-colors">Ovulation Calculator</Link>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">Partner Tools</h3>
+              <a href="https://resumeforge.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors">Resume Forge</a>
+              <a href="https://pdfutility.app" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors">PDF Utility</a>
+              <a href="https://paletteflow.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors">Palette Flow</a>
+              <a href="https://qrgenerator.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors">QR Generator</a>
+              <a href="https://emicalculator.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors">EMI Calculator</a>
             </div>
 
             <div className="flex flex-col gap-2">

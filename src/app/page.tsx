@@ -81,6 +81,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Quick Access to Cycle Tools */}
+      <section className="pt-12 border-t border-gray-200 dark:border-gray-800">
+        <h2 className="heading-3 mb-6 text-center">Free Cycle Tracking Tools</h2>
+        <div className="grid sm:grid-cols-3 gap-4">
+          <Link href="/tools/next-period-predictor" className="card p-6 hover:border-[var(--primary)]/50 transition-all group">
+            <h3 className="font-semibold text-lg mb-2 group-hover:text-[var(--primary)] transition-colors">Next Period Predictor</h3>
+            <p className="text-sm text-[var(--muted)]">Predict exactly when your next period will arrive based on your cycle history.</p>
+          </Link>
+          <Link href="/tools/safe-days-calculator" className="card p-6 hover:border-[var(--primary)]/50 transition-all group">
+            <h3 className="font-semibold text-lg mb-2 group-hover:text-[var(--primary)] transition-colors">Safe Days Calculator</h3>
+            <p className="text-sm text-[var(--muted)]">Calculate your safe days and fertile window with privacy-first tracking.</p>
+          </Link>
+          <Link href="/tools/ovulation-calculator" className="card p-6 hover:border-[var(--primary)]/50 transition-all group">
+            <h3 className="font-semibold text-lg mb-2 group-hover:text-[var(--primary)] transition-colors">Ovulation Calculator</h3>
+            <p className="text-sm text-[var(--muted)]">Find your most fertile days instantly with our free ovulation calculator.</p>
+          </Link>
+        </div>
+      </section>
+
       {/* Internal Traffic Engine - Related Tools Widget */}
       <RelatedToolsWidget />
     </div>
