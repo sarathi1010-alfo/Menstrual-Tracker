@@ -1,0 +1,8 @@
+# Redirect HTTP to HTTPS (single hop)
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Redirect www to non-www (single hop, combined with HTTPS redirect if needed)
+RewriteCond %{HTTP_HOST} ^www\.lunacycle\.afio\.online$ [NC]
+RewriteRule ^(.*)$ https://lunacycle.afio.online/$1 [R=301,L]

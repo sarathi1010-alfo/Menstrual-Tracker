@@ -2,12 +2,10 @@ import { Metadata } from 'next';
 
 // Centralized configuration for the site
 export const siteConfig = {
-fix/seo-sitemap-url-15757905475816566380
   // Use environment variable in production, fallback for local dev
 
   // Use environment variable in production, fallback to production domain
- feature/mvp-setup-13479668950272014118
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://cyclehub.alfo.online',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacycle.alfo.online',
   name: 'CycleHub',
   description: 'Track your cycle visually, predict key dates instantly, and save everything locally on your device.',
   creator: 'alfo.online',

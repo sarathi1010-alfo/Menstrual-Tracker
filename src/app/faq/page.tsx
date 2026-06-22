@@ -4,8 +4,8 @@ import faqsData from '@/data/faqs.json';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata = constructMetadata({
-  title: 'Frequently Asked Questions',
-  description: 'Answers to common questions about using CycleHub and understanding your cycle.',
+  title: 'Frequently Asked Questions - CycleHub Period Tracker Help',
+  description: 'Get answers to common questions about CycleHub period tracker. Learn how to track your cycle, data privacy, predictions, and more in our FAQ.',
   path: '/faq',
 });
 

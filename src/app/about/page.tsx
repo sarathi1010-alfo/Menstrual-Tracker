@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'About CycleHub',
-  description: 'Learn more about the mission behind CycleHub and our commitment to privacy.',
+  title: 'About CycleHub - Privacy-First Period Tracking App',
+  description: 'Learn about CycleHub, a privacy-first period tracking app that stores your cycle data locally on your device. No accounts, no cloud storage, complete privacy.',
   path: '/about',
 });
 

@@ -1,8 +1,8 @@
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata = constructMetadata({
-  title: 'Terms of Service',
-  description: 'Terms of Service for CycleHub',
+  title: 'Terms of Service - CycleHub Legal Information',
+  description: 'Read the Terms of Service for CycleHub. Understand our privacy commitment, data policies, and service limitations.',
   path: '/terms-of-service',
 });
 
