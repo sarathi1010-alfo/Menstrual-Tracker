@@ -47,6 +47,25 @@ export default function GuidesIndexPage() {
           </Link>
         ))}
       </div>
+
+      {/* Quick Access to Cycle Tools */}
+      <section className="pt-8 border-t border-gray-200 dark:border-gray-800">
+        <h2 className="heading-3 mb-6">Need Quick Calculations?</h2>
+        <div className="grid sm:grid-cols-3 gap-4">
+          <Link href="/tools/next-period-predictor" className="card p-5 hover:border-[var(--primary)]/50 transition-all group">
+            <h3 className="font-semibold text-base mb-1 group-hover:text-[var(--primary)] transition-colors">Next Period Predictor</h3>
+            <p className="text-sm text-[var(--muted)]">Predict your next period date instantly.</p>
+          </Link>
+          <Link href="/tools/safe-days-calculator" className="card p-5 hover:border-[var(--primary)]/50 transition-all group">
+            <h3 className="font-semibold text-base mb-1 group-hover:text-[var(--primary)] transition-colors">Safe Days Calculator</h3>
+            <p className="text-sm text-[var(--muted)]">Calculate safe days and fertile window.</p>
+          </Link>
+          <Link href="/tools/ovulation-calculator" className="card p-5 hover:border-[var(--primary)]/50 transition-all group">
+            <h3 className="font-semibold text-base mb-1 group-hover:text-[var(--primary)] transition-colors">Ovulation Calculator</h3>
+            <p className="text-sm text-[var(--muted)]">Find your most fertile days.</p>
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

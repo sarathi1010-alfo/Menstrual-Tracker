@@ -64,6 +64,25 @@ export default function FAQPage() {
             The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods.
           </p>
         </div>
+
+        {/* Quick Access to Tools */}
+        <div className="card p-6 bg-[var(--primary)]/5 border-[var(--primary)]/20">
+          <h3 className="heading-3 mb-3 text-[var(--primary)]">Quick Access: Free Cycle Tools</h3>
+          <div className="space-y-3">
+            <Link href="/tools/next-period-predictor" className="block text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
+              <span className="font-medium">Next Period Predictor</span>
+              <span className="block text-sm text-[var(--muted)]">Predict when your next period will start</span>
+            </Link>
+            <Link href="/tools/safe-days-calculator" className="block text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
+              <span className="font-medium">Safe Days Calculator</span>
+              <span className="block text-sm text-[var(--muted)]">Calculate safe days and fertile window</span>
+            </Link>
+            <Link href="/tools/ovulation-calculator" className="block text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
+              <span className="font-medium">Ovulation Calculator</span>
+              <span className="block text-sm text-[var(--muted)]">Find your most fertile days instantly</span>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

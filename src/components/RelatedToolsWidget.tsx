@@ -22,7 +22,7 @@ export function RelatedToolsWidget({
         <a
           href="https://hub.alfo.online"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="nofollow noopener noreferrer"
           className="text-sm font-medium text-[var(--primary)] hover:underline inline-flex items-center gap-1"
         >
           View all tools <ArrowUpRight size={14} />
@@ -35,7 +35,7 @@ export function RelatedToolsWidget({
             key={tool.name}
             href={tool.url}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="nofollow noopener noreferrer"
             className="group block p-4 bg-[var(--surface)] border border-gray-200 dark:border-gray-800 rounded-xl hover:border-[var(--primary)]/50 transition-colors"
           >
             <div className="flex justify-between items-start mb-2">
