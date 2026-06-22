@@ -1,5 +1,6 @@
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 import faqsData from '@/data/faqs.json';
+import Link from 'next/link';
 
 import { constructMetadata } from '@/lib/seo';
 
