@@ -3,12 +3,14 @@
 import React from 'react';
 import { format, startOfWeek, endOfWeek, eachDayOfInterval, addMonths, subMonths, isSameMonth, isSameDay, startOfMonth, endOfMonth, parseISO } from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { DailyLogModal } from './DailyLogModal';
 import { useTracker } from './TrackerContext';
 import { cn } from '@/lib/utils';
 import { getValidDateString } from '@/lib/date';
 
 export function CycleCalendar() {
   const [currentMonth, setCurrentMonth] = React.useState(new Date());
+  const [selectedDate, setSelectedDate] = React.useState<string | null>(null);
 
   const handlePreviousMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
   const handleNextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
@@ -33,20 +35,11 @@ export function CycleCalendar() {
     });
   };
 
-  const { cycles, addCycle, deleteCycle, fertileWindow, nextPeriodPrediction } = useTracker();
+  const { cycles, fertileWindow, nextPeriodPrediction } = useTracker();
 
   const handleDayClick = (date: Date) => {
     const dateStr = getValidDateString(date);
-    const existingCycle = cycles.find(c => c.startDate === dateStr);
-
-    if (existingCycle) {
-      if (window.confirm("Remove this period start date?")) {
-        deleteCycle(existingCycle.id);
-      }
-      return;
-    }
-
-    addCycle({ startDate: dateStr });
+    setSelectedDate(dateStr);
   };
 
   return (
@@ -97,7 +90,7 @@ export function CycleCalendar() {
         })}
       </div>
 
-      <div className="mt-6 flex flex-wrap gap-4 text-xs text-[var(--muted)] justify-center">
+            <div className="mt-6 flex flex-wrap gap-4 text-xs text-[var(--muted)] justify-center">
         <div className="flex items-center gap-1.5">
           <div className="w-3 h-3 rounded-full bg-[var(--accent)]"></div>
           <span>Period</span>
@@ -115,6 +108,14 @@ export function CycleCalendar() {
           <span>Today</span>
         </div>
       </div>
+
+      {selectedDate && (
+        <DailyLogModal
+          date={selectedDate}
+          isOpen={!!selectedDate}
+          onClose={() => setSelectedDate(null)}
+        />
+      )}
     </div>
   );
 }
