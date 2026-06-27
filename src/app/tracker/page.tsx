@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { CycleCalendar } from '@/components/CycleCalendar';
 import { PredictionCard } from '@/components/PredictionCard';
 import { HistoryChart } from '@/components/HistoryChart';
+import { PatternsChart } from '@/components/PatternsChart';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 import { RelatedToolsWidget } from '@/components/RelatedToolsWidget';
 import { constructMetadata } from '@/lib/seo';
@@ -39,6 +40,7 @@ export default function TrackerPage() {
         <div className="lg:col-span-2 space-y-8">
           <CycleCalendar />
           <HistoryChart />
+          <PatternsChart />
         </div>
 
         <div className="space-y-6">

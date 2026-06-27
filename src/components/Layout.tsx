@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Calendar, Home, HelpCircle, ChevronDown } from 'lucide-react';
+import { Calendar, Home, HelpCircle, ChevronDown, Settings } from 'lucide-react';
 import { TrackerProvider } from '@/components/TrackerContext';
 import { AdPlaceholder } from '@/components/AdPlaceholder';
 
@@ -49,6 +49,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <Link href="/tracker" className="hover:text-[var(--foreground)] transition-colors">Tracker</Link>
               <Link href="/guides" className="hover:text-[var(--foreground)] transition-colors">Blog</Link>
               <Link href="/about" className="hover:text-[var(--foreground)] transition-colors">About</Link>
+              <Link href="/settings" className="hover:text-[var(--foreground)] transition-colors flex items-center" aria-label="Settings">
+                <Settings size={18} />
+              </Link>
             </nav>
           </div>
         </header>

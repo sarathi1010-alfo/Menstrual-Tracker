@@ -1,4 +1,4 @@
-import { CycleRecord } from './types';
+import { CycleRecord, UserPreferences } from './types';
 import { differenceInDays, addDays, parseISO, isBefore, format } from 'date-fns';
 
 export const AVERAGE_CYCLE_LENGTH = 28;
@@ -10,7 +10,7 @@ export function calculateCycleLength(currentStart: string, nextStart: string): n
 }
 
 // Calculate the average cycle length from an array of records
-export function calculateAverageCycleLength(cycles: CycleRecord[]): number {
+export function calculateAverageCycleLength(cycles: CycleRecord[], preferences?: UserPreferences): number {
   if (!cycles || cycles.length < 2) return AVERAGE_CYCLE_LENGTH;
 
   // Sort cycles chronologically
@@ -24,7 +24,10 @@ export function calculateAverageCycleLength(cycles: CycleRecord[]): number {
   for (let i = 0; i < sorted.length - 1; i++) {
     const length = calculateCycleLength(sorted[i].startDate, sorted[i+1].startDate);
     // Ignore unusually short or long cycles to maintain a reasonable average
-    if (length > 15 && length < 50) {
+    const tolerance = preferences?.cycleVariabilityTolerance || 7;
+    const lowerBound = AVERAGE_CYCLE_LENGTH - tolerance - 6; // ~15
+    const upperBound = AVERAGE_CYCLE_LENGTH + tolerance + 15; // ~50
+    if (length > lowerBound && length < upperBound) {
       totalDays += length;
       count++;
     }
@@ -34,7 +37,7 @@ export function calculateAverageCycleLength(cycles: CycleRecord[]): number {
 }
 
 // Predict the next period start date
-export function predictNextPeriod(cycles: CycleRecord[]): Date | null {
+export function predictNextPeriod(cycles: CycleRecord[], preferences?: UserPreferences): Date | null {
   if (!cycles || cycles.length === 0) return null;
 
   const sorted = [...cycles].sort((a, b) =>
@@ -42,15 +45,15 @@ export function predictNextPeriod(cycles: CycleRecord[]): Date | null {
   );
 
   const lastCycle = sorted[sorted.length - 1];
-  const averageLength = calculateAverageCycleLength(cycles);
-
+  const averageLength = calculateAverageCycleLength(cycles, preferences);
   return addDays(parseISO(lastCycle.startDate), averageLength);
 }
 
 // Calculate the estimated fertile window
-export function calculateFertileWindow(nextPeriodStart: Date): { start: Date, end: Date, ovulation: Date } {
+export function calculateFertileWindow(nextPeriodStart: Date, preferences?: UserPreferences): { start: Date, end: Date, ovulation: Date } {
   // Ovulation typically occurs 14 days before the NEXT period
-  const ovulation = addDays(nextPeriodStart, -14);
+  const lutealPhase = preferences?.lutealPhaseLength || 14;
+  const ovulation = addDays(nextPeriodStart, -lutealPhase);
   // Fertile window is typically 5 days before ovulation to 1 day after
   const start = addDays(ovulation, -5);
   const end = addDays(ovulation, 1);

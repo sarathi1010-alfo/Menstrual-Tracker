@@ -1,10 +1,16 @@
-'use client';
+import re
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { CycleRecord, DailyLog, UserPreferences, TrackerStateData } from '../lib/types';
-import { calculateAverageCycleLength, predictNextPeriod, calculateFertileWindow } from '../lib/date';
+with open('src/components/TrackerContext.tsx', 'r') as f:
+    content = f.read()
 
-interface TrackerState {
+# Import new types
+content = content.replace(
+    "import { CycleRecord } from '../lib/types';",
+    "import { CycleRecord, DailyLog, UserPreferences, TrackerStateData } from '../lib/types';"
+)
+
+# Update TrackerState interface
+tracker_state_replace = """interface TrackerState {
   cycles: CycleRecord[];
   dailyLogs: Record<string, DailyLog>;
   preferences: UserPreferences;
@@ -19,13 +25,12 @@ interface TrackerState {
   averageCycleLength: number;
   nextPeriodPrediction: Date | null;
   fertileWindow: { start: Date; end: Date; ovulation: Date } | null;
-}
+}"""
 
-const TrackerContext = createContext<TrackerState | undefined>(undefined);
+content = re.sub(r"interface TrackerState \{[\s\S]*?\}", tracker_state_replace, content)
 
-const LOCAL_STORAGE_KEY = 'menstrual-tracker-cycles';
-
-export function TrackerProvider({ children }: { children: ReactNode }) {
+# Update context body
+provider_replace = """export function TrackerProvider({ children }: { children: ReactNode }) {
   const [cycles, setCycles] = useState<CycleRecord[]>([]);
   const [dailyLogs, setDailyLogs] = useState<Record<string, DailyLog>>({});
   const [preferences, setPreferences] = useState<UserPreferences>({
@@ -160,12 +165,9 @@ export function TrackerProvider({ children }: { children: ReactNode }) {
       {children}
     </TrackerContext.Provider>
   );
-}
+}"""
 
-export function useTracker() {
-  const context = useContext(TrackerContext);
-  if (context === undefined) {
-    throw new Error('useTracker must be used within a TrackerProvider');
-  }
-  return context;
-}
+content = re.sub(r"export function TrackerProvider\(\{ children \}: \{ children: ReactNode \}\) \{[\s\S]*?(?=export function useTracker)", provider_replace, content)
+
+with open('src/components/TrackerContext.tsx', 'w') as f:
+    f.write(content)

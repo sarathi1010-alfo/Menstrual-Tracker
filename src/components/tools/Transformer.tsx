@@ -13,6 +13,7 @@ export function Transformer({ toolName, transformFn, inputLabel, outputLabel }: 
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleTransform = () => {
     setOutput(transformFn(input));
   };
