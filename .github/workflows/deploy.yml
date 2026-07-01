@@ -1,4 +1,4 @@
-name: CycleHub Production Deployment & SEO Checks
+name: LunaCycle Production Deployment & SEO Checks
 
 on:
   push:
