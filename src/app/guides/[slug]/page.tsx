@@ -48,7 +48,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     .filter(g => g.slug !== guide.meta.slug && g.tags.some(t => guide.meta.tags.includes(t)))
     .slice(0, 3); // Get top 3 related
 
-  const articleSchema = {
+  const articleSchema: any = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": guide.meta.seoTitle,
@@ -68,11 +68,25 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     }
   };
 
+  const faqSchema = guide.meta.faqs ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": guide.meta.faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  } : null;
+
   // AI-Retrieval Optimization: Answer-first formatting and semantic chunking
   return (
     <div className="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
       <article className="lg:w-2/3">
         <SchemaMarkup schema={articleSchema} />
+        {faqSchema && <SchemaMarkup schema={faqSchema} />}
         <div className="mb-8">
           <Link href="/guides" className="inline-flex items-center text-sm text-[var(--muted)] hover:text-[var(--primary)] mb-6 transition-colors">
             <ArrowLeft size={16} className="mr-1" /> Back to all guides
