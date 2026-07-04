@@ -4,11 +4,11 @@ import { Metadata } from 'next';
 import { BookOpen, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Cycle Health Guides & Education - Period Tracking Resources',
-  description: 'Free evidence-based guides to understanding your menstrual cycle, tracking methods, and reproductive health. Privacy-first educational resources from CycleHub.',
+  title: 'Cycle Health Blog & Education - Period Tracking Resources',
+  description: 'Free evidence-based articles to understanding your menstrual cycle, tracking methods, and reproductive health. Privacy-first educational resources from LunaCycle.',
 };
 
-export default function GuidesIndexPage() {
+export default function BlogIndexPage() {
   const guides = getAllGuides();
 
   return (
@@ -17,7 +17,7 @@ export default function GuidesIndexPage() {
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[var(--primary)]/10 text-[var(--primary)] mb-2">
           <BookOpen size={32} />
         </div>
-        <h1 className="heading-1">Cycle Education Hub</h1>
+        <h1 className="heading-1">Cycle Education Blog</h1>
         <p className="text-xl text-[var(--muted)] max-w-2xl mx-auto">
           Understand your body with our semantic library of cycle mechanics, tracking methodology, and health indicators.
         </p>
@@ -25,7 +25,7 @@ export default function GuidesIndexPage() {
 
       <div className="grid md:grid-cols-2 gap-6">
         {guides.map((guide) => (
-          <Link key={guide.slug} href={`/guides/${guide.slug}`} className="group block">
+          <Link key={guide.slug} href={`/blog/${guide.slug}`} className="group block">
             <div className="card p-6 h-full border border-transparent hover:border-[var(--primary)]/30 transition-all hover:shadow-md">
               <div className="flex gap-2 mb-3 flex-wrap">
                 {guide.tags.map(tag => (
@@ -41,7 +41,7 @@ export default function GuidesIndexPage() {
                 {guide.summary}
               </p>
               <div className="flex items-center text-sm font-medium text-[var(--primary)] mt-auto">
-                Read guide <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
+                Read article <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
           </Link>
