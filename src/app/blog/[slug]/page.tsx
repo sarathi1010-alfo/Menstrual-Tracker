@@ -31,11 +31,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: guide.meta.seoDescription,
       type: 'article',
       tags: guide.meta.tags,
+    },
+    alternates: {
+      canonical: `/blog/${resolvedParams.slug}`,
     }
   };
 }
 
-export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const guide = getGuideBySlug(resolvedParams.slug);
 
@@ -48,7 +51,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     .filter(g => g.slug !== guide.meta.slug && g.tags.some(t => guide.meta.tags.includes(t)))
     .slice(0, 3); // Get top 3 related
 
-  const articleSchema = {
+  const articleSchema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": guide.meta.seoTitle,
@@ -56,17 +59,31 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     "keywords": guide.meta.tags.join(', '),
     "author": {
       "@type": "Organization",
-      "name": "CycleHub"
+      "name": "LunaCycle"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "CycleHub",
+      "name": "LunaCycle",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://cyclehub.example.com/logo.png"
+        "url": "https://lunacycle.alfo.online/logo.png"
       }
     }
   };
+
+  if (guide.meta.faqs && guide.meta.faqs.length > 0) {
+    articleSchema.mainEntity = {
+      "@type": "FAQPage",
+      "mainEntity": guide.meta.faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    };
+  }
 
   // AI-Retrieval Optimization: Answer-first formatting and semantic chunking
   return (
@@ -74,8 +91,8 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       <article className="lg:w-2/3">
         <SchemaMarkup schema={articleSchema} />
         <div className="mb-8">
-          <Link href="/guides" className="inline-flex items-center text-sm text-[var(--muted)] hover:text-[var(--primary)] mb-6 transition-colors">
-            <ArrowLeft size={16} className="mr-1" /> Back to all guides
+          <Link href="/blog" className="inline-flex items-center text-sm text-[var(--muted)] hover:text-[var(--primary)] mb-6 transition-colors">
+            <ArrowLeft size={16} className="mr-1" /> Back to blog
           </Link>
           <div className="flex gap-2 mb-4 flex-wrap">
             {guide.meta.tags.map(tag => (
@@ -116,7 +133,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         <div className="card p-6 bg-[var(--primary)] text-white shadow-lg sticky top-24">
           <h3 className="text-xl font-bold mb-3">Apply this to your cycle</h3>
           <p className="text-white/80 text-sm mb-6">
-            CycleHub is a 100% private, local-only tracker. We never see your data. Start tracking now to get personalized predictions.
+            LunaCycle is a 100% private, local-only tracker. We never see your data. Start tracking now to get personalized predictions.
           </p>
           <Link href="/tracker" className="block w-full py-3 bg-white text-[var(--primary)] text-center font-bold rounded-xl hover:bg-gray-50 transition-colors shadow-sm">
             Open Free Tracker
@@ -130,7 +147,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             </h3>
             <div className="space-y-4">
               {relatedGuides.map(related => (
-                <Link key={related.slug} href={`/guides/${related.slug}`} className="block group">
+                <Link key={related.slug} href={`/blog/${related.slug}`} className="block group">
                   <h4 className="font-medium text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors line-clamp-2 mb-1">
                     {related.title}
                   </h4>
