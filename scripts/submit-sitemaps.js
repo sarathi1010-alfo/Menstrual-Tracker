@@ -5,7 +5,7 @@ const path = require('path');
 require('dotenv').config();
 
 // Configuration
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.cyclehub.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacycle.alfo.online';
 const CREDENTIALS_PATH = path.join(process.cwd(), 'gsc-service-account.json');
 
 const sitemaps = [

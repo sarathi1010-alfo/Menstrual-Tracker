@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const guidesDirectory = path.join(process.cwd(), 'src/data/guides');
+const blogDirectory = path.join(process.cwd(), 'src/data/blog');
 
 export interface GuideMeta {
   title: string;
@@ -11,6 +11,7 @@ export interface GuideMeta {
   seoDescription: string;
   tags: string[];
   slug: string;
+  faqs?: { question: string; answer: string }[];
 }
 
 export interface Guide {
@@ -19,10 +20,10 @@ export interface Guide {
 }
 
 export function getGuideSlugs(): string[] {
-  if (!fs.existsSync(guidesDirectory)) {
+  if (!fs.existsSync(blogDirectory)) {
     return [];
   }
-  return fs.readdirSync(guidesDirectory)
+  return fs.readdirSync(blogDirectory)
     .filter((file) => file.endsWith('.mdx'))
     .map((file) => file.replace(/\.mdx$/, ''));
 }
@@ -30,7 +31,7 @@ export function getGuideSlugs(): string[] {
 export function getGuideBySlug(slug: string): Guide | null {
   try {
     const realSlug = slug.replace(/\.mdx$/, '');
-    const fullPath = path.join(guidesDirectory, `${realSlug}.mdx`);
+    const fullPath = path.join(blogDirectory, `${realSlug}.mdx`);
 
     if (!fs.existsSync(fullPath)) return null;
 
@@ -45,6 +46,7 @@ export function getGuideBySlug(slug: string): Guide | null {
         seoTitle: data.seoTitle || data.title || '',
         seoDescription: data.seoDescription || data.summary || '',
         tags: data.tags || [],
+        faqs: data.faqs || [],
       },
       content,
     };

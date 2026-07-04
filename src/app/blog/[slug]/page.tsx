@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, BookOpen, Share2 } from 'lucide-react';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
+import { absoluteUrl } from '@/lib/seo';
 
 export async function generateStaticParams() {
   const slugs = getGuideSlugs();
@@ -48,7 +49,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     .filter(g => g.slug !== guide.meta.slug && g.tags.some(t => guide.meta.tags.includes(t)))
     .slice(0, 3); // Get top 3 related
 
-  const articleSchema = {
+  const articleSchema: any = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": guide.meta.seoTitle,
@@ -56,25 +57,44 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     "keywords": guide.meta.tags.join(', '),
     "author": {
       "@type": "Organization",
-      "name": "CycleHub"
+      "name": "LunaCycle"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "CycleHub",
+      "name": "LunaCycle",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://cyclehub.example.com/logo.png"
+        "url": absoluteUrl("/favicon.ico")
       }
     }
   };
 
+  // Add FAQ Schema if present in frontmatter
+  let faqSchema: any = null;
+  if ((guide.meta as any).faqs && (guide.meta as any).faqs.length > 0) {
+    faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": (guide.meta as any).faqs.map((faq: any) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    };
+  }
+
   // AI-Retrieval Optimization: Answer-first formatting and semantic chunking
   return (
     <div className="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
-      <article className="lg:w-2/3">
+      <article className="lg:w-2/3 py-8">
         <SchemaMarkup schema={articleSchema} />
+        {faqSchema && <SchemaMarkup schema={faqSchema} />}
+
         <div className="mb-8">
-          <Link href="/guides" className="inline-flex items-center text-sm text-[var(--muted)] hover:text-[var(--primary)] mb-6 transition-colors">
+          <Link href="/blog" className="inline-flex items-center text-sm text-[var(--muted)] hover:text-[var(--primary)] mb-6 transition-colors">
             <ArrowLeft size={16} className="mr-1" /> Back to all guides
           </Link>
           <div className="flex gap-2 mb-4 flex-wrap">
@@ -112,11 +132,11 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       </article>
 
       {/* Semantic Linking Sidebar / Authority Distribution */}
-      <aside className="lg:w-1/3 space-y-8">
+      <aside className="lg:w-1/3 space-y-8 py-8">
         <div className="card p-6 bg-[var(--primary)] text-white shadow-lg sticky top-24">
           <h3 className="text-xl font-bold mb-3">Apply this to your cycle</h3>
           <p className="text-white/80 text-sm mb-6">
-            CycleHub is a 100% private, local-only tracker. We never see your data. Start tracking now to get personalized predictions.
+            LunaCycle is a 100% private, local-only tracker. We never see your data. Start tracking now to get personalized predictions.
           </p>
           <Link href="/tracker" className="block w-full py-3 bg-white text-[var(--primary)] text-center font-bold rounded-xl hover:bg-gray-50 transition-colors shadow-sm">
             Open Free Tracker
@@ -130,7 +150,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             </h3>
             <div className="space-y-4">
               {relatedGuides.map(related => (
-                <Link key={related.slug} href={`/guides/${related.slug}`} className="block group">
+                <Link key={related.slug} href={`/blog/${related.slug}`} className="block group">
                   <h4 className="font-medium text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors line-clamp-2 mb-1">
                     {related.title}
                   </h4>
