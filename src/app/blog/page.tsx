@@ -5,7 +5,7 @@ import { BookOpen, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Cycle Health Guides & Education - Period Tracking Resources',
-  description: 'Free evidence-based guides to understanding your menstrual cycle, tracking methods, and reproductive health. Privacy-first educational resources from CycleHub.',
+  description: 'Free evidence-based guides to understanding your menstrual cycle, tracking methods, and reproductive health. Privacy-first educational resources from LunaCycle.',
 };
 
 export default function GuidesIndexPage() {
@@ -25,7 +25,7 @@ export default function GuidesIndexPage() {
 
       <div className="grid md:grid-cols-2 gap-6">
         {guides.map((guide) => (
-          <Link key={guide.slug} href={`/guides/${guide.slug}`} className="group block">
+          <Link key={guide.slug} href={`/blog/${guide.slug}`} className="group block">
             <div className="card p-6 h-full border border-transparent hover:border-[var(--primary)]/30 transition-all hover:shadow-md">
               <div className="flex gap-2 mb-3 flex-wrap">
                 {guide.tags.map(tag => (

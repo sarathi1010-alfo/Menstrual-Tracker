@@ -25,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: absoluteUrl('/guides'),
+      url: absoluteUrl('/blog'),
       lastModified: currentDateStr,
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -67,7 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const guideRoutes: MetadataRoute.Sitemap = guideSlugs
     .filter((slug) => slug && slug.trim() !== '')
     .map((slug) => ({
-      url: absoluteUrl(`/guides/${slug}`),
+      url: absoluteUrl(`/blog/${slug}`),
       lastModified: currentDateStr,
       changeFrequency: 'monthly',
       priority: 0.7, // Internal programmatic pages get high but sub-core priority
