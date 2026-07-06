@@ -23,7 +23,7 @@ export default function Home() {
           Track your cycle visually, predict key dates instantly.
         </h1>
         <p className="text-lg text-[var(--muted)] max-w-xl mx-auto">
-          No accounts. No cloud storage. A beautifully simple utility designed to give you clarity over your cycle, stored securely on your own device.
+          No accounts. No cloud storage. A beautifully simple utility designed to give you clarity over your cycle, stored securely on your own device with LunaCycle.
         </p>
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link href="/tracker" className="button-primary flex items-center gap-2 w-full sm:w-auto justify-center">
