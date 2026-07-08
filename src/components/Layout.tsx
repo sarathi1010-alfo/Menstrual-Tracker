@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Calendar, Home, HelpCircle, ChevronDown, Settings } from 'lucide-react';
+import { Calendar, Home, HelpCircle, ChevronDown, Settings, ShieldCheck } from 'lucide-react';
 import { TrackerProvider } from '@/components/TrackerContext';
 import { AdPlaceholder } from '@/components/AdPlaceholder';
 
@@ -18,7 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <div className="w-8 h-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center">
                 <Calendar size={18} />
               </div>
-              CycleHub
+              LunaCycle
             </Link>
 
             <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-[var(--muted)]">
@@ -32,7 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </button>
                 {isToolsDropdownOpen && (
                   <div className="absolute top-full left-0 mt-2 w-56 bg-[var(--surface)] border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg py-2">
-                    {/* Internal CycleHub Tools */}
+                    {/* Internal LunaCycle Tools */}
                     <Link href="/tools/next-period-predictor" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">Next Period Predictor</Link>
                     <Link href="/tools/safe-days-calculator" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">Safe Days Calculator</Link>
                     <Link href="/tools/ovulation-calculator" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">Ovulation Calculator</Link>
@@ -47,7 +47,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 )}
               </div>
               <Link href="/tracker" className="hover:text-[var(--foreground)] transition-colors">Tracker</Link>
-              <Link href="/guides" className="hover:text-[var(--foreground)] transition-colors">Blog</Link>
+              <Link href="/features" className="hover:text-[var(--foreground)] transition-colors flex items-center gap-1">
+                <ShieldCheck size={16} /> Features
+              </Link>
+              <Link href="/blog" className="hover:text-[var(--foreground)] transition-colors">Blog</Link>
               <Link href="/about" className="hover:text-[var(--foreground)] transition-colors">About</Link>
               <Link href="/settings" className="hover:text-[var(--foreground)] transition-colors flex items-center" aria-label="Settings">
                 <Settings size={18} />
@@ -94,14 +97,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className="w-6 h-6 rounded-full bg-[var(--primary)] text-white flex items-center justify-center">
                   <Calendar size={14} />
                 </div>
-                CycleHub
+                LunaCycle
               </div>
               <p>Privacy-first menstrual cycle tracking. Save everything locally on your device.</p>
               <p className="mt-4">© {new Date().getFullYear()} <a href="https://alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)]">alfo.online</a>. All rights reserved.</p>
             </div>
 
             <div className="flex flex-col gap-2">
-              <h3 className="font-semibold text-[var(--foreground)] mb-2">Cycle Tools</h3>
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">LunaCycle</h3>
+              <Link href="/features" className="hover:text-[var(--foreground)] transition-colors">Features</Link>
+              <Link href="/blog" className="hover:text-[var(--foreground)] transition-colors">Blog</Link>
+              <Link href="/faq" className="hover:text-[var(--foreground)] transition-colors">FAQ</Link>
               <Link href="/tools/next-period-predictor" className="hover:text-[var(--foreground)] transition-colors">Next Period Predictor</Link>
               <Link href="/tools/safe-days-calculator" className="hover:text-[var(--foreground)] transition-colors">Safe Days Calculator</Link>
               <Link href="/tools/ovulation-calculator" className="hover:text-[var(--foreground)] transition-colors">Ovulation Calculator</Link>
@@ -122,13 +128,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <Link href="/terms-of-service" className="hover:text-[var(--foreground)] transition-colors">Terms of Service</Link>
               <Link href="/contact" className="hover:text-[var(--foreground)] transition-colors">Contact</Link>
               <Link href="/about" className="hover:text-[var(--foreground)] transition-colors">About</Link>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <h3 className="font-semibold text-[var(--foreground)] mb-2">Social</h3>
-              <a href="#" className="hover:text-[var(--foreground)] transition-colors">Twitter / X</a>
-              <a href="#" className="hover:text-[var(--foreground)] transition-colors">GitHub</a>
-              <a href="#" className="hover:text-[var(--foreground)] transition-colors">LinkedIn</a>
             </div>
           </div>
         </footer>
