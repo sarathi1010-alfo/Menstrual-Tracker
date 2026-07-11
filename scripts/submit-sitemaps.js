@@ -5,13 +5,13 @@ const path = require('path');
 require('dotenv').config();
 
 // Configuration
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.cyclehub.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.lunacycle.com';
 const CREDENTIALS_PATH = path.join(process.cwd(), 'gsc-service-account.json');
 
 const sitemaps = [
   `${SITE_URL}/sitemap.xml`, // Index
   `${SITE_URL}/sitemap/core/sitemap.xml`,
-  `${SITE_URL}/sitemap/guides/sitemap.xml`,
+  `${SITE_URL}/sitemap/blog/sitemap.xml`,
   `${SITE_URL}/sitemap/tools/sitemap.xml`
 ];
 
