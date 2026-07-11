@@ -1,4 +1,4 @@
-name: CycleHub Production Deployment & SEO Checks
+name: LunaCycle Production Deployment & SEO Checks
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
       - name: Build Next.js
         run: npm run build
         env:
-          NEXT_PUBLIC_SITE_URL: 'https://www.cyclehub.com'
+          NEXT_PUBLIC_SITE_URL: 'https://www.lunacycle.com'
 
   deploy:
     needs: build-and-test
@@ -65,7 +65,7 @@ jobs:
       - name: Submit Sitemaps to GSC
         env:
           GSC_CREDENTIALS_JSON: ${{ secrets.GSC_CREDENTIALS_JSON }}
-          NEXT_PUBLIC_SITE_URL: 'https://www.cyclehub.com'
+          NEXT_PUBLIC_SITE_URL: 'https://www.lunacycle.com'
         run: |
           echo "$GSC_CREDENTIALS_JSON" > gsc-service-account.json
           node scripts/submit-sitemaps.js
