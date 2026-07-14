@@ -63,7 +63,7 @@ export default function Home() {
             <Shield size={20} />
           </div>
           <h4 className="font-semibold text-lg">Privacy First</h4>
-          <p className="text-sm text-[var(--muted)]">Your data never leaves your device. We use local storage so your health information remains yours alone.</p>
+          <p className="text-sm text-[var(--muted)]">Your data never leaves your device. LunaCycle uses local storage so your health information remains yours alone.</p>
         </div>
         <div className="space-y-3">
           <div className="w-10 h-10 rounded-xl bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center">
