@@ -6,8 +6,8 @@ export const siteConfig = {
 
   // Use environment variable in production, fallback to production domain
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacycle.alfo.online',
-  name: 'CycleHub',
-  description: 'Track your cycle visually, predict key dates instantly, and save everything locally on your device.',
+  name: 'LunaCycle',
+  description: 'Privacy-first menstrual cycle tracking. Track your cycle visually, predict key dates instantly, and save everything locally on your device.',
   creator: 'alfo.online',
   ecosystemHub: 'https://hub.alfo.online',
 };
