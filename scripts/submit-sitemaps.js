@@ -11,7 +11,7 @@ const CREDENTIALS_PATH = path.join(process.cwd(), 'gsc-service-account.json');
 const sitemaps = [
   `${SITE_URL}/sitemap.xml`, // Index
   `${SITE_URL}/sitemap/core/sitemap.xml`,
-  `${SITE_URL}/sitemap/guides/sitemap.xml`,
+  `${SITE_URL}/sitemap/blog/sitemap.xml`,
   `${SITE_URL}/sitemap/tools/sitemap.xml`
 ];
 
