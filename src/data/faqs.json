@@ -2,7 +2,7 @@
   {
     "id": "is-my-data-secure",
     "question": "Is my data secure?",
-    "answer": "Yes. We built CycleHub with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
+    "answer": "Yes. We built LunaCycle with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
   },
   {
     "id": "how-to-track",
@@ -17,6 +17,56 @@
   {
     "id": "birth-control",
     "question": "Can I use this for birth control?",
-    "answer": "No. CycleHub is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+    "answer": "No. LunaCycle is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+  },
+  {
+    "id": "what-is-cycle-tracking",
+    "question": "What is cycle tracking?",
+    "answer": "Cycle tracking is the practice of recording the start and end dates of your menstrual period, along with other symptoms. It helps you understand your body's rhythm, predict future periods, and identify your fertile window."
+  },
+  {
+    "id": "how-long-is-a-normal-cycle",
+    "question": "How long is a normal menstrual cycle?",
+    "answer": "A normal menstrual cycle can range anywhere from 21 to 35 days. While 28 days is often cited as the average, it varies significantly from person to person."
+  },
+  {
+    "id": "what-is-ovulation",
+    "question": "What is ovulation?",
+    "answer": "Ovulation is the release of a mature egg from an ovary. It typically occurs around the midpoint of your menstrual cycle and marks your most fertile time."
+  },
+  {
+    "id": "what-is-fertile-window",
+    "question": "What is the fertile window?",
+    "answer": "The fertile window consists of the 5 days leading up to ovulation and the day of ovulation itself. This is the time when you are most likely to conceive."
+  },
+  {
+    "id": "can-i-track-symptoms",
+    "question": "Can I track symptoms other than my period?",
+    "answer": "Yes, tracking symptoms like mood, energy levels, and physical discomforts can provide a more comprehensive view of your health and help you identify patterns."
+  },
+  {
+    "id": "why-track-cycle",
+    "question": "Why should I track my cycle?",
+    "answer": "Tracking your cycle helps you anticipate periods, plan for physical or emotional changes, and spot any irregularities that might require medical attention."
+  },
+  {
+    "id": "how-accurate-are-predictions",
+    "question": "How accurate are LunaCycle's predictions?",
+    "answer": "Predictions are based on your past data. The more consistently you log your periods, the more accurate the predictions will become, though variations can still occur."
+  },
+  {
+    "id": "export-data",
+    "question": "Can I export my data?",
+    "answer": "Yes, since your data is stored locally, you can export it as a JSON file from the Settings page for backup purposes."
+  },
+  {
+    "id": "what-if-i-forget-to-log",
+    "question": "What happens if I forget to log my period?",
+    "answer": "You can always retroactively add dates to the calendar. However, missing multiple logs can temporarily reduce the accuracy of future predictions."
+  },
+  {
+    "id": "is-it-free",
+    "question": "Is LunaCycle free to use?",
+    "answer": "Yes, LunaCycle is entirely free. We believe in providing accessible, privacy-first health tools for everyone."
   }
 ]
