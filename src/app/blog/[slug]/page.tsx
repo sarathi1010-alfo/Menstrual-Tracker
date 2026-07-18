@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, BookOpen, Share2 } from 'lucide-react';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 export async function generateStaticParams() {
   const slugs = getGuideSlugs();
@@ -48,7 +49,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     .filter(g => g.slug !== guide.meta.slug && g.tags.some(t => guide.meta.tags.includes(t)))
     .slice(0, 3); // Get top 3 related
 
-  const articleSchema = {
+  const articleSchema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": guide.meta.seoTitle,
@@ -56,11 +57,11 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     "keywords": guide.meta.tags.join(', '),
     "author": {
       "@type": "Organization",
-      "name": "CycleHub"
+      "name": "LunaCycle"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "CycleHub",
+      "name": "LunaCycle",
       "logo": {
         "@type": "ImageObject",
         "url": "https://cyclehub.example.com/logo.png"
@@ -68,13 +69,28 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     }
   };
 
+  const faqSchema: Record<string, unknown> | null = guide.meta.faqs && guide.meta.faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": guide.meta.faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  } : null;
+
   // AI-Retrieval Optimization: Answer-first formatting and semantic chunking
   return (
     <div className="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
       <article className="lg:w-2/3">
         <SchemaMarkup schema={articleSchema} />
+        {faqSchema && <SchemaMarkup schema={faqSchema} />}
+
         <div className="mb-8">
-          <Link href="/guides" className="inline-flex items-center text-sm text-[var(--muted)] hover:text-[var(--primary)] mb-6 transition-colors">
+          <Link href="/blog" className="inline-flex items-center text-sm text-[var(--muted)] hover:text-[var(--primary)] mb-6 transition-colors">
             <ArrowLeft size={16} className="mr-1" /> Back to all guides
           </Link>
           <div className="flex gap-2 mb-4 flex-wrap">
@@ -97,11 +113,40 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                {guide.meta.summary}
             </p>
           </div>
+
+          {/* AEO Box: Key Takeaways */}
+          {guide.meta.takeaways && guide.meta.takeaways.length > 0 && (
+            <div className="p-6 rounded-xl bg-[var(--primary)]/5 border border-[var(--primary)]/20 shadow-sm mb-10">
+              <h2 className="text-lg font-bold text-[var(--primary)] mb-4">Key Takeaways</h2>
+              <ul className="list-disc list-inside space-y-2 text-[var(--muted)]">
+                {guide.meta.takeaways.map((takeaway, idx) => (
+                  <li key={idx}>{takeaway}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
-        <div className="prose prose-lg dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-[var(--primary)] hover:prose-a:text-[var(--accent)] prose-a:transition-colors max-w-none">
+        <MedicalDisclaimer />
+
+        <div className="prose prose-lg dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-[var(--primary)] hover:prose-a:text-[var(--accent)] prose-a:transition-colors max-w-none mt-10">
           <MDXRemote source={guide.content} />
         </div>
+
+        {/* FAQ Section */}
+        {guide.meta.faqs && guide.meta.faqs.length > 0 && (
+          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+            <div className="space-y-6">
+              {guide.meta.faqs.map((faq, idx) => (
+                <div key={idx} className="bg-gray-50 dark:bg-gray-800/50 p-5 rounded-lg">
+                  <h3 className="font-bold text-lg mb-2">{faq.question}</h3>
+                  <p className="text-[var(--muted)]">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="mt-12 flex items-center justify-between py-6 border-t border-b border-gray-200 dark:border-gray-800">
            <span className="font-medium">Was this guide helpful?</span>
@@ -109,6 +154,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
              <Share2 size={18} className="mr-2" /> Share
            </button>
         </div>
+
       </article>
 
       {/* Semantic Linking Sidebar / Authority Distribution */}
@@ -116,7 +162,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         <div className="card p-6 bg-[var(--primary)] text-white shadow-lg sticky top-24">
           <h3 className="text-xl font-bold mb-3">Apply this to your cycle</h3>
           <p className="text-white/80 text-sm mb-6">
-            CycleHub is a 100% private, local-only tracker. We never see your data. Start tracking now to get personalized predictions.
+            LunaCycle is a 100% private, local-only tracker. We never see your data. Start tracking now to get personalized predictions.
           </p>
           <Link href="/tracker" className="block w-full py-3 bg-white text-[var(--primary)] text-center font-bold rounded-xl hover:bg-gray-50 transition-colors shadow-sm">
             Open Free Tracker
@@ -130,7 +176,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             </h3>
             <div className="space-y-4">
               {relatedGuides.map(related => (
-                <Link key={related.slug} href={`/guides/${related.slug}`} className="block group">
+                <Link key={related.slug} href={`/blog/${related.slug}`} className="block group">
                   <h4 className="font-medium text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors line-clamp-2 mb-1">
                     {related.title}
                   </h4>

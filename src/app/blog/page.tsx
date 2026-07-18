@@ -2,10 +2,11 @@ import Link from 'next/link';
 import { getAllGuides } from '@/lib/mdx';
 import { Metadata } from 'next';
 import { BookOpen, ArrowRight } from 'lucide-react';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 export const metadata: Metadata = {
   title: 'Cycle Health Guides & Education - Period Tracking Resources',
-  description: 'Free evidence-based guides to understanding your menstrual cycle, tracking methods, and reproductive health. Privacy-first educational resources from CycleHub.',
+  description: 'Free evidence-based guides to understanding your menstrual cycle, tracking methods, and reproductive health. Privacy-first educational resources from LunaCycle.',
 };
 
 export default function GuidesIndexPage() {
@@ -17,15 +18,26 @@ export default function GuidesIndexPage() {
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[var(--primary)]/10 text-[var(--primary)] mb-2">
           <BookOpen size={32} />
         </div>
-        <h1 className="heading-1">Cycle Education Hub</h1>
-        <p className="text-xl text-[var(--muted)] max-w-2xl mx-auto">
-          Understand your body with our semantic library of cycle mechanics, tracking methodology, and health indicators.
+        <h1 className="heading-1">LunaCycle Blog – Cycle Tracking Guides, Menstrual Health &amp; Privacy Tips</h1>
+        <p className="text-lg text-[var(--muted)] max-w-3xl mx-auto leading-relaxed">
+          Welcome to the LunaCycle Blog, your trusted, privacy-first resource for understanding your body. Whether you&apos;re learning the basics of your menstrual cycle, trying to conceive, or simply looking for ways to track your period without sacrificing your personal data, we have you covered. Our guides are designed to be clear, educational, and completely free of jargon. Explore our categories below to dive deep into cycle fundamentals, fertility &amp; family planning, privacy &amp; security, and women&apos;s health conditions. Remember, all your data in the <Link href="/" className="text-[var(--primary)] hover:underline">LunaCycle tracker</Link> stays on your device. For more details on our mission, check out our <Link href="/about" className="text-[var(--primary)] hover:underline">About</Link> page, or visit our <Link href="/faq" className="text-[var(--primary)] hover:underline">FAQ</Link> for quick answers.
         </p>
       </header>
 
+      <section className="mb-12">
+        <h2 className="heading-2 mb-6">Categories</h2>
+        <div className="flex flex-wrap gap-3">
+          <span className="px-4 py-2 bg-[var(--primary)]/10 text-[var(--primary)] font-medium rounded-full text-sm">Cycle Fundamentals</span>
+          <span className="px-4 py-2 bg-[var(--primary)]/10 text-[var(--primary)] font-medium rounded-full text-sm">Fertility &amp; Family Planning</span>
+          <span className="px-4 py-2 bg-[var(--primary)]/10 text-[var(--primary)] font-medium rounded-full text-sm">Privacy &amp; Security</span>
+          <span className="px-4 py-2 bg-[var(--primary)]/10 text-[var(--primary)] font-medium rounded-full text-sm">Conditions &amp; Health</span>
+          <span className="px-4 py-2 bg-[var(--primary)]/10 text-[var(--primary)] font-medium rounded-full text-sm">Wellness &amp; Lifestyle</span>
+        </div>
+      </section>
+
       <div className="grid md:grid-cols-2 gap-6">
         {guides.map((guide) => (
-          <Link key={guide.slug} href={`/guides/${guide.slug}`} className="group block">
+          <Link key={guide.slug} href={`/blog/${guide.slug}`} className="group block">
             <div className="card p-6 h-full border border-transparent hover:border-[var(--primary)]/30 transition-all hover:shadow-md">
               <div className="flex gap-2 mb-3 flex-wrap">
                 {guide.tags.map(tag => (
@@ -66,6 +78,7 @@ export default function GuidesIndexPage() {
           </Link>
         </div>
       </section>
+      <MedicalDisclaimer />
     </div>
   );
 }

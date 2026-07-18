@@ -14,7 +14,7 @@ export function PredictionCard() {
   if (cycles.length === 0) {
     return (
       <div className="card p-6 bg-gradient-to-br from-[var(--primary)] to-indigo-600 text-white">
-        <h3 className="text-lg font-semibold mb-2">Welcome to CycleHub</h3>
+        <h3 className="text-lg font-semibold mb-2">Welcome to LunaCycle</h3>
         <p className="text-white/80 text-sm">
           Log your first period to start getting predictions and insights.
         </p>

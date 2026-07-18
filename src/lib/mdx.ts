@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const guidesDirectory = path.join(process.cwd(), 'src/data/guides');
+const guidesDirectory = path.join(process.cwd(), 'src/data/blog');
 
 export interface GuideMeta {
   title: string;
@@ -11,6 +11,8 @@ export interface GuideMeta {
   seoDescription: string;
   tags: string[];
   slug: string;
+  takeaways?: string[];
+  faqs?: { question: string; answer: string }[];
 }
 
 export interface Guide {
@@ -45,6 +47,8 @@ export function getGuideBySlug(slug: string): Guide | null {
         seoTitle: data.seoTitle || data.title || '',
         seoDescription: data.seoDescription || data.summary || '',
         tags: data.tags || [],
+        takeaways: data.takeaways || [],
+        faqs: data.faqs || [],
       },
       content,
     };
