@@ -1,0 +1,34 @@
+<<<<<<< SEARCH
+export interface ArticleMeta {
+  title: string;
+  summary: string;
+  seoTitle: string;
+  seoDescription: string;
+  tags: string[];
+  slug: string;
+}
+=======
+export interface ArticleMeta {
+  title: string;
+  summary: string;
+  seoTitle: string;
+  seoDescription: string;
+  tags: string[];
+  slug: string;
+  takeaways?: string[];
+  faqs?: { question: string; answer: string }[];
+}
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+        seoDescription: data.seoDescription || data.summary || '',
+        tags: data.tags || [],
+      },
+      content,
+=======
+        seoDescription: data.seoDescription || data.summary || '',
+        tags: data.tags || [],
+        takeaways: data.takeaways || [],
+        faqs: data.faqs || [],
+      },
+      content,
+>>>>>>> REPLACE
