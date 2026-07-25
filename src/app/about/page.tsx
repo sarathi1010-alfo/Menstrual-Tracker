@@ -1,17 +1,19 @@
 import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'About CycleHub - Privacy-First Period Tracking App',
-  description: 'Learn about CycleHub, a privacy-first period tracking app that stores your cycle data locally on your device. No accounts, no cloud storage, complete privacy.',
+  title: 'About LunaCycle - Privacy-First Period Tracking App',
+  description: 'Learn about LunaCycle, a privacy-first period tracking app that stores your cycle data locally on your device. No accounts, no cloud storage, complete privacy.',
   path: '/about',
 });
 
 export default function AboutPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
+      <MedicalDisclaimer />
       <div>
-        <h1 className="heading-1 mb-4">About CycleHub</h1>
+        <h1 className="heading-1 mb-4">About LunaCycle</h1>
         <p className="text-[var(--muted)] text-lg">
           A beautifully simple utility designed to give you clarity over your cycle, stored securely on your own device.
         </p>
@@ -25,7 +27,7 @@ export default function AboutPage() {
 
         <h2 className="heading-3 mt-8 mb-4">Our Approach</h2>
         <p className="text-[var(--muted)] mb-6 leading-relaxed">
-          CycleHub was built to be different. It is a client-side only web application. This means the code runs entirely in your browser. When you log a date, it is saved directly to your device&apos;s local storage.
+          LunaCycle was built to be different. It is a client-side only web application. This means the code runs entirely in your browser. When you log a date, it is saved directly to your device&apos;s local storage.
         </p>
 
         <ul className="list-disc list-inside space-y-2 text-[var(--muted)] mb-6">
@@ -37,7 +39,7 @@ export default function AboutPage() {
 
         <h2 className="heading-3 mt-8 mb-4">Who is it for?</h2>
         <p className="text-[var(--muted)] mb-6 leading-relaxed">
-          CycleHub is for anyone who wants a minimal, beautifully designed calendar to track their cycle length and predict upcoming dates. It is perfect for those who value digital privacy and prefer tools over social networks.
+          LunaCycle is for anyone who wants a minimal, beautifully designed calendar to track their cycle length and predict upcoming dates. It is perfect for those who value digital privacy and prefer tools over social networks.
         </p>
       </article>
     </div>

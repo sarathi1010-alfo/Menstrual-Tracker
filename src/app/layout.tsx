@@ -5,6 +5,7 @@ import { SchemaMarkup } from '@/components/SchemaMarkup';
 import { constructMetadata, siteConfig, absoluteUrl } from '@/lib/seo';
 import './globals.css';
 
+
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
