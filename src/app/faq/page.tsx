@@ -1,20 +1,41 @@
+import { Metadata } from 'next';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
-import faqsData from '@/data/faqs.json';
-import Link from 'next/link';
+import { HelpCircle, ChevronDown } from 'lucide-react';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
-import { constructMetadata } from '@/lib/seo';
+export const metadata: Metadata = {
+  title: 'Frequently Asked Questions | LunaCycle',
+  description: 'Common questions about LunaCycle period tracker, privacy, local storage, and cycle predictions.',
+};
 
-export const metadata = constructMetadata({
-  title: 'Frequently Asked Questions - CycleHub Period Tracker Help',
-  description: 'Get answers to common questions about CycleHub period tracker. Learn how to track your cycle, data privacy, predictions, and more in our FAQ.',
-  path: '/faq',
-});
+const faqs = [
+  {
+    question: "How does LunaCycle protect my privacy?",
+    answer: "LunaCycle is a 100% private, local-only tracker. All your cycle data is stored exclusively in your browser's local storage. We never collect, sync, or transmit your data to any external servers or third parties."
+  },
+  {
+    question: "Do I need to create an account?",
+    answer: "No, you never need to create an account. Because everything is stored locally on your device, there is no need for user accounts, passwords, or emails. You can start tracking immediately."
+  },
+  {
+    question: "What happens if I clear my browser data?",
+    answer: "Since LunaCycle uses local storage, clearing your browser data or cache will erase your tracking history. We highly recommend using our data export feature in the Settings page to regularly backup your data locally."
+  },
+  {
+    question: "Can I use LunaCycle offline?",
+    answer: "Yes! Because the app relies solely on your local device and doesn't communicate with external servers, all tracking, insights, and predictions work perfectly without an internet connection."
+  },
+  {
+    question: "Is LunaCycle a substitute for medical advice?",
+    answer: "No. LunaCycle is designed for educational and informational purposes only. It is not a medical device and should not be used as a substitute for professional medical consultation, diagnosis, or treatment."
+  }
+];
 
 export default function FAQPage() {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqsData.map((faq) => ({
+    "mainEntity": faqs.map((faq) => ({
       "@type": "Question",
       "name": faq.question,
       "acceptedAnswer": {
@@ -25,65 +46,33 @@ export default function FAQPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-12">
       <SchemaMarkup schema={faqSchema} />
-      <div>
-        <h1 className="heading-1 mb-4">Frequently Asked Questions</h1>
-        <p className="text-[var(--muted)] text-lg">
-          Everything you need to know about tracking your cycle with CycleHub.
+
+      <header className="text-center space-y-4">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[var(--primary)]/10 text-[var(--primary)] mb-2">
+          <HelpCircle size={32} />
+        </div>
+        <h1 className="heading-1">Frequently Asked Questions</h1>
+        <p className="text-xl text-[var(--muted)] max-w-2xl mx-auto">
+          Everything you need to know about how LunaCycle works and keeps your data completely private.
         </p>
-      </div>
+      </header>
 
-      <div className="space-y-6">
-        <div className="card p-6">
-          <h3 className="heading-3 mb-2">Is my data secure?</h3>
-          <p className="text-[var(--muted)]">
-            Yes. We built CycleHub with a strict privacy-first architecture. Your data is stored locally on your device using your browser&apos;s local storage. We do not have servers, databases, or accounts. Your information never leaves your device.
-          </p>
-        </div>
+      <MedicalDisclaimer />
 
-        <div className="card p-6">
-          <h3 className="heading-3 mb-2">How do I track my period?</h3>
-          <p className="text-[var(--muted)]">
-            Navigate to the Tracker page and tap the date on the calendar when your period started. The app will automatically calculate your cycle length based on the distance between your logged dates.
-          </p>
-        </div>
-
-        <div className="card p-6">
-          <h3 className="heading-3 mb-2">How is my next period predicted?</h3>
-          <p className="text-[var(--muted)]">
-            We look at your past logged periods to determine your average cycle length (excluding extreme outliers). We then add this average to your most recent period&apos;s start date to predict when your next one will begin.
-          </p>
-        </div>
-
-        <div className="card p-6">
-          <h3 className="heading-3 mb-2">Can I use this for birth control?</h3>
-          <p className="text-[var(--muted)] text-[var(--accent)] font-medium">
-            No. CycleHub is designed for educational and tracking purposes only.
-          </p>
-          <p className="text-[var(--muted)] mt-2">
-            The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods.
-          </p>
-        </div>
-
-        {/* Quick Access to Tools */}
-        <div className="card p-6 bg-[var(--primary)]/5 border-[var(--primary)]/20">
-          <h3 className="heading-3 mb-3 text-[var(--primary)]">Quick Access: Free Cycle Tools</h3>
-          <div className="space-y-3">
-            <Link href="/tools/next-period-predictor" className="block text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
-              <span className="font-medium">Next Period Predictor</span>
-              <span className="block text-sm text-[var(--muted)]">Predict when your next period will start</span>
-            </Link>
-            <Link href="/tools/safe-days-calculator" className="block text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
-              <span className="font-medium">Safe Days Calculator</span>
-              <span className="block text-sm text-[var(--muted)]">Calculate safe days and fertile window</span>
-            </Link>
-            <Link href="/tools/ovulation-calculator" className="block text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
-              <span className="font-medium">Ovulation Calculator</span>
-              <span className="block text-sm text-[var(--muted)]">Find your most fertile days instantly</span>
-            </Link>
-          </div>
-        </div>
+      <div className="space-y-4 max-w-3xl mx-auto">
+        {faqs.map((faq, index) => (
+          <details key={index} className="group bg-[var(--surface)] border border-gray-200 dark:border-gray-800 rounded-xl p-6 cursor-pointer open:ring-2 open:ring-[var(--primary)]/20 shadow-sm">
+            <summary className="flex items-center justify-between font-medium text-lg list-none text-[var(--foreground)]">
+              {faq.question}
+              <ChevronDown size={20} className="text-[var(--muted)] group-open:rotate-180 transition-transform" />
+            </summary>
+            <div className="mt-4 text-[var(--muted)] leading-relaxed">
+              {faq.answer}
+            </div>
+          </details>
+        ))}
       </div>
     </div>
   );
