@@ -1,18 +1,20 @@
 import Link from 'next/link';
-import { getAllGuides } from '@/lib/mdx';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
+import { getAllArticles } from '@/lib/mdx';
 import { Metadata } from 'next';
 import { BookOpen, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Cycle Health Guides & Education - Period Tracking Resources',
-  description: 'Free evidence-based guides to understanding your menstrual cycle, tracking methods, and reproductive health. Privacy-first educational resources from CycleHub.',
+  description: 'Free evidence-based articles to understanding your menstrual cycle, tracking methods, and reproductive health. Privacy-first educational resources from LunaCycle.',
 };
 
-export default function GuidesIndexPage() {
-  const guides = getAllGuides();
+export default function BlogIndexPage() {
+  const articles = getAllArticles();
 
   return (
     <div className="max-w-4xl mx-auto space-y-12">
+      <MedicalDisclaimer />
       <header className="text-center space-y-4">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[var(--primary)]/10 text-[var(--primary)] mb-2">
           <BookOpen size={32} />
@@ -24,8 +26,8 @@ export default function GuidesIndexPage() {
       </header>
 
       <div className="grid md:grid-cols-2 gap-6">
-        {guides.map((guide) => (
-          <Link key={guide.slug} href={`/guides/${guide.slug}`} className="group block">
+        {articles.map((guide) => (
+          <Link key={guide.slug} href={`/blog/${guide.slug}`} className="group block">
             <div className="card p-6 h-full border border-transparent hover:border-[var(--primary)]/30 transition-all hover:shadow-md">
               <div className="flex gap-2 mb-3 flex-wrap">
                 {guide.tags.map(tag => (

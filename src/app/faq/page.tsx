@@ -1,12 +1,13 @@
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 import faqsData from '@/data/faqs.json';
 import Link from 'next/link';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata = constructMetadata({
-  title: 'Frequently Asked Questions - CycleHub Period Tracker Help',
-  description: 'Get answers to common questions about CycleHub period tracker. Learn how to track your cycle, data privacy, predictions, and more in our FAQ.',
+  title: 'Frequently Asked Questions - LunaCycle Period Tracker Help',
+  description: 'Get answers to common questions about LunaCycle period tracker. Learn how to track your cycle, data privacy, predictions, and more in our FAQ.',
   path: '/faq',
 });
 
@@ -26,11 +27,12 @@ export default function FAQPage() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8">
+      <MedicalDisclaimer />
       <SchemaMarkup schema={faqSchema} />
       <div>
         <h1 className="heading-1 mb-4">Frequently Asked Questions</h1>
         <p className="text-[var(--muted)] text-lg">
-          Everything you need to know about tracking your cycle with CycleHub.
+          Everything you need to know about tracking your cycle with LunaCycle.
         </p>
       </div>
 
@@ -38,7 +40,7 @@ export default function FAQPage() {
         <div className="card p-6">
           <h3 className="heading-3 mb-2">Is my data secure?</h3>
           <p className="text-[var(--muted)]">
-            Yes. We built CycleHub with a strict privacy-first architecture. Your data is stored locally on your device using your browser&apos;s local storage. We do not have servers, databases, or accounts. Your information never leaves your device.
+            Yes. We built LunaCycle with a strict privacy-first architecture. Your data is stored locally on your device using your browser&apos;s local storage. We do not have servers, databases, or accounts. Your information never leaves your device.
           </p>
         </div>
 
@@ -59,7 +61,7 @@ export default function FAQPage() {
         <div className="card p-6">
           <h3 className="heading-3 mb-2">Can I use this for birth control?</h3>
           <p className="text-[var(--muted)] text-[var(--accent)] font-medium">
-            No. CycleHub is designed for educational and tracking purposes only.
+            No. LunaCycle is designed for educational and tracking purposes only.
           </p>
           <p className="text-[var(--muted)] mt-2">
             The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods.
