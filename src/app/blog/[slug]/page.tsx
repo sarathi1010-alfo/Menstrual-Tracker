@@ -1,4 +1,4 @@
-import { getGuideBySlug, getGuideSlugs, getAllGuides } from '@/lib/mdx';
+import { getArticleBySlug, getArticleSlugs, getAllArticles } from '@/lib/mdx';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
@@ -7,7 +7,7 @@ import { ArrowLeft, BookOpen, Share2 } from 'lucide-react';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 
 export async function generateStaticParams() {
-  const slugs = getGuideSlugs();
+  const slugs = getArticleSlugs();
   return slugs.map((slug) => ({
     slug: slug,
   }));
@@ -15,7 +15,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
-  const guide = getGuideBySlug(resolvedParams.slug);
+  const guide = getArticleBySlug(resolvedParams.slug);
 
   if (!guide) {
     return {
@@ -39,13 +39,13 @@ import { MedicalDisclaimer } from "@/components/MedicalDisclaimer";
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const guide = getGuideBySlug(resolvedParams.slug);
+  const guide = getArticleBySlug(resolvedParams.slug);
 
   if (!guide) {
     notFound();
   }
 
-  const allGuides = getAllGuides();
+  const allGuides = getAllArticles();
   const relatedGuides = allGuides
     .filter(g => g.slug !== guide.meta.slug && g.tags.some(t => guide.meta.tags.includes(t)))
     .slice(0, 3); // Get top 3 related

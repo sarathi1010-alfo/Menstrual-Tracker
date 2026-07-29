@@ -2,7 +2,18 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
+// Helper function to safely read a directory
+function safeReadDir(directory: string): string[] {
+  if (!fs.existsSync(directory)) {
+    return [];
+  }
+  return fs.readdirSync(directory)
+    .filter((file) => file.endsWith('.mdx'))
+    .map((file) => file.replace(/\.mdx$/, ''));
+}
+
 const guidesDirectory = path.join(process.cwd(), 'src/data/guides');
+const blogDirectory = path.join(process.cwd(), 'src/data/blog');
 
 export interface GuideMeta {
   title: string;
@@ -19,18 +30,17 @@ export interface Guide {
 }
 
 export function getGuideSlugs(): string[] {
-  if (!fs.existsSync(guidesDirectory)) {
-    return [];
-  }
-  return fs.readdirSync(guidesDirectory)
-    .filter((file) => file.endsWith('.mdx'))
-    .map((file) => file.replace(/\.mdx$/, ''));
+  return safeReadDir(guidesDirectory);
 }
 
-export function getGuideBySlug(slug: string): Guide | null {
+export function getArticleSlugs(): string[] {
+  return safeReadDir(blogDirectory);
+}
+
+function getFileBySlugAndDir(slug: string, directory: string): Guide | null {
   try {
     const realSlug = slug.replace(/\.mdx$/, '');
-    const fullPath = path.join(guidesDirectory, `${realSlug}.mdx`);
+    const fullPath = path.join(directory, `${realSlug}.mdx`);
 
     if (!fs.existsSync(fullPath)) return null;
 
@@ -49,10 +59,19 @@ export function getGuideBySlug(slug: string): Guide | null {
       content,
     };
   } catch (error) {
-    console.error(`Error reading guide ${slug}:`, error);
+    console.error(`Error reading file ${slug} from ${directory}:`, error);
     return null;
   }
 }
+
+export function getGuideBySlug(slug: string): Guide | null {
+  return getFileBySlugAndDir(slug, guidesDirectory);
+}
+
+export function getArticleBySlug(slug: string): Guide | null {
+  return getFileBySlugAndDir(slug, blogDirectory);
+}
+
 
 export function getAllGuides(): GuideMeta[] {
   const slugs = getGuideSlugs();
@@ -62,4 +81,14 @@ export function getAllGuides(): GuideMeta[] {
     .map((guide) => guide.meta);
 
   return guides;
+}
+
+export function getAllArticles(): GuideMeta[] {
+  const slugs = getArticleSlugs();
+  const articles = slugs
+    .map((slug) => getArticleBySlug(slug))
+    .filter((article): article is Guide => article !== null)
+    .map((article) => article.meta);
+
+  return articles;
 }

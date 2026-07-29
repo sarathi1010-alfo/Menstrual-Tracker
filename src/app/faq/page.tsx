@@ -10,6 +10,7 @@ export const metadata = constructMetadata({
   path: '/faq',
 });
 
+import { MedicalDisclaimer } from "@/components/MedicalDisclaimer";
 export default function FAQPage() {
   const faqSchema = {
     "@context": "https://schema.org",
@@ -33,6 +34,8 @@ export default function FAQPage() {
           Everything you need to know about tracking your cycle with CycleHub.
         </p>
       </div>
+
+      <MedicalDisclaimer />
 
       <div className="space-y-6">
         <div className="card p-6">
