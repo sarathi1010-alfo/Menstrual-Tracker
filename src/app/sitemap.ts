@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getArticleSlugs } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
@@ -26,6 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl('/guides'),
+      lastModified: currentDateStr,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl('/blog'),
       lastModified: currentDateStr,
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -73,6 +79,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7, // Internal programmatic pages get high but sub-core priority
     }));
 
+  const articleSlugs = getArticleSlugs() || [];
+  const articleRoutes: MetadataRoute.Sitemap = articleSlugs
+    .filter((slug) => slug && slug.trim() !== '')
+    .map((slug) => ({
+      url: absoluteUrl(`/blog/${slug}`),
+      lastModified: currentDateStr,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    }));
+
   const toolsData = seoData || [];
   const toolRoutes: MetadataRoute.Sitemap = toolsData
     .filter((tool) => tool && tool.slug && tool.slug.trim() !== '')
@@ -83,5 +99,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  return [...staticRoutes, ...guideRoutes, ...articleRoutes, ...toolRoutes];
 }
