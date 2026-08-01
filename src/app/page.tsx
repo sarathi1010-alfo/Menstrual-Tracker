@@ -1,3 +1,4 @@
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { PredictionCard } from '@/components/PredictionCard';
@@ -102,6 +103,7 @@ export default function Home() {
 
       {/* Internal Traffic Engine - Related Tools Widget */}
       <RelatedToolsWidget />
+      <MedicalDisclaimer />
     </div>
   );
 }
