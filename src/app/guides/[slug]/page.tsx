@@ -45,7 +45,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
 
   const allGuides = getAllGuides();
   const relatedGuides = allGuides
-    .filter(g => g.slug !== guide.meta.slug && g.tags.some(t => guide.meta.tags.includes(t)))
+    .filter(g => g.slug !== guide.meta.slug && g.tags?.some(t => guide.meta.tags?.includes(t)))
     .slice(0, 3); // Get top 3 related
 
   const articleSchema = {
@@ -53,7 +53,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     "@type": "Article",
     "headline": guide.meta.seoTitle,
     "description": guide.meta.seoDescription,
-    "keywords": guide.meta.tags.join(', '),
+    "keywords": (guide.meta.tags || []).join(', '),
     "author": {
       "@type": "Organization",
       "name": "CycleHub"
@@ -78,7 +78,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             <ArrowLeft size={16} className="mr-1" /> Back to all guides
           </Link>
           <div className="flex gap-2 mb-4 flex-wrap">
-            {guide.meta.tags.map(tag => (
+            {(guide.meta.tags || []).map(tag => (
               <span key={tag} className="text-xs font-medium px-2.5 py-1 bg-[var(--primary)]/10 text-[var(--primary)] rounded-full">
                 {tag}
               </span>
