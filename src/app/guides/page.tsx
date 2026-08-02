@@ -28,7 +28,7 @@ export default function GuidesIndexPage() {
           <Link key={guide.slug} href={`/guides/${guide.slug}`} className="group block">
             <div className="card p-6 h-full border border-transparent hover:border-[var(--primary)]/30 transition-all hover:shadow-md">
               <div className="flex gap-2 mb-3 flex-wrap">
-                {guide.tags.map(tag => (
+                {(guide.tags || []).map(tag => (
                   <span key={tag} className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-md text-[var(--muted)]">
                     {tag}
                   </span>
