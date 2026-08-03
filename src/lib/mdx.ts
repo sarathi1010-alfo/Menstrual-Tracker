@@ -11,10 +11,20 @@ export interface GuideMeta {
   seoDescription: string;
   tags: string[];
   slug: string;
+  takeaways?: string[];
+  faqs?: { question: string; answer: string }[];
+  category?: string;
 }
 
 export interface Guide {
   meta: GuideMeta;
+  content: string;
+}
+
+export type ArticleMeta = GuideMeta;
+
+export interface Article {
+  meta: ArticleMeta;
   content: string;
 }
 
@@ -62,4 +72,55 @@ export function getAllGuides(): GuideMeta[] {
     .map((guide) => guide.meta);
 
   return guides;
+}
+
+const articlesDirectory = path.join(process.cwd(), 'src/data/blog');
+
+export function getArticleSlugs(): string[] {
+  if (!fs.existsSync(articlesDirectory)) {
+    return [];
+  }
+  return fs.readdirSync(articlesDirectory)
+    .filter((file) => file.endsWith('.mdx'))
+    .map((file) => file.replace(/\.mdx$/, ''));
+}
+
+export function getArticleBySlug(slug: string): Article | null {
+  try {
+    const realSlug = slug.replace(/\.mdx$/, '');
+    const fullPath = path.join(articlesDirectory, `${realSlug}.mdx`);
+
+    if (!fs.existsSync(fullPath)) return null;
+
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const { data, content } = matter(fileContents);
+
+    return {
+      meta: {
+        slug: realSlug,
+        title: data.title || '',
+        summary: data.summary || '',
+        seoTitle: data.seoTitle || data.title || '',
+        seoDescription: data.seoDescription || data.summary || '',
+        tags: data.tags || [],
+        takeaways: data.takeaways || [],
+        faqs: data.faqs || [],
+        category: data.category || '',
+      },
+      content,
+    };
+  } catch (error) {
+    console.error(`Error reading article ${slug}:`, error);
+    return null;
+  }
+}
+
+export function getAllArticles(): ArticleMeta[] {
+  const slugs = getArticleSlugs();
+  const articles = slugs
+    .map((slug) => getArticleBySlug(slug))
+    .filter((article): article is Article => article !== null)
+    .map((article) => article.meta);
+
+  return articles;
 }
