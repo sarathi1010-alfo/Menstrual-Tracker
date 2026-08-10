@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getAllArticles } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
@@ -73,6 +73,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7, // Internal programmatic pages get high but sub-core priority
     }));
 
+  const articles = getAllArticles() || [];
+  const articleRoutes: MetadataRoute.Sitemap = articles.map((article) => {
+    let url = `/blog/${article.slug}`;
+    if (article.category === 'what-is') url = `/${article.slug}`;
+    if (article.category === 'use-cases') url = `/use-cases/${article.slug}`;
+    if (article.category === 'conditions') url = `/conditions/${article.slug}`;
+    return {
+      url: absoluteUrl(url),
+      lastModified: currentDateStr,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    };
+  });
+
   const toolsData = seoData || [];
   const toolRoutes: MetadataRoute.Sitemap = toolsData
     .filter((tool) => tool && tool.slug && tool.slug.trim() !== '')
@@ -83,5 +97,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  return [...staticRoutes, ...guideRoutes, ...articleRoutes, ...toolRoutes];
 }
