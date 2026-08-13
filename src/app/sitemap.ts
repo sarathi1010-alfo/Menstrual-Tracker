@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getAllArticles } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
@@ -25,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: absoluteUrl('/guides'),
+      url: absoluteUrl('/blog'),
       lastModified: currentDateStr,
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -62,7 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Dynamic programmatic SEO pages
+  // Dynamic programmatic SEO pages (legacy guides)
   const guideSlugs = getGuideSlugs() || [];
   const guideRoutes: MetadataRoute.Sitemap = guideSlugs
     .filter((slug) => slug && slug.trim() !== '')
@@ -70,8 +70,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl(`/guides/${slug}`),
       lastModified: currentDateStr,
       changeFrequency: 'monthly',
-      priority: 0.7, // Internal programmatic pages get high but sub-core priority
+      priority: 0.7,
     }));
+
+  // Dynamic programmatic SEO pages (new articles)
+  const articles = getAllArticles() || [];
+  const articleRoutes: MetadataRoute.Sitemap = articles
+    .filter((article) => article.slug && article.slug.trim() !== '')
+    .map((article) => {
+      let prefix = '/blog';
+      if (article.category === 'what-is') {
+        prefix = ''; // Routes to /[slug]
+      } else if (article.category === 'use-cases') {
+        prefix = '/use-cases';
+      } else if (article.category === 'conditions') {
+        prefix = '/conditions';
+      }
+      return {
+        url: absoluteUrl(`${prefix}/${article.slug}`),
+        lastModified: currentDateStr,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      };
+    });
 
   const toolsData = seoData || [];
   const toolRoutes: MetadataRoute.Sitemap = toolsData
@@ -83,5 +104,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  return [...staticRoutes, ...guideRoutes, ...articleRoutes, ...toolRoutes];
 }
