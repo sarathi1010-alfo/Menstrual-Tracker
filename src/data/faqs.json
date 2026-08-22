@@ -1,22 +1,42 @@
 [
   {
-    "id": "is-my-data-secure",
-    "question": "Is my data secure?",
-    "answer": "Yes. We built CycleHub with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
+    "question": "What is LunaCycle?",
+    "answer": "LunaCycle is a privacy-first menstrual cycle tracking application that stores all your data locally on your device."
   },
   {
-    "id": "how-to-track",
+    "question": "Is my data secure?",
+    "answer": "Yes. We built LunaCycle with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
+  },
+  {
     "question": "How do I track my period?",
     "answer": "Navigate to the Tracker page and tap the date on the calendar when your period started. The app will automatically calculate your cycle length based on the distance between your logged dates."
   },
   {
-    "id": "predictions",
     "question": "How is my next period predicted?",
     "answer": "We look at your past logged periods to determine your average cycle length (excluding extreme outliers). We then add this average to your most recent period's start date to predict when your next one will begin."
   },
   {
-    "id": "birth-control",
     "question": "Can I use this for birth control?",
-    "answer": "No. CycleHub is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+    "answer": "No. LunaCycle is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+  },
+  {
+    "question": "How do I export my data?",
+    "answer": "You can export your data as a JSON file from the Settings page. This file can be used to restore your data on another device."
+  },
+  {
+    "question": "How do I import my data?",
+    "answer": "You can import your data from a JSON file on the Settings page. Simply click 'Import Data' and select the file you previously exported."
+  },
+  {
+    "question": "Is LunaCycle free?",
+    "answer": "Yes, LunaCycle is completely free to use with no hidden fees or subscriptions."
+  },
+  {
+    "question": "Does LunaCycle work offline?",
+    "answer": "Yes, LunaCycle is an installable PWA (Progressive Web App) that operates completely offline."
+  },
+  {
+    "question": "Can I track symptoms and mood?",
+    "answer": "Yes, you can track daily logs including mood, energy, flow, and symptoms by clicking on any date in the tracker."
   }
 ]
