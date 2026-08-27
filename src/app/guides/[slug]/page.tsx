@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, BookOpen, Share2 } from 'lucide-react';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 export async function generateStaticParams() {
   const slugs = getGuideSlugs();
@@ -84,6 +85,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
               </span>
             ))}
           </div>
+          <MedicalDisclaimer />
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-[var(--foreground)]">
             {guide.meta.title}
           </h1>

@@ -1,6 +1,7 @@
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 import faqsData from '@/data/faqs.json';
 import Link from 'next/link';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 import { constructMetadata } from '@/lib/seo';
 
@@ -32,6 +33,7 @@ export default function FAQPage() {
         <p className="text-[var(--muted)] text-lg">
           Everything you need to know about tracking your cycle with CycleHub.
         </p>
+        <MedicalDisclaimer />
       </div>
 
       <div className="space-y-6">
