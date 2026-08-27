@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 export const metadata: Metadata = constructMetadata({
   title: 'Privacy Policy - CycleHub Data Protection & Local Storage',
@@ -12,6 +13,7 @@ export default function PrivacyPage() {
     <div className="max-w-3xl mx-auto space-y-8">
       <div>
         <h1 className="heading-1 mb-4">Privacy Policy</h1>
+      <MedicalDisclaimer />
         <p className="text-[var(--muted)] text-lg">
           Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
         </p>

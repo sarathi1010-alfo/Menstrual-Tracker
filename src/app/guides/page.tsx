@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getAllGuides } from '@/lib/mdx';
 import { Metadata } from 'next';
 import { BookOpen, ArrowRight } from 'lucide-react';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 export const metadata: Metadata = {
   title: 'Cycle Health Guides & Education - Period Tracking Resources',
@@ -22,6 +23,7 @@ export default function GuidesIndexPage() {
           Understand your body with our semantic library of cycle mechanics, tracking methodology, and health indicators.
         </p>
       </header>
+      <MedicalDisclaimer />
 
       <div className="grid md:grid-cols-2 gap-6">
         {guides.map((guide) => (
