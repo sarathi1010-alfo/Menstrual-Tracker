@@ -2,7 +2,7 @@
   {
     "id": "is-my-data-secure",
     "question": "Is my data secure?",
-    "answer": "Yes. We built CycleHub with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
+    "answer": "Yes. We built LunaCycle with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
   },
   {
     "id": "how-to-track",
@@ -17,6 +17,41 @@
   {
     "id": "birth-control",
     "question": "Can I use this for birth control?",
-    "answer": "No. CycleHub is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+    "answer": "No. LunaCycle is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+  },
+  {
+    "id": "cloud-sync",
+    "question": "Can I sync my data across devices?",
+    "answer": "Currently, LunaCycle operates entirely offline on a per-device basis to ensure maximum privacy. This means your data is only on the device where you log it. There is no cloud syncing feature right now."
+  },
+  {
+    "id": "export-data",
+    "question": "Can I export my data?",
+    "answer": "Yes. In the Settings page, you can export your cycle data as a JSON file, which you can keep for your records or use to import your data into another device."
+  },
+  {
+    "id": "clear-data",
+    "question": "How do I delete my data?",
+    "answer": "Since your data is only stored in your browser's local storage, you can delete it by clicking the 'Clear All Data' button in the LunaCycle Settings, or by simply clearing your browser's site data or cache for this website."
+  },
+  {
+    "id": "cycle-length",
+    "question": "What is a normal cycle length?",
+    "answer": "A typical menstrual cycle lasts between 21 and 35 days, with the average being 28 days. Cycle length can vary slightly from month to month. If your cycles are consistently shorter than 21 days or longer than 35 days, consider consulting a healthcare professional."
+  },
+  {
+    "id": "fertile-window",
+    "question": "When is my fertile window?",
+    "answer": "The fertile window typically includes the 5 days leading up to ovulation and the day of ovulation itself. LunaCycle estimates this based on standard calendar calculations, usually occurring midway through your cycle."
+  },
+  {
+    "id": "irregular-cycles",
+    "question": "Does LunaCycle work with irregular cycles?",
+    "answer": "LunaCycle uses an average of your past cycles to make predictions. If your cycles are highly irregular, the predictions may be less accurate. It can still be very useful for visually tracking your history."
+  },
+  {
+    "id": "medical-advice",
+    "question": "Does LunaCycle provide medical advice?",
+    "answer": "No. LunaCycle is an educational tool. The information provided does not constitute medical advice. Always consult a healthcare provider for any medical decisions."
   }
 ]
