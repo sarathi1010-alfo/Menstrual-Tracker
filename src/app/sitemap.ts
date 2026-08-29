@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getAllArticles } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
@@ -83,5 +83,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+
+  const articles = getAllArticles() || [];
+
+  const articleRoutes: MetadataRoute.Sitemap = articles.map((article) => {
+    let path = `/blog/${article.slug}`;
+    if (article.category === 'use-cases') path = `/use-cases/${article.slug}`;
+    else if (article.category === 'conditions') path = `/conditions/${article.slug}`;
+    else if (article.category === 'what-is') path = `/${article.slug}`;
+
+    return {
+      url: absoluteUrl(path),
+      lastModified: currentDateStr,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    };
+  });
+
+  return [...staticRoutes, ...guideRoutes, ...toolRoutes, ...articleRoutes];
 }
