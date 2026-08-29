@@ -1,3 +1,4 @@
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
 
@@ -10,6 +11,7 @@ export const metadata: Metadata = constructMetadata({
 export default function AboutPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
+      <MedicalDisclaimer />
       <div>
         <h1 className="heading-1 mb-4">About CycleHub</h1>
         <p className="text-[var(--muted)] text-lg">
