@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getAllArticles } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
@@ -83,5 +83,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+
+  // Dynamic blog articles
+  const articles = getAllArticles() || [];
+  const articleRoutes: MetadataRoute.Sitemap = articles
+    .filter((a) => a && a.slug && a.slug.trim() !== '')
+    .map((article) => {
+      let prefix = '/blog';
+      if (article.category === 'what-is') {
+        prefix = '';
+      } else if (article.category === 'use-cases') {
+        prefix = '/use-cases';
+      } else if (article.category === 'conditions') {
+        prefix = '/conditions';
+      }
+      return {
+        url: absoluteUrl(`${prefix}/${article.slug}`),
+        lastModified: currentDateStr,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      };
+    });
+
+  return [...staticRoutes, ...guideRoutes, ...toolRoutes, ...articleRoutes];
+
 }
