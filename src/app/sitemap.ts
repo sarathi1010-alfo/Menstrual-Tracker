@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getAllArticles } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
@@ -83,5 +83,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+
+
+  const articles = getAllArticles();
+
+  const articleRoutes = articles.map((article) => {
+    let routePrefix = 'blog';
+    if (article.category === 'what-is') {
+      routePrefix = '';
+    } else if (article.category === 'use-cases') {
+      routePrefix = 'use-cases';
+    } else if (article.category === 'conditions') {
+      routePrefix = 'conditions';
+    }
+
+    const routePath = routePrefix ? `/${routePrefix}/${article.slug}` : `/${article.slug}`;
+
+    return {
+      url: `https://lunacycle.alfo.online${routePath}`,
+      lastModified: currentDateStr,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    };
+  });
+
+  return [...staticRoutes, ...guideRoutes, ...toolRoutes, ...articleRoutes];
+
 }
