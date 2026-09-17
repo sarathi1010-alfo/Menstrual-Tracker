@@ -1,5 +1,6 @@
 import { getGuideBySlug, getGuideSlugs, getAllGuides } from '@/lib/mdx';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import remarkGfm from 'remark-gfm';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
