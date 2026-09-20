@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, BookOpen, Share2 } from 'lucide-react';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
+import { constructMetadata } from '@/lib/seo';
 
 export async function generateStaticParams() {
   const slugs = getGuideSlugs();
@@ -23,16 +24,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   }
 
-  return {
+  return constructMetadata({
     title: guide.meta.seoTitle,
     description: guide.meta.seoDescription,
-    openGraph: {
-      title: guide.meta.seoTitle,
-      description: guide.meta.seoDescription,
-      type: 'article',
-      tags: guide.meta.tags,
-    }
-  };
+    path: ,
+  });
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
