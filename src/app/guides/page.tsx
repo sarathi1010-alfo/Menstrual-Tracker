@@ -2,11 +2,13 @@ import Link from 'next/link';
 import { getAllGuides } from '@/lib/mdx';
 import { Metadata } from 'next';
 import { BookOpen, ArrowRight } from 'lucide-react';
+import { constructMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = constructMetadata({
   title: 'Cycle Health Guides & Education - Period Tracking Resources',
   description: 'Free evidence-based guides to understanding your menstrual cycle, tracking methods, and reproductive health. Privacy-first educational resources from CycleHub.',
-};
+  path: '/guides',
+});
 
 export default function GuidesIndexPage() {
   const guides = getAllGuides();
