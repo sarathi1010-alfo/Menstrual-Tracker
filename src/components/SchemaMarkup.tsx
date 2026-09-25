@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useId } from 'react';
 
-interface SchemaMarkupProps {
-  schema: Record<string, unknown>;
-}
-
-export function SchemaMarkup({ schema }: SchemaMarkupProps) {
+export function SchemaMarkup({ schema }: { schema: Record<string, unknown> }) {
+  const id = useId();
   return (
     <script
+      id={`schema-${id}`}
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
