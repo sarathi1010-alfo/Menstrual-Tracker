@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
@@ -11,7 +13,7 @@ export default function PrivacyPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
       <div>
-        <h1 className="heading-1 mb-4">Privacy Policy</h1>
+        <h1 className="heading-1 mb-4">Privacy Policy – LunaCycle&apos;s Commitment to Your Data Privacy</h1>
         <p className="text-[var(--muted)] text-lg">
           Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
         </p>
@@ -42,6 +44,13 @@ export default function PrivacyPage() {
           If we ever change how we handle data (for example, if we introduce an optional, encrypted cloud sync feature in the future), we will make it strictly opt-in and update this privacy policy to clearly explain the technical implementation.
         </p>
       </article>
+
+      <div className="flex gap-4 pt-4 border-t border-gray-200 dark:border-gray-800">
+        <Link href="/" className="text-[var(--primary)] hover:underline">Return to Tracker Tool</Link>
+        <Link href="/about" className="text-[var(--primary)] hover:underline">Read About LunaCycle</Link>
+      </div>
+
+      <MedicalDisclaimer />
     </div>
   );
 }
