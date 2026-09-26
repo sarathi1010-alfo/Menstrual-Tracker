@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 import { PredictionCard } from '@/components/PredictionCard';
 import { CycleCalendar } from '@/components/CycleCalendar';
 import { ArrowRight, Shield, Activity, CalendarDays } from 'lucide-react';
@@ -102,6 +103,11 @@ export default function Home() {
 
       {/* Internal Traffic Engine - Related Tools Widget */}
       <RelatedToolsWidget />
+
+      {/* Medical Disclaimer */}
+      <section className="pt-8 max-w-3xl mx-auto">
+        <MedicalDisclaimer />
+      </section>
     </div>
   );
 }

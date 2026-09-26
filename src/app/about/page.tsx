@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
@@ -40,6 +41,8 @@ export default function AboutPage() {
           CycleHub is for anyone who wants a minimal, beautifully designed calendar to track their cycle length and predict upcoming dates. It is perfect for those who value digital privacy and prefer tools over social networks.
         </p>
       </article>
+
+      <MedicalDisclaimer />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 import faqsData from '@/data/faqs.json';
 import Link from 'next/link';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 import { constructMetadata } from '@/lib/seo';
 
@@ -28,9 +29,9 @@ export default function FAQPage() {
     <div className="max-w-3xl mx-auto space-y-8">
       <SchemaMarkup schema={faqSchema} />
       <div>
-        <h1 className="heading-1 mb-4">Frequently Asked Questions</h1>
+        <h1 className="heading-1 mb-4">Frequently Asked Questions About LunaCycle & Cycle Tracking</h1>
         <p className="text-[var(--muted)] text-lg">
-          Everything you need to know about tracking your cycle with CycleHub.
+          Everything you need to know about tracking your cycle with LunaCycle.
         </p>
       </div>
 
@@ -84,6 +85,13 @@ export default function FAQPage() {
             </Link>
           </div>
         </div>
+
+        <div className="flex gap-4 pt-4 border-t border-gray-200 dark:border-gray-800">
+          <Link href="/" className="text-[var(--primary)] hover:underline">Return to Tracker Tool</Link>
+          <Link href="/about" className="text-[var(--primary)] hover:underline">Read About LunaCycle</Link>
+        </div>
+
+        <MedicalDisclaimer />
       </div>
     </div>
   );
