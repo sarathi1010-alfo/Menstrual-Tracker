@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 export const metadata: Metadata = constructMetadata({
   title: 'About CycleHub - Privacy-First Period Tracking App',
@@ -15,6 +16,7 @@ export default function AboutPage() {
         <p className="text-[var(--muted)] text-lg">
           A beautifully simple utility designed to give you clarity over your cycle, stored securely on your own device.
         </p>
+        <MedicalDisclaimer />
       </div>
 
       <article className="prose prose-gray dark:prose-invert max-w-none">
