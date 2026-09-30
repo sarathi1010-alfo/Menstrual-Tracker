@@ -1,87 +1,62 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
-import seoData from '@/data/pSeoData.json';
-import { absoluteUrl } from '@/lib/seo';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  // Use a string to ensure no timezone fluctuation for static generation,
-  // Next.js MetadataRoute.Sitemap allows Date objects or strings,
-  // but to avoid "Couldn't fetch" parsing errors from malformed date outputs,
-  // we can use a stable ISO string without milliseconds.
-  const currentDateStr = new Date().toISOString().split('T')[0];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = 'https://lunacycle.alfo.online';
 
-  // Static core pages
-  const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: absoluteUrl('/'),
-      lastModified: currentDateStr,
-      changeFrequency: 'monthly',
-      priority: 1,
-    },
-    {
-      url: absoluteUrl('/tracker'),
-      lastModified: currentDateStr,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: absoluteUrl('/guides'),
-      lastModified: currentDateStr,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl('/faq'),
-      lastModified: currentDateStr,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl('/about'),
-      lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+  // Base routes
+  const routes = [
+    '',
+    '/about',
+    '/tracker',
+    '/tools',
+    '/tools/cycle-length-calculator',
+    '/tools/ovulation-calculator',
+    '/tools/period-calculator',
+    '/privacy',
+    '/terms-of-service',
+    '/contact',
+    '/faq',
+    '/blog',
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: 'weekly' as const,
+    priority: route === '' ? 1 : 0.8,
+  }));
+
+  try {
+    const { getAllGuides, getAllArticles } = await import('@/lib/mdx');
+
+    const guides = getAllGuides();
+    const guideRoutes = guides.map((guide) => ({
+      url: `${baseUrl}/guides/${guide.slug}`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'monthly' as const,
       priority: 0.7,
-    },
-    {
-      url: absoluteUrl('/privacy'),
-      lastModified: currentDateStr,
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
-    {
-      url: absoluteUrl('/terms-of-service'),
-      lastModified: currentDateStr,
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
-    {
-      url: absoluteUrl('/contact'),
-      lastModified: currentDateStr,
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
-  ];
-
-  // Dynamic programmatic SEO pages
-  const guideSlugs = getGuideSlugs() || [];
-  const guideRoutes: MetadataRoute.Sitemap = guideSlugs
-    .filter((slug) => slug && slug.trim() !== '')
-    .map((slug) => ({
-      url: absoluteUrl(`/guides/${slug}`),
-      lastModified: currentDateStr,
-      changeFrequency: 'monthly',
-      priority: 0.7, // Internal programmatic pages get high but sub-core priority
     }));
 
-  const toolsData = seoData || [];
-  const toolRoutes: MetadataRoute.Sitemap = toolsData
-    .filter((tool) => tool && tool.slug && tool.slug.trim() !== '')
-    .map((tool) => ({
-      url: absoluteUrl(`/tools/${tool.slug}`),
-      lastModified: currentDateStr,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    }));
+    const articles = getAllArticles();
+    const articleRoutes = articles.map((article) => {
+      let routePath = `/blog/${article.slug}`;
+      if (article.category === 'what-is') {
+        routePath = `/${article.slug}`;
+      } else if (article.category === 'use-cases') {
+        routePath = `/use-cases/${article.slug}`;
+      } else if (article.category === 'conditions') {
+        routePath = `/conditions/${article.slug}`;
+      }
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+      return {
+        url: `${baseUrl}${routePath}`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      };
+    });
+
+    return [...routes, ...guideRoutes, ...articleRoutes];
+  } catch (error) {
+    console.error('Failed to generate sitemap routes from MDX:', error);
+    return routes;
+  }
 }
