@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getArticleSlugs, getArticleBySlug } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
@@ -73,6 +73,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7, // Internal programmatic pages get high but sub-core priority
     }));
 
+  const articleSlugs = getArticleSlugs() || [];
+  const articleRoutes: MetadataRoute.Sitemap = articleSlugs
+    .filter((slug) => slug && slug.trim() !== '')
+    .map((slug) => {
+      const article = getArticleBySlug(slug);
+      let path = `/blog/${slug}`;
+      if (article) {
+        if (article.meta.category === 'what-is') path = `/${slug}`;
+        if (article.meta.category === 'use-cases') path = `/use-cases/${slug}`;
+        if (article.meta.category === 'conditions') path = `/conditions/${slug}`;
+      }
+      return {
+        url: absoluteUrl(path),
+        lastModified: currentDateStr,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      };
+    });
+
   const toolsData = seoData || [];
   const toolRoutes: MetadataRoute.Sitemap = toolsData
     .filter((tool) => tool && tool.slug && tool.slug.trim() !== '')
@@ -83,5 +102,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  return [...staticRoutes, ...guideRoutes, ...articleRoutes, ...toolRoutes];
 }
