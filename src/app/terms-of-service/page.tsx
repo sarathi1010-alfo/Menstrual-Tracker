@@ -1,8 +1,8 @@
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata = constructMetadata({
-  title: 'Terms of Service - CycleHub Legal Information',
-  description: 'Read the Terms of Service for CycleHub. Understand our privacy commitment, data policies, and service limitations.',
+  title: 'Terms of Service - LunaCycle Legal Information',
+  description: 'Read the Terms of Service for LunaCycle. Understand our privacy commitment, data policies, and service limitations.',
   path: '/terms-of-service',
 });
 
@@ -14,17 +14,17 @@ export default function TermsOfService() {
 
       <section className="space-y-4">
         <h2 className="text-xl font-semibold">1. Acceptance of Terms</h2>
-        <p>By accessing and using CycleHub (powered by alfo.online), you accept and agree to be bound by the terms and provision of this agreement.</p>
+        <p>By accessing and using LunaCycle (powered by alfo.online), you accept and agree to be bound by the terms and provision of this agreement.</p>
       </section>
 
       <section className="space-y-4">
         <h2 className="text-xl font-semibold">2. Description of Service</h2>
-        <p>CycleHub provides a set of tools for menstrual cycle tracking. The tools are provided &quot;as is&quot; and are for informational purposes only. They do not constitute medical advice.</p>
+        <p>LunaCycle provides a set of tools for menstrual cycle tracking. The tools are provided &quot;as is&quot; and are for informational purposes only. They do not constitute medical advice.</p>
       </section>
 
       <section className="space-y-4">
         <h2 className="text-xl font-semibold">3. Privacy and Data Storage</h2>
-        <p>All data entered into CycleHub is stored locally on your device using your browser&apos;s local storage. We do not transmit, collect, or store your personal health data on any external servers.</p>
+        <p>All data entered into LunaCycle is stored locally on your device using your browser&apos;s local storage. We do not transmit, collect, or store your personal health data on any external servers.</p>
       </section>
 
       <section className="space-y-4">
@@ -34,7 +34,7 @@ export default function TermsOfService() {
 
       <section className="space-y-4">
         <h2 className="text-xl font-semibold">5. Limitations of Liability</h2>
-        <p>In no event shall CycleHub or alfo.online be liable for any direct, indirect, incidental, special, consequential or exemplary damages.</p>
+        <p>In no event shall LunaCycle or alfo.online be liable for any direct, indirect, incidental, special, consequential or exemplary damages.</p>
       </section>
     </div>
   );
