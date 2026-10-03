@@ -8,7 +8,7 @@ interface RelatedToolsWidgetProps {
 
 export function RelatedToolsWidget({
   currentTags = ['lifestyle', 'health', 'utility'],
-  excludeName = 'CycleHub'
+  excludeName = 'LunaCycle'
 }: RelatedToolsWidgetProps) {
   const relatedTools = getRelatedTools(currentTags, excludeName, 4);
 

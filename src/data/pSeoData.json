@@ -2,7 +2,7 @@
   {
     "slug": "ovulation-calculator",
     "keyword": "free ovulation calculator",
-    "title": "Free Ovulation Calculator & Tracker | CycleHub",
+    "title": "Free Ovulation Calculator & Tracker | LunaCycle",
     "description": "Calculate your ovulation days instantly for free. A completely private, local-storage based ovulation calculator that helps you find your fertile window.",
     "h1": "Free Ovulation Calculator",
     "intro": "Understanding your fertile window is key whether you are trying to conceive or simply want to know your body better. Our free ovulation calculator uses your cycle length and last period date to estimate when you are most likely to ovulate.",
@@ -13,14 +13,14 @@
       },
       {
         "question": "Is my ovulation data private?",
-        "answer": "Yes. CycleHub stores all your data directly in your browser's local storage. We have no servers, no databases, and no way to access your personal health information."
+        "answer": "Yes. LunaCycle stores all your data directly in your browser's local storage. We have no servers, no databases, and no way to access your personal health information."
       }
     ]
   },
   {
     "slug": "safe-days-calculator",
     "keyword": "safe days calculator",
-    "title": "Safe Days Calculator | Period Tracking | CycleHub",
+    "title": "Safe Days Calculator | Period Tracking | LunaCycle",
     "description": "Track your safe days and fertile window with our privacy-first calendar. Understand your cycle phases without compromising your data.",
     "h1": "Safe Days Calculator",
     "intro": "Tracking your cycle can help you understand the different phases of your body's monthly rhythm. Our local-first safe days calculator helps you visualize your estimated fertile and non-fertile days right in your browser.",
@@ -38,7 +38,7 @@
   {
     "slug": "next-period-predictor",
     "keyword": "next period predictor",
-    "title": "Next Period Predictor | Free Cycle Tracking | CycleHub",
+    "title": "Next Period Predictor | Free Cycle Tracking | LunaCycle",
     "description": "Predict exactly when your next period will arrive. A fast, free, and completely private period predictor.",
     "h1": "Next Period Predictor",
     "intro": "Never be caught off guard again. Use our free next period predictor to estimate when your cycle will start based on your personal historical data. The more you log, the smarter the prediction gets, all while keeping your data strictly on your device.",

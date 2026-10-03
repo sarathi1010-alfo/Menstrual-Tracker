@@ -6,7 +6,7 @@ import { constructMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
   title: 'Cycle Health Guides & Education - Period Tracking Resources',
-  description: 'Free evidence-based guides to understanding your menstrual cycle, tracking methods, and reproductive health. Privacy-first educational resources from CycleHub.',
+  description: 'Free evidence-based guides to understanding your menstrual cycle, tracking methods, and reproductive health. Privacy-first educational resources from LunaCycle.',
   path: '/guides',
 });
 
