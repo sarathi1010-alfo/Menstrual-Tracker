@@ -1,89 +1,61 @@
-import { SchemaMarkup } from '@/components/SchemaMarkup';
-import faqsData from '@/data/faqs.json';
-import Link from 'next/link';
-
+import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
+import { SchemaMarkup } from '@/components/SchemaMarkup';
 
-export const metadata = constructMetadata({
-  title: 'Frequently Asked Questions - CycleHub Period Tracker Help',
-  description: 'Get answers to common questions about CycleHub period tracker. Learn how to track your cycle, data privacy, predictions, and more in our FAQ.',
-  path: '/faq',
+export const metadata: Metadata = constructMetadata({
+  title: 'LunaCycle FAQ - Frequently Asked Questions',
+  description: 'Find answers to common questions about LunaCycle, period tracking, data privacy, and menstrual health.',
 });
+
+const faqs = [
+  {
+    question: "Is LunaCycle really private?",
+    answer: "Yes. LunaCycle stores all your data locally on your device. We do not require an account, we do not have servers storing your personal health data, and we do not sell your information."
+  },
+  {
+    question: "How do I backup my data?",
+    answer: "Currently, because all data is stored locally, it remains on your device. We are working on a secure export feature that will allow you to save a backup file locally to your phone or computer."
+  },
+  {
+    question: "How accurate are the predictions?",
+    answer: "LunaCycle uses standard algorithms based on the data you input. The more consistently you log your cycle start and end dates over several months, the more accurate the predictions will become."
+  },
+  {
+    question: "Can LunaCycle help me get pregnant?",
+    answer: "LunaCycle can help you track your cycle and identify your potential fertile window based on calendar averages. However, it is not a medical device and should not be used as the sole method for family planning."
+  }
+];
 
 export default function FAQPage() {
   const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqsData.map((faq) => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-8">
+    <div className="max-w-3xl mx-auto px-4 py-12">
       <SchemaMarkup schema={faqSchema} />
-      <div>
-        <h1 className="heading-1 mb-4">Frequently Asked Questions</h1>
-        <p className="text-[var(--muted)] text-lg">
-          Everything you need to know about tracking your cycle with CycleHub.
-        </p>
-      </div>
+
+      <h1 className="heading-1 mb-6">Frequently Asked Questions</h1>
+      <p className="text-lg text-muted mb-10">
+        Got questions? We&apos;ve got answers. Learn more about how LunaCycle works and our commitment to your privacy.
+      </p>
 
       <div className="space-y-6">
-        <div className="card p-6">
-          <h3 className="heading-3 mb-2">Is my data secure?</h3>
-          <p className="text-[var(--muted)]">
-            Yes. We built CycleHub with a strict privacy-first architecture. Your data is stored locally on your device using your browser&apos;s local storage. We do not have servers, databases, or accounts. Your information never leaves your device.
-          </p>
-        </div>
-
-        <div className="card p-6">
-          <h3 className="heading-3 mb-2">How do I track my period?</h3>
-          <p className="text-[var(--muted)]">
-            Navigate to the Tracker page and tap the date on the calendar when your period started. The app will automatically calculate your cycle length based on the distance between your logged dates.
-          </p>
-        </div>
-
-        <div className="card p-6">
-          <h3 className="heading-3 mb-2">How is my next period predicted?</h3>
-          <p className="text-[var(--muted)]">
-            We look at your past logged periods to determine your average cycle length (excluding extreme outliers). We then add this average to your most recent period&apos;s start date to predict when your next one will begin.
-          </p>
-        </div>
-
-        <div className="card p-6">
-          <h3 className="heading-3 mb-2">Can I use this for birth control?</h3>
-          <p className="text-[var(--muted)] text-[var(--accent)] font-medium">
-            No. CycleHub is designed for educational and tracking purposes only.
-          </p>
-          <p className="text-[var(--muted)] mt-2">
-            The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods.
-          </p>
-        </div>
-
-        {/* Quick Access to Tools */}
-        <div className="card p-6 bg-[var(--primary)]/5 border-[var(--primary)]/20">
-          <h3 className="heading-3 mb-3 text-[var(--primary)]">Quick Access: Free Cycle Tools</h3>
-          <div className="space-y-3">
-            <Link href="/tools/next-period-predictor" className="block text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
-              <span className="font-medium">Next Period Predictor</span>
-              <span className="block text-sm text-[var(--muted)]">Predict when your next period will start</span>
-            </Link>
-            <Link href="/tools/safe-days-calculator" className="block text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
-              <span className="font-medium">Safe Days Calculator</span>
-              <span className="block text-sm text-[var(--muted)]">Calculate safe days and fertile window</span>
-            </Link>
-            <Link href="/tools/ovulation-calculator" className="block text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
-              <span className="font-medium">Ovulation Calculator</span>
-              <span className="block text-sm text-[var(--muted)]">Find your most fertile days instantly</span>
-            </Link>
+        {faqs.map((faq, index) => (
+          <div key={index} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
+            <h3 className="heading-3 mb-3">{faq.question}</h3>
+            <p className="text-muted">{faq.answer}</p>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
