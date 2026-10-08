@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getAllArticles } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Use a string to ensure no timezone fluctuation for static generation,
   // Next.js MetadataRoute.Sitemap allows Date objects or strings,
   // but to avoid "Couldn't fetch" parsing errors from malformed date outputs,
@@ -62,6 +62,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  const articles = getAllArticles() || [];
+  const articleRoutes: MetadataRoute.Sitemap = articles
+    .filter((article) => article.slug && article.slug.trim() !== '')
+    .map((article) => {
+      let path = '';
+      if (article.category === 'what-is') {
+        path = `/${article.slug}`;
+      } else if (article.category === 'use-cases') {
+        path = `/use-cases/${article.slug}`;
+      } else if (article.category === 'conditions') {
+        path = `/conditions/${article.slug}`;
+      } else {
+        path = `/blog/${article.slug}`;
+      }
+      return {
+        url: absoluteUrl(path),
+        lastModified: currentDateStr,
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      };
+    });
+
   // Dynamic programmatic SEO pages
   const guideSlugs = getGuideSlugs() || [];
   const guideRoutes: MetadataRoute.Sitemap = guideSlugs
@@ -83,5 +105,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  return [...staticRoutes, ...guideRoutes, ...toolRoutes, ...articleRoutes];
 }
