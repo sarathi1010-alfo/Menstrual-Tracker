@@ -1,10 +1,6 @@
 import React from 'react';
 
-interface SchemaMarkupProps {
-  schema: Record<string, unknown>;
-}
-
-export function SchemaMarkup({ schema }: SchemaMarkupProps) {
+export function SchemaMarkup({ schema }: { schema: Record<string, unknown> }) {
   return (
     <script
       type="application/ld+json"
