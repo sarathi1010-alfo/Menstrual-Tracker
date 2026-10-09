@@ -3,7 +3,9 @@ import { getGuideSlugs } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+import { getAllArticles } from '@/lib/mdx';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Use a string to ensure no timezone fluctuation for static generation,
   // Next.js MetadataRoute.Sitemap allows Date objects or strings,
   // but to avoid "Couldn't fetch" parsing errors from malformed date outputs,
@@ -83,5 +85,46 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+
+  const articles = getAllArticles();
+
+  const articleRoutes = articles.map((article) => {
+    let slugPath = `/blog/${article.slug}`;
+    if (article.category === 'what-is') slugPath = `/${article.slug}`;
+    else if (article.category === 'use-cases') slugPath = `/use-cases/${article.slug}`;
+    else if (article.category === 'conditions') slugPath = `/conditions/${article.slug}`;
+
+    return {
+      url: `https://lunacycle.alfo.online${slugPath}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    };
+  });
+
+  return [
+    {
+      url: 'https://lunacycle.alfo.online',
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 1,
+    },
+    {
+      url: 'https://lunacycle.alfo.online/blog',
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
+      url: 'https://lunacycle.alfo.online/faq',
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    ...staticRoutes,
+    ...guideRoutes,
+    ...toolRoutes,
+    ...articleRoutes
+  ];
+
 }
