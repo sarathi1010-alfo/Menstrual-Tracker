@@ -23,7 +23,7 @@ export interface GeneratedMetadata {
 
 export function generateSeoMetadata(input: ToolMetadataInput): GeneratedMetadata {
   const { toolName, cluster, primaryAction, inputType, outputType, keyBenefit = "free, private, and local" } = input;
-  const siteName = "CycleHub";
+  const siteName = "LunaCycle";
 
   // --- Title Tag Generation (Max 60 chars optimal) ---
   const titleVariants = [

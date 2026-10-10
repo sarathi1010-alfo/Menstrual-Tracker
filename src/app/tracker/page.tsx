@@ -8,7 +8,7 @@ import { RelatedToolsWidget } from '@/components/RelatedToolsWidget';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Cycle Tracker Dashboard - Track Your Period Locally | CycleHub',
+  title: 'Cycle Tracker Dashboard - Track Your Period Locally | LunaCycle',
   description: 'Track your menstrual cycle privately with our local-only dashboard. Log periods, view predictions, see your fertile window, and analyze cycle history securely.',
   path: '/tracker',
 });
@@ -17,7 +17,7 @@ export default function TrackerPage() {
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "CycleHub Tracker",
+    "name": "LunaCycle Tracker",
     "url": "https://cyclehub.example.com/tracker",
     "applicationCategory": "HealthApplication",
     "operatingSystem": "Any",
