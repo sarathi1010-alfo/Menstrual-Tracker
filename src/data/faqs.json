@@ -1,22 +1,14 @@
 [
   {
-    "id": "is-my-data-secure",
-    "question": "Is my data secure?",
-    "answer": "Yes. We built CycleHub with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
+    "question": "Is my tracking data private?",
+    "answer": "Yes, LunaCycle is completely privacy-first. All your tracking data is stored locally on your device in your browser's localStorage. We do not have user accounts, and we do not sync or sell your health data to any servers."
   },
   {
-    "id": "how-to-track",
-    "question": "How do I track my period?",
-    "answer": "Navigate to the Tracker page and tap the date on the calendar when your period started. The app will automatically calculate your cycle length based on the distance between your logged dates."
+    "question": "How accurate are the period predictions?",
+    "answer": "LunaCycle uses standard prediction algorithms based on your historical cycle lengths. The more consistent you are with logging, the more accurate the predictions become. However, it's normal for cycles to vary, so predictions are estimates, not guarantees."
   },
   {
-    "id": "predictions",
-    "question": "How is my next period predicted?",
-    "answer": "We look at your past logged periods to determine your average cycle length (excluding extreme outliers). We then add this average to your most recent period's start date to predict when your next one will begin."
-  },
-  {
-    "id": "birth-control",
-    "question": "Can I use this for birth control?",
-    "answer": "No. CycleHub is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+    "question": "Can I use LunaCycle for contraception?",
+    "answer": "No. LunaCycle is a tracking and educational tool, not a contraceptive device. It should not be used to prevent pregnancy or as a replacement for professional medical advice regarding family planning."
   }
 ]
