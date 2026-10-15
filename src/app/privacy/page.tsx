@@ -1,9 +1,11 @@
 import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
+import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Privacy Policy - CycleHub Data Protection & Local Storage',
-  description: 'CycleHub stores your period tracking data locally on your device only. No servers, no accounts, no cloud storage. Read our complete privacy policy.',
+  title: 'Privacy Policy - LunaCycle Data Protection & Local Storage',
+  description: 'LunaCycle stores your period tracking data locally on your device only. No servers, no accounts, no cloud storage. Read our complete privacy policy.',
   path: '/privacy',
 });
 
@@ -11,20 +13,23 @@ export default function PrivacyPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
       <div>
-        <h1 className="heading-1 mb-4">Privacy Policy</h1>
-        <p className="text-[var(--muted)] text-lg">
+        <h1 className="heading-1 mb-4">Privacy Policy – LunaCycle&apos;s Commitment to Your Data Privacy</h1>
+        <p className="text-[var(--muted)] text-lg mb-2">
           Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+        </p>
+        <p className="text-[var(--muted)]">
+          Back to <Link href="/" className="text-[var(--primary)] hover:underline">Homepage</Link> | <Link href="/about" className="text-[var(--primary)] hover:underline">About Us</Link>
         </p>
       </div>
 
       <article className="prose prose-gray dark:prose-invert max-w-none">
         <p className="text-[var(--muted)] mb-6 text-lg font-medium">
-          The short version: CycleHub does not collect, store, or transmit your cycle data to any external server.
+          The short version: LunaCycle does not collect, store, or transmit your cycle data to any external server. No data collection, no accounts, no cloud sync.
         </p>
 
         <h2 className="heading-3 mt-8 mb-4">1. Local Storage Only</h2>
         <p className="text-[var(--muted)] mb-6">
-          All data you input into CycleHub (such as period start dates) is stored exclusively on your device using your web browser&apos;s standard <code>localStorage</code> API. We do not operate a backend database for user data, meaning we physically cannot access your health information.
+          All data you input into LunaCycle (such as period start dates, symptoms, and notes) is stored exclusively on your device using your web browser&apos;s standard <code>localStorage</code> API. We do not operate a backend database for user data, meaning we physically cannot access your health information.
         </p>
 
         <h2 className="heading-3 mt-8 mb-4">2. Analytics</h2>
@@ -42,6 +47,8 @@ export default function PrivacyPage() {
           If we ever change how we handle data (for example, if we introduce an optional, encrypted cloud sync feature in the future), we will make it strictly opt-in and update this privacy policy to clearly explain the technical implementation.
         </p>
       </article>
+
+      <MedicalDisclaimer />
     </div>
   );
 }

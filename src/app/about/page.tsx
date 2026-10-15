@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
+import Link from 'next/link';
 
 export const metadata: Metadata = constructMetadata({
   title: 'About CycleHub - Privacy-First Period Tracking App',
@@ -39,7 +41,12 @@ export default function AboutPage() {
         <p className="text-[var(--muted)] mb-6 leading-relaxed">
           CycleHub is for anyone who wants a minimal, beautifully designed calendar to track their cycle length and predict upcoming dates. It is perfect for those who value digital privacy and prefer tools over social networks.
         </p>
+        <p className="text-[var(--muted)] mt-8 leading-relaxed">
+          Learn more by visiting our <Link href="/" className="text-[var(--primary)] hover:underline">homepage</Link> or checking out our <Link href="/faq" className="text-[var(--primary)] hover:underline">FAQ</Link>.
+        </p>
       </article>
+
+      <MedicalDisclaimer />
     </div>
   );
 }
