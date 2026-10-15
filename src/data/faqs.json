@@ -1,22 +1,42 @@
 [
   {
-    "id": "is-my-data-secure",
-    "question": "Is my data secure?",
-    "answer": "Yes. We built CycleHub with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
+    "question": "Is my data secure with LunaCycle?",
+    "answer": "Yes. We built LunaCycle with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
   },
   {
-    "id": "how-to-track",
     "question": "How do I track my period?",
     "answer": "Navigate to the Tracker page and tap the date on the calendar when your period started. The app will automatically calculate your cycle length based on the distance between your logged dates."
   },
   {
-    "id": "predictions",
     "question": "How is my next period predicted?",
     "answer": "We look at your past logged periods to determine your average cycle length (excluding extreme outliers). We then add this average to your most recent period's start date to predict when your next one will begin."
   },
   {
-    "id": "birth-control",
-    "question": "Can I use this for birth control?",
-    "answer": "No. CycleHub is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+    "question": "Can I use LunaCycle for birth control?",
+    "answer": "No. LunaCycle is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy."
+  },
+  {
+    "question": "Do I need an account to use LunaCycle?",
+    "answer": "No! LunaCycle requires absolutely no account, sign-up, or login. You can start tracking immediately, and your data stays on your device."
+  },
+  {
+    "question": "What happens if I clear my browser data?",
+    "answer": "Because LunaCycle stores data in your browser's local storage, clearing your browser data or cache will permanently delete your cycle history from that device."
+  },
+  {
+    "question": "Can I sync my LunaCycle data across devices?",
+    "answer": "Currently, LunaCycle is designed for single-device use to maximize privacy. We do not offer cloud sync, meaning your data cannot be automatically transferred between your phone and computer."
+  },
+  {
+    "question": "What is the average menstrual cycle length?",
+    "answer": "The average menstrual cycle is 28 days long, but a normal cycle can range anywhere from 21 to 35 days in adults."
+  },
+  {
+    "question": "How does LunaCycle calculate my fertile window?",
+    "answer": "LunaCycle estimates your fertile window by taking your average cycle length, assuming a 14-day luteal phase, and predicting the days leading up to and including ovulation."
+  },
+  {
+    "question": "Is LunaCycle free to use?",
+    "answer": "Yes, LunaCycle and all of its core cycle tracking features and educational tools are completely free to use."
   }
 ]

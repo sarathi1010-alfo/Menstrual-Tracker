@@ -1,8 +1,8 @@
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata = constructMetadata({
-  title: 'Contact CycleHub - Get Support & Help',
-  description: 'Get in touch with the CycleHub team. Have questions or suggestions? We\'d love to hear from you and help with any issues.',
+  title: 'Contact LunaCycle - Get Support & Help',
+  description: 'Get in touch with the LunaCycle team. Have questions or suggestions? We\'d love to hear from you and help with any issues.',
   path: '/contact',
 });
 
