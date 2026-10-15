@@ -3,19 +3,31 @@ import path from 'path';
 import matter from 'gray-matter';
 
 const guidesDirectory = path.join(process.cwd(), 'src/data/guides');
+const blogDirectory = path.join(process.cwd(), 'src/data/blog');
 
 export interface GuideMeta {
   title: string;
   summary: string;
-  seoTitle: string;
-  seoDescription: string;
-  tags: string[];
+  seoTitle?: string;
+  seoDescription?: string;
+  tags?: string[];
   slug: string;
+  takeaways?: string[];
+  faqs?: { question: string; answer: string }[];
+  category?: string;
 }
 
 export interface Guide {
   meta: GuideMeta;
   content: string;
+}
+
+// Ensure both directories exist
+if (!fs.existsSync(blogDirectory)) {
+  fs.mkdirSync(blogDirectory, { recursive: true });
+}
+if (!fs.existsSync(guidesDirectory)) {
+  fs.mkdirSync(guidesDirectory, { recursive: true });
 }
 
 export function getGuideSlugs(): string[] {
@@ -62,4 +74,53 @@ export function getAllGuides(): GuideMeta[] {
     .map((guide) => guide.meta);
 
   return guides;
+}
+
+export function getArticleSlugs(): string[] {
+  if (!fs.existsSync(blogDirectory)) {
+    return [];
+  }
+  return fs.readdirSync(blogDirectory)
+    .filter((file) => file.endsWith('.mdx'))
+    .map((file) => file.replace(/\.mdx$/, ''));
+}
+
+export function getArticleBySlug(slug: string): Guide | null {
+  try {
+    const realSlug = slug.replace(/\.mdx$/, '');
+    const fullPath = path.join(blogDirectory, `${realSlug}.mdx`);
+
+    if (!fs.existsSync(fullPath)) return null;
+
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const { data, content } = matter(fileContents);
+
+    return {
+      meta: {
+        slug: realSlug,
+        title: data.title || '',
+        summary: data.summary || '',
+        seoTitle: data.seoTitle || data.title || '',
+        seoDescription: data.seoDescription || data.summary || '',
+        tags: data.tags || [],
+        takeaways: data.takeaways || [],
+        faqs: data.faqs || [],
+        category: data.category || 'blog',
+      },
+      content,
+    };
+  } catch (error) {
+    console.error(`Error reading article ${slug}:`, error);
+    return null;
+  }
+}
+
+export function getAllArticles(): GuideMeta[] {
+  const slugs = getArticleSlugs();
+  const articles = slugs
+    .map((slug) => getArticleBySlug(slug))
+    .filter((article): article is Guide => article !== null)
+    .map((article) => article.meta);
+
+  return articles;
 }
