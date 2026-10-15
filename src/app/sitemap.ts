@@ -3,7 +3,27 @@ import { getGuideSlugs } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { getAllArticles } = await import('@/lib/mdx');
+  const articles = getAllArticles();
+
+  const articleUrls = articles.map((article) => {
+    let url = `https://lunacycle.alfo.online/blog/${article.slug}`;
+    if (article.category === 'what-is') {
+      url = `https://lunacycle.alfo.online/${article.slug}`;
+    } else if (article.category === 'use-cases') {
+      url = `https://lunacycle.alfo.online/use-cases/${article.slug}`;
+    } else if (article.category === 'conditions') {
+      url = `https://lunacycle.alfo.online/conditions/${article.slug}`;
+    }
+    return {
+      url,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    };
+  });
+
   // Use a string to ensure no timezone fluctuation for static generation,
   // Next.js MetadataRoute.Sitemap allows Date objects or strings,
   // but to avoid "Couldn't fetch" parsing errors from malformed date outputs,
@@ -83,5 +103,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  return [
+    ...articleUrls,...staticRoutes, ...guideRoutes, ...toolRoutes];
 }

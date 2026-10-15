@@ -4,6 +4,11 @@ import matter from 'gray-matter';
 
 const guidesDirectory = path.join(process.cwd(), 'src/data/guides');
 
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
 export interface GuideMeta {
   title: string;
   summary: string;
@@ -11,7 +16,17 @@ export interface GuideMeta {
   seoDescription: string;
   tags: string[];
   slug: string;
+  category?: string;
+  takeaways?: string[];
+  faqs?: FAQ[];
 }
+
+export type ArticleMeta = GuideMeta;
+export interface Article {
+  meta: ArticleMeta;
+  content: string;
+}
+
 
 export interface Guide {
   meta: GuideMeta;
@@ -62,4 +77,55 @@ export function getAllGuides(): GuideMeta[] {
     .map((guide) => guide.meta);
 
   return guides;
+}
+
+const blogDirectory = path.join(process.cwd(), 'src/data/blog');
+
+export function getArticleSlugs(): string[] {
+  if (!fs.existsSync(blogDirectory)) {
+    return [];
+  }
+  return fs.readdirSync(blogDirectory)
+    .filter((file) => file.endsWith('.mdx'))
+    .map((file) => file.replace(/\.mdx$/, ''));
+}
+
+export function getArticleBySlug(slug: string): Article | null {
+  try {
+    const realSlug = slug.replace(/\.mdx$/, '');
+    const fullPath = path.join(blogDirectory, `${realSlug}.mdx`);
+
+    if (!fs.existsSync(fullPath)) return null;
+
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const { data, content } = matter(fileContents);
+
+    return {
+      meta: {
+        slug: realSlug,
+        title: data.title || '',
+        summary: data.summary || '',
+        seoTitle: data.seoTitle || data.title || '',
+        seoDescription: data.seoDescription || data.summary || '',
+        tags: data.tags || [],
+        category: data.category || '',
+        takeaways: data.takeaways || [],
+        faqs: data.faqs || [],
+      },
+      content,
+    };
+  } catch (error) {
+    console.error(`Error reading article ${slug}:`, error);
+    return null;
+  }
+}
+
+export function getAllArticles(): ArticleMeta[] {
+  const slugs = getArticleSlugs();
+  const articles = slugs
+    .map((slug) => getArticleBySlug(slug))
+    .filter((article): article is Article => article !== null)
+    .map((article) => article.meta);
+
+  return articles;
 }
