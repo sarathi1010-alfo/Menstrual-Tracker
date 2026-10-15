@@ -1,3 +1,4 @@
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 import faqsData from '@/data/faqs.json';
 import Link from 'next/link';
@@ -26,6 +27,7 @@ export default function FAQPage() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8">
+      <MedicalDisclaimer />
       <SchemaMarkup schema={faqSchema} />
       <div>
         <h1 className="heading-1 mb-4">Frequently Asked Questions</h1>
