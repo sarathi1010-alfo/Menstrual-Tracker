@@ -5,6 +5,7 @@ import { CycleCalendar } from '@/components/CycleCalendar';
 import { ArrowRight, Shield, Activity, CalendarDays } from 'lucide-react';
 import { RelatedToolsWidget } from '@/components/RelatedToolsWidget';
 import { constructMetadata } from '@/lib/seo';
+import MedicalDisclaimer from '@/components/MedicalDisclaimer';
 
 export const metadata: Metadata = constructMetadata({
   path: '/',
@@ -13,6 +14,7 @@ export const metadata: Metadata = constructMetadata({
 export default function Home() {
   return (
     <div className="space-y-16 pb-8">
+      <MedicalDisclaimer />
       {/* Hero Section */}
       <section className="text-center space-y-6 py-12 md:py-20">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--secondary)]/20 text-[var(--secondary)] text-sm font-medium mb-4">
