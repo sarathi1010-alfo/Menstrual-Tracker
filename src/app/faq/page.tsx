@@ -3,6 +3,7 @@ import faqsData from '@/data/faqs.json';
 import Link from 'next/link';
 
 import { constructMetadata } from '@/lib/seo';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 export const metadata = constructMetadata({
   title: 'Frequently Asked Questions - CycleHub Period Tracker Help',
@@ -11,7 +12,7 @@ export const metadata = constructMetadata({
 });
 
 export default function FAQPage() {
-  const faqSchema = {
+  const faqSchema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": faqsData.map((faq) => ({
@@ -26,6 +27,7 @@ export default function FAQPage() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8">
+      <MedicalDisclaimer />
       <SchemaMarkup schema={faqSchema} />
       <div>
         <h1 className="heading-1 mb-4">Frequently Asked Questions</h1>
