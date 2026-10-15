@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getAllArticles } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
@@ -27,8 +27,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: absoluteUrl('/guides'),
       lastModified: currentDateStr,
-      changeFrequency: 'weekly',
+      changeFrequency: 'weekly' as const,
       priority: 0.8,
+    },
+    {
+      url: absoluteUrl('/blog'),
+      lastModified: currentDateStr,
+      changeFrequency: 'daily' as const,
+      priority: 0.9,
     },
     {
       url: absoluteUrl('/faq'),
@@ -69,7 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((slug) => ({
       url: absoluteUrl(`/guides/${slug}`),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.7, // Internal programmatic pages get high but sub-core priority
     }));
 
@@ -79,9 +85,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((tool) => ({
       url: absoluteUrl(`/tools/${tool.slug}`),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  const articles = getAllArticles() || [];
+  const articleRoutes: MetadataRoute.Sitemap = articles
+    .filter((article) => article && article.slug && article.slug.trim() !== '')
+    .map((article) => {
+      let prefix = '/blog';
+      if (article.category === 'what-is') prefix = '';
+      else if (article.category === 'use-cases') prefix = '/use-cases';
+      else if (article.category === 'conditions') prefix = '/conditions';
+
+      return {
+        url: absoluteUrl(`${prefix}/${article.slug}`),
+        lastModified: article.updatedAt || currentDateStr,
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      };
+    });
+
+  return [...staticRoutes, ...guideRoutes, ...toolRoutes, ...articleRoutes];
 }
