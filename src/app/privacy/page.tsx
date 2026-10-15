@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Privacy Policy - CycleHub Data Protection & Local Storage',
-  description: 'CycleHub stores your period tracking data locally on your device only. No servers, no accounts, no cloud storage. Read our complete privacy policy.',
+  title: 'Privacy Policy - LunaCycle Data Protection & Local Storage',
+  description: 'LunaCycle stores your period tracking data locally on your device only. No servers, no accounts, no cloud storage. Read our complete privacy policy.',
   path: '/privacy',
 });
 
@@ -19,12 +19,12 @@ export default function PrivacyPage() {
 
       <article className="prose prose-gray dark:prose-invert max-w-none">
         <p className="text-[var(--muted)] mb-6 text-lg font-medium">
-          The short version: CycleHub does not collect, store, or transmit your cycle data to any external server.
+          The short version: LunaCycle does not collect, store, or transmit your cycle data to any external server.
         </p>
 
         <h2 className="heading-3 mt-8 mb-4">1. Local Storage Only</h2>
         <p className="text-[var(--muted)] mb-6">
-          All data you input into CycleHub (such as period start dates) is stored exclusively on your device using your web browser&apos;s standard <code>localStorage</code> API. We do not operate a backend database for user data, meaning we physically cannot access your health information.
+          All data you input into LunaCycle (such as period start dates) is stored exclusively on your device using your web browser&apos;s standard <code>localStorage</code> API. We do not operate a backend database for user data, meaning we physically cannot access your health information.
         </p>
 
         <h2 className="heading-3 mt-8 mb-4">2. Analytics</h2>
