@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
 
@@ -7,11 +8,12 @@ export const metadata: Metadata = constructMetadata({
   path: '/privacy',
 });
 
+
 export default function PrivacyPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
       <div>
-        <h1 className="heading-1 mb-4">Privacy Policy</h1>
+        <h1 className="heading-1 mb-4">Privacy Policy – LunaCycle&apos;s Commitment to Your Data Privacy</h1>
         <p className="text-[var(--muted)] text-lg">
           Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
         </p>
@@ -19,12 +21,15 @@ export default function PrivacyPage() {
 
       <article className="prose prose-gray dark:prose-invert max-w-none">
         <p className="text-[var(--muted)] mb-6 text-lg font-medium">
-          The short version: CycleHub does not collect, store, or transmit your cycle data to any external server.
+          The short version: LunaCycle does not collect, store, or transmit your cycle data to any external server.
+        </p>
+        <p className="text-[var(--muted)] mb-6">
+          LunaCycle operates on a strict privacy-first architecture: no accounts, no data collection, no cloud sync.
         </p>
 
         <h2 className="heading-3 mt-8 mb-4">1. Local Storage Only</h2>
         <p className="text-[var(--muted)] mb-6">
-          All data you input into CycleHub (such as period start dates) is stored exclusively on your device using your web browser&apos;s standard <code>localStorage</code> API. We do not operate a backend database for user data, meaning we physically cannot access your health information.
+          All data you input into LunaCycle (such as period start dates) is stored exclusively on your device using your web browser&apos;s standard <code>localStorage</code> API. We do not operate a backend database for user data, meaning we physically cannot access your health information.
         </p>
 
         <h2 className="heading-3 mt-8 mb-4">2. Analytics</h2>
@@ -41,6 +46,15 @@ export default function PrivacyPage() {
         <p className="text-[var(--muted)] mb-6">
           If we ever change how we handle data (for example, if we introduce an optional, encrypted cloud sync feature in the future), we will make it strictly opt-in and update this privacy policy to clearly explain the technical implementation.
         </p>
+
+        <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 flex gap-4">
+          <Link href="/" className="text-[var(--primary)] hover:underline">
+            Return to Home
+          </Link>
+          <Link href="/about" className="text-[var(--primary)] hover:underline">
+            About Us
+          </Link>
+        </div>
       </article>
     </div>
   );
