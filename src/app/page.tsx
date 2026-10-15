@@ -5,6 +5,7 @@ import { CycleCalendar } from '@/components/CycleCalendar';
 import { ArrowRight, Shield, Activity, CalendarDays } from 'lucide-react';
 import { RelatedToolsWidget } from '@/components/RelatedToolsWidget';
 import { constructMetadata } from '@/lib/seo';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 export const metadata: Metadata = constructMetadata({
   path: '/',
@@ -56,6 +57,7 @@ export default function Home() {
         </div>
       </section>
 
+      <MedicalDisclaimer />
       {/* Features */}
       <section className="grid sm:grid-cols-3 gap-6 pt-12 border-t border-gray-200 dark:border-gray-800">
         <div className="space-y-3">
