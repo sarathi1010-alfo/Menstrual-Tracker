@@ -1,22 +1,18 @@
 [
   {
-    "id": "is-my-data-secure",
-    "question": "Is my data secure?",
-    "answer": "Yes. We built CycleHub with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
+    "question": "Is my data private?",
+    "answer": "Yes. LunaCycle uses local storage on your device. We do not store your data on our servers or share it with third parties."
   },
   {
-    "id": "how-to-track",
-    "question": "How do I track my period?",
-    "answer": "Navigate to the Tracker page and tap the date on the calendar when your period started. The app will automatically calculate your cycle length based on the distance between your logged dates."
+    "question": "How do I export my data?",
+    "answer": "You can export your data anytime by going to the Settings page and clicking 'Export Data'. This will download a JSON file to your device."
   },
   {
-    "id": "predictions",
-    "question": "How is my next period predicted?",
-    "answer": "We look at your past logged periods to determine your average cycle length (excluding extreme outliers). We then add this average to your most recent period's start date to predict when your next one will begin."
+    "question": "Is LunaCycle free?",
+    "answer": "Yes, LunaCycle is completely free to use."
   },
   {
-    "id": "birth-control",
-    "question": "Can I use this for birth control?",
-    "answer": "No. CycleHub is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+    "question": "Can I use LunaCycle on multiple devices?",
+    "answer": "Because LunaCycle stores data locally for privacy, your data does not automatically sync across devices. You can use the Export/Import features in Settings to manually transfer data."
   }
 ]

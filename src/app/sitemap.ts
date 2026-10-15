@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getArticleSlugs, getArticleBySlug } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
@@ -60,6 +60,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.6,
     },
+    {
+      url: absoluteUrl('/blog'),
+      lastModified: currentDateStr,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
   ];
 
   // Dynamic programmatic SEO pages
@@ -83,5 +89,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  const articleSlugs = getArticleSlugs() || [];
+  const articleRoutes: MetadataRoute.Sitemap = articleSlugs
+    .map(slug => {
+      const article = getArticleBySlug(slug);
+      if (!article) return null;
+
+      let basePath = '/blog';
+      if (article.meta.category === 'what-is') basePath = '';
+      else if (article.meta.category === 'use-cases') basePath = '/use-cases';
+      else if (article.meta.category === 'conditions') basePath = '/conditions';
+
+      return {
+        url: absoluteUrl(`${basePath}/${slug}`),
+        lastModified: currentDateStr,
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      };
+    })
+    .filter((route): route is NonNullable<typeof route> => route !== null);
+
+  return [...staticRoutes, ...guideRoutes, ...toolRoutes, ...articleRoutes];
 }
