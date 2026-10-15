@@ -1,6 +1,7 @@
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 import faqsData from '@/data/faqs.json';
 import Link from 'next/link';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 import { constructMetadata } from '@/lib/seo';
 
@@ -84,6 +85,8 @@ export default function FAQPage() {
             </Link>
           </div>
         </div>
+
+        <MedicalDisclaimer />
       </div>
     </div>
   );
