@@ -11,6 +11,7 @@ export interface GuideMeta {
   seoDescription: string;
   tags: string[];
   slug: string;
+  faqs?: { question: string; answer: string }[];
 }
 
 export interface Guide {
@@ -45,6 +46,7 @@ export function getGuideBySlug(slug: string): Guide | null {
         seoTitle: data.seoTitle || data.title || '',
         seoDescription: data.seoDescription || data.summary || '',
         tags: data.tags || [],
+        faqs: data.faqs || undefined,
       },
       content,
     };
