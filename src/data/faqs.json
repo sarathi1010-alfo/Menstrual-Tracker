@@ -2,7 +2,7 @@
   {
     "id": "is-my-data-secure",
     "question": "Is my data secure?",
-    "answer": "Yes. We built CycleHub with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
+    "answer": "Yes. We built LunaCycle with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
   },
   {
     "id": "how-to-track",
@@ -17,6 +17,36 @@
   {
     "id": "birth-control",
     "question": "Can I use this for birth control?",
-    "answer": "No. CycleHub is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+    "answer": "No. LunaCycle is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+  },
+  {
+    "id": "fertile-window",
+    "question": "What is the fertile window?",
+    "answer": "The fertile window is the time during your menstrual cycle when pregnancy is most likely to occur. It typically includes the five days leading up to ovulation and the day of ovulation itself. LunaCycle estimates this based on standard calendar methods."
+  },
+  {
+    "id": "ovulation",
+    "question": "How do you calculate ovulation?",
+    "answer": "We estimate ovulation by subtracting 14 days from the predicted start date of your next period. This is a common standard, but please remember that every body is different and actual ovulation days can vary."
+  },
+  {
+    "id": "cycle-length",
+    "question": "What is a normal cycle length?",
+    "answer": "A normal menstrual cycle length for adults ranges from 21 to 35 days, with the average being about 28 days. For teens, cycles can be slightly longer and more variable, typically ranging from 21 to 45 days."
+  },
+  {
+    "id": "delete-data",
+    "question": "How do I delete my data?",
+    "answer": "Because your data lives in your browser, you have complete control over it. You can clear your data at any time by going to the Settings page and choosing to reset your app data, or by clearing your browser's site data or cache."
+  },
+  {
+    "id": "sync-devices",
+    "question": "Can I sync my data across devices?",
+    "answer": "Currently, no. To ensure maximum privacy, LunaCycle uses local storage only. This means your data is confined to the specific browser and device you use to log it. We do not use cloud syncing."
+  },
+  {
+    "id": "export-data",
+    "question": "Can I export my data?",
+    "answer": "Yes, we plan to add features allowing you to securely export your data to a CSV or JSON file directly from your device, so you can bring it to doctor's appointments without compromising privacy."
   }
 ]

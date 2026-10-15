@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { PredictionCard } from '@/components/PredictionCard';
 import { CycleCalendar } from '@/components/CycleCalendar';
 import { ArrowRight, Shield, Activity, CalendarDays } from 'lucide-react';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 import { RelatedToolsWidget } from '@/components/RelatedToolsWidget';
 import { constructMetadata } from '@/lib/seo';
 
@@ -102,6 +103,8 @@ export default function Home() {
 
       {/* Internal Traffic Engine - Related Tools Widget */}
       <RelatedToolsWidget />
+
+      <MedicalDisclaimer />
     </div>
   );
 }
