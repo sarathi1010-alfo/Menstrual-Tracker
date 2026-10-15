@@ -1,16 +1,14 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getAllArticles } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
-import { absoluteUrl } from '@/lib/seo';
+
+const absoluteUrl = (path: string) => {
+  return `https://lunacycle.alfo.online${path}`;
+};
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Use a string to ensure no timezone fluctuation for static generation,
-  // Next.js MetadataRoute.Sitemap allows Date objects or strings,
-  // but to avoid "Couldn't fetch" parsing errors from malformed date outputs,
-  // we can use a stable ISO string without milliseconds.
   const currentDateStr = new Date().toISOString().split('T')[0];
 
-  // Static core pages
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: absoluteUrl('/'),
@@ -25,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: absoluteUrl('/guides'),
+      url: absoluteUrl('/blog'),
       lastModified: currentDateStr,
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -62,7 +60,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Dynamic programmatic SEO pages
   const guideSlugs = getGuideSlugs() || [];
   const guideRoutes: MetadataRoute.Sitemap = guideSlugs
     .filter((slug) => slug && slug.trim() !== '')
@@ -70,7 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl(`/guides/${slug}`),
       lastModified: currentDateStr,
       changeFrequency: 'monthly',
-      priority: 0.7, // Internal programmatic pages get high but sub-core priority
+      priority: 0.7,
     }));
 
   const toolsData = seoData || [];
@@ -83,5 +80,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  const allArticles = getAllArticles() || [];
+
+  const articleRoutes: MetadataRoute.Sitemap = allArticles
+    .filter((article) => article.slug && article.slug.trim() !== '')
+    .map((article) => {
+      let urlPath = `/blog/${article.slug}`;
+
+      if (article.category === 'what-is') {
+        urlPath = `/${article.slug}`;
+      } else if (article.category === 'use-cases') {
+        urlPath = `/use-cases/${article.slug}`;
+      } else if (article.category === 'conditions') {
+        urlPath = `/conditions/${article.slug}`;
+      }
+
+      return {
+        url: absoluteUrl(urlPath),
+        lastModified: currentDateStr,
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      };
+    });
+
+  return [...staticRoutes, ...guideRoutes, ...toolRoutes, ...articleRoutes];
 }
