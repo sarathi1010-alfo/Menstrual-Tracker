@@ -11,7 +11,7 @@ export const viewport = {
 };
 
 export const metadata: Metadata = constructMetadata({
-  title: 'CycleHub - Privacy-first Period Tracker',
+  title: 'LunaCycle - Privacy-first Period Tracker',
   description: 'Track your cycle visually, predict key dates instantly, and save everything locally on your device.',
 });
 
