@@ -1,22 +1,42 @@
 [
   {
-    "id": "is-my-data-secure",
     "question": "Is my data secure?",
-    "answer": "Yes. We built CycleHub with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
+    "answer": "Yes. We built LunaCycle with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
   },
   {
-    "id": "how-to-track",
     "question": "How do I track my period?",
     "answer": "Navigate to the Tracker page and tap the date on the calendar when your period started. The app will automatically calculate your cycle length based on the distance between your logged dates."
   },
   {
-    "id": "predictions",
     "question": "How is my next period predicted?",
     "answer": "We look at your past logged periods to determine your average cycle length (excluding extreme outliers). We then add this average to your most recent period's start date to predict when your next one will begin."
   },
   {
-    "id": "birth-control",
     "question": "Can I use this for birth control?",
-    "answer": "No. CycleHub is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+    "answer": "No. LunaCycle is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+  },
+  {
+    "question": "How do I back up my data if it is only stored locally?",
+    "answer": "You can export your data as a JSON file from the Settings page. This file can be saved securely on your device or personal cloud. To restore your data on a new device, simply import this JSON file."
+  },
+  {
+    "question": "What happens to my data if I clear my browser history?",
+    "answer": "Because LunaCycle uses your browser's local storage, clearing your site data or cache for our website will permanently delete your cycle history from that device. We recommend exporting a backup before clearing your browser data."
+  },
+  {
+    "question": "Does LunaCycle sell my data to advertisers?",
+    "answer": "Absolutely not. Because your data never leaves your device, we physically do not have access to it. We cannot and will not sell, share, or analyze your personal cycle information."
+  },
+  {
+    "question": "Can I adjust the length of my luteal phase?",
+    "answer": "Yes, you can customize your predicted luteal phase length in the Settings menu to make your ovulation and next-period predictions more accurate to your specific body."
+  },
+  {
+    "question": "Is LunaCycle free to use?",
+    "answer": "Yes, LunaCycle is entirely free to use. There are no paywalls, premium tiers, or hidden subscriptions."
+  },
+  {
+    "question": "How accurate are the fertile window predictions?",
+    "answer": "Our fertile window predictions use standard calendar methods based on your average cycle length. While helpful for general awareness or trying to conceive, they are not 100% accurate because real human cycles naturally vary from month to month."
   }
 ]

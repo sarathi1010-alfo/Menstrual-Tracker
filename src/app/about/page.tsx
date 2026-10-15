@@ -1,3 +1,4 @@
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
 
@@ -40,6 +41,7 @@ export default function AboutPage() {
           CycleHub is for anyone who wants a minimal, beautifully designed calendar to track their cycle length and predict upcoming dates. It is perfect for those who value digital privacy and prefer tools over social networks.
         </p>
       </article>
+      <MedicalDisclaimer />
     </div>
   );
 }
