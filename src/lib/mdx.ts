@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 
 const guidesDirectory = path.join(process.cwd(), 'src/data/guides');
+const blogDirectory = path.join(process.cwd(), 'src/data/blog');
 
 export interface GuideMeta {
   title: string;
@@ -11,7 +12,12 @@ export interface GuideMeta {
   seoDescription: string;
   tags: string[];
   slug: string;
+  category?: string;
+  takeaways?: string[];
+  faqs?: { question: string; answer: string }[];
 }
+
+export type ArticleMeta = GuideMeta;
 
 export interface Guide {
   meta: GuideMeta;
@@ -19,12 +25,23 @@ export interface Guide {
 }
 
 export function getGuideSlugs(): string[] {
-  if (!fs.existsSync(guidesDirectory)) {
-    return [];
+  let guides: string[] = [];
+  if (fs.existsSync(guidesDirectory)) {
+    guides = fs.readdirSync(guidesDirectory)
+      .filter((file) => file.endsWith('.mdx'))
+      .map((file) => file.replace(/\.mdx$/, ''));
   }
-  return fs.readdirSync(guidesDirectory)
-    .filter((file) => file.endsWith('.mdx'))
-    .map((file) => file.replace(/\.mdx$/, ''));
+  return guides;
+}
+
+export function getArticleSlugs(): string[] {
+  let articles: string[] = [];
+  if (fs.existsSync(blogDirectory)) {
+    articles = fs.readdirSync(blogDirectory)
+      .filter((file) => file.endsWith('.mdx'))
+      .map((file) => file.replace(/\.mdx$/, ''));
+  }
+  return articles;
 }
 
 export function getGuideBySlug(slug: string): Guide | null {
@@ -54,6 +71,36 @@ export function getGuideBySlug(slug: string): Guide | null {
   }
 }
 
+export function getArticleBySlug(slug: string): Guide | null {
+  try {
+    const realSlug = slug.replace(/\.mdx$/, '');
+    const fullPath = path.join(blogDirectory, `${realSlug}.mdx`);
+
+    if (!fs.existsSync(fullPath)) return null;
+
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const { data, content } = matter(fileContents);
+
+    return {
+      meta: {
+        slug: realSlug,
+        title: data.title || '',
+        summary: data.summary || '',
+        seoTitle: data.seoTitle || data.title || '',
+        seoDescription: data.seoDescription || data.summary || '',
+        tags: data.tags || [],
+        category: data.category || '',
+        takeaways: data.takeaways || [],
+        faqs: data.faqs || [],
+      },
+      content,
+    };
+  } catch (error) {
+    console.error(`Error reading article ${slug}:`, error);
+    return null;
+  }
+}
+
 export function getAllGuides(): GuideMeta[] {
   const slugs = getGuideSlugs();
   const guides = slugs
@@ -62,4 +109,14 @@ export function getAllGuides(): GuideMeta[] {
     .map((guide) => guide.meta);
 
   return guides;
+}
+
+export function getAllArticles(): GuideMeta[] {
+  const slugs = getArticleSlugs();
+  const articles = slugs
+    .map((slug) => getArticleBySlug(slug))
+    .filter((article): article is Guide => article !== null)
+    .map((article) => article.meta);
+
+  return articles;
 }
