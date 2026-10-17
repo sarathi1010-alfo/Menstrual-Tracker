@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 export const metadata: Metadata = constructMetadata({
   title: 'Privacy Policy - CycleHub Data Protection & Local Storage',
@@ -42,6 +43,7 @@ export default function PrivacyPage() {
           If we ever change how we handle data (for example, if we introduce an optional, encrypted cloud sync feature in the future), we will make it strictly opt-in and update this privacy policy to clearly explain the technical implementation.
         </p>
       </article>
+      <MedicalDisclaimer />
     </div>
   );
 }
