@@ -3,6 +3,7 @@ import faqsData from '@/data/faqs.json';
 import Link from 'next/link';
 
 import { constructMetadata } from '@/lib/seo';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 export const metadata = constructMetadata({
   title: 'Frequently Asked Questions - CycleHub Period Tracker Help',
@@ -85,6 +86,7 @@ export default function FAQPage() {
           </div>
         </div>
       </div>
+      <MedicalDisclaimer />
     </div>
   );
 }
