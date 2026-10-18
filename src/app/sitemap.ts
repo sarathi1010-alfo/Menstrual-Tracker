@@ -1,87 +1,53 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
-import seoData from '@/data/pSeoData.json';
-import { absoluteUrl } from '@/lib/seo';
+import { getAllGuides } from '@/lib/mdx';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  // Use a string to ensure no timezone fluctuation for static generation,
-  // Next.js MetadataRoute.Sitemap allows Date objects or strings,
-  // but to avoid "Couldn't fetch" parsing errors from malformed date outputs,
-  // we can use a stable ISO string without milliseconds.
-  const currentDateStr = new Date().toISOString().split('T')[0];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = 'https://lunacycle.alfo.online';
 
-  // Static core pages
   const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: absoluteUrl('/'),
-      lastModified: currentDateStr,
-      changeFrequency: 'monthly',
-      priority: 1,
-    },
-    {
-      url: absoluteUrl('/tracker'),
-      lastModified: currentDateStr,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: absoluteUrl('/guides'),
-      lastModified: currentDateStr,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl('/faq'),
-      lastModified: currentDateStr,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl('/about'),
-      lastModified: currentDateStr,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: absoluteUrl('/privacy'),
-      lastModified: currentDateStr,
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
-    {
-      url: absoluteUrl('/terms-of-service'),
-      lastModified: currentDateStr,
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
-    {
-      url: absoluteUrl('/contact'),
-      lastModified: currentDateStr,
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
+    { url: `${baseUrl}`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 1.0 },
+    { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.8 },
+    { url: `${baseUrl}/faq`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.8 },
+    { url: `${baseUrl}/privacy`, lastModified: new Date(), changeFrequency: 'yearly' as const, priority: 0.5 },
+    { url: `${baseUrl}/terms-of-service`, lastModified: new Date(), changeFrequency: 'yearly' as const, priority: 0.5 },
+    { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: 'yearly' as const, priority: 0.5 },
+    { url: `${baseUrl}/features`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.8 },
+    { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
   ];
 
-  // Dynamic programmatic SEO pages
-  const guideSlugs = getGuideSlugs() || [];
-  const guideRoutes: MetadataRoute.Sitemap = guideSlugs
-    .filter((slug) => slug && slug.trim() !== '')
-    .map((slug) => ({
-      url: absoluteUrl(`/guides/${slug}`),
-      lastModified: currentDateStr,
-      changeFrequency: 'monthly',
-      priority: 0.7, // Internal programmatic pages get high but sub-core priority
-    }));
+  const guideRoutes = getAllGuides().map((guide) => ({
+    url: `${baseUrl}/guides/${guide.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
 
-  const toolsData = seoData || [];
-  const toolRoutes: MetadataRoute.Sitemap = toolsData
-    .filter((tool) => tool && tool.slug && tool.slug.trim() !== '')
-    .map((tool) => ({
-      url: absoluteUrl(`/tools/${tool.slug}`),
-      lastModified: currentDateStr,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    }));
+  const toolRoutes = [
+    { url: `${baseUrl}/tools/ovulation-calculator`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.9 },
+    { url: `${baseUrl}/tools/period-calculator`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.9 },
+    { url: `${baseUrl}/tools/safe-days-calculator`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.9 },
+  ];
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  try {
+    const { getAllArticles } = await import('@/lib/mdx');
+    const articles = getAllArticles();
+
+    const blogRoutes = articles.map((article) => {
+      let path = `/blog/${article.slug}`;
+      if (article.category === 'what-is') path = `/${article.slug}`;
+      if (article.category === 'use-cases') path = `/use-cases/${article.slug}`;
+      if (article.category === 'conditions') path = `/conditions/${article.slug}`;
+
+      return {
+        url: `${baseUrl}${path}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+      };
+    });
+
+    return [...staticRoutes, ...toolRoutes, ...guideRoutes, ...blogRoutes];
+  } catch (e) {
+    return [...staticRoutes, ...toolRoutes, ...guideRoutes];
+  }
 }

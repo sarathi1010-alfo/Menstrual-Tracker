@@ -3,6 +3,7 @@ import Script from 'next/script';
 import Layout from '@/components/Layout';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
 import { constructMetadata, siteConfig, absoluteUrl } from '@/lib/seo';
+import { TrackerProvider } from '@/components/TrackerContext';
 import './globals.css';
 
 export const viewport = {
@@ -11,7 +12,7 @@ export const viewport = {
 };
 
 export const metadata: Metadata = constructMetadata({
-  title: 'CycleHub - Privacy-first Period Tracker',
+  title: 'LunaCycle - Privacy-first Period Tracker',
   description: 'Track your cycle visually, predict key dates instantly, and save everything locally on your device.',
 });
 
@@ -50,7 +51,9 @@ export default function RootLayout({
         <SchemaMarkup schema={defaultSchema} />
       </head>
       <body className="antialiased bg-[var(--background)] text-[var(--foreground)]">
-        <Layout>{children}</Layout>
+        <TrackerProvider>
+          <Layout>{children}</Layout>
+        </TrackerProvider>
       </body>
     </html>
   );
