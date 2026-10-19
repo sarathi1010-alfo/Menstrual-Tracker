@@ -3,7 +3,9 @@ import { getGuideSlugs } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+import { getArticleSlugs, getArticleBySlug } from '@/lib/mdx';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Use a string to ensure no timezone fluctuation for static generation,
   // Next.js MetadataRoute.Sitemap allows Date objects or strings,
   // but to avoid "Couldn't fetch" parsing errors from malformed date outputs,
@@ -57,10 +59,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: absoluteUrl('/contact'),
       lastModified: currentDateStr,
-      changeFrequency: 'yearly',
+      changeFrequency: 'yearly' as const,
       priority: 0.6,
     },
+    {
+      url: absoluteUrl('/features'),
+      lastModified: currentDateStr,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl('/blog'),
+      lastModified: currentDateStr,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
   ];
+
+  // Map change frequencies inside static routes specifically due to TS requirements
+  staticRoutes.forEach(r => {
+    // Casting to literal type to avoid TS errors
+    if (r.url === absoluteUrl('/')) r.changeFrequency = 'monthly' as const;
+    if (r.url === absoluteUrl('/tracker')) r.changeFrequency = 'weekly' as const;
+    if (r.url === absoluteUrl('/guides')) r.changeFrequency = 'weekly' as const;
+    if (r.url === absoluteUrl('/faq')) r.changeFrequency = 'monthly' as const;
+    if (r.url === absoluteUrl('/about')) r.changeFrequency = 'monthly' as const;
+    if (r.url === absoluteUrl('/privacy')) r.changeFrequency = 'yearly' as const;
+    if (r.url === absoluteUrl('/terms-of-service')) r.changeFrequency = 'yearly' as const;
+  });
 
   // Dynamic programmatic SEO pages
   const guideSlugs = getGuideSlugs() || [];
@@ -69,9 +95,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((slug) => ({
       url: absoluteUrl(`/guides/${slug}`),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.7, // Internal programmatic pages get high but sub-core priority
     }));
+
+  const blogSlugs = getArticleSlugs() || [];
+  const blogRoutes: MetadataRoute.Sitemap = blogSlugs
+    .filter((slug) => slug && slug.trim() !== '')
+    .map((slug) => {
+      const article = getArticleBySlug(slug);
+      let path = `/blog/${slug}`;
+      if (article) {
+        if (article.meta.category === 'what-is') path = `/${slug}`;
+        if (article.meta.category === 'use-cases') path = `/use-cases/${slug}`;
+        if (article.meta.category === 'conditions') path = `/conditions/${slug}`;
+      }
+      return {
+        url: absoluteUrl(path),
+        lastModified: currentDateStr,
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      };
+    });
 
   const toolsData = seoData || [];
   const toolRoutes: MetadataRoute.Sitemap = toolsData
@@ -79,9 +124,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((tool) => ({
       url: absoluteUrl(`/tools/${tool.slug}`),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  return [...staticRoutes, ...guideRoutes, ...blogRoutes, ...toolRoutes];
 }
