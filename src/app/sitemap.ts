@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getAllArticles } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Use a string to ensure no timezone fluctuation for static generation,
   // Next.js MetadataRoute.Sitemap allows Date objects or strings,
   // but to avoid "Couldn't fetch" parsing errors from malformed date outputs,
@@ -79,9 +79,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((tool) => ({
       url: absoluteUrl(`/tools/${tool.slug}`),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  const articles = getAllArticles();
+  const articleRoutes: MetadataRoute.Sitemap = articles.map((article) => {
+    let urlPath = `/blog/${article.slug}`;
+    if (article.category === 'what-is') urlPath = `/${article.slug}`;
+    else if (article.category === 'use-cases') urlPath = `/use-cases/${article.slug}`;
+    else if (article.category === 'conditions') urlPath = `/conditions/${article.slug}`;
+
+    return {
+      url: absoluteUrl(urlPath),
+      lastModified: currentDateStr,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    };
+  });
+
+  return [...staticRoutes, ...guideRoutes, ...toolRoutes, ...articleRoutes];
 }
