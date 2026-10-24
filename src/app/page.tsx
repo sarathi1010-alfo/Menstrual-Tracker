@@ -5,6 +5,7 @@ import { CycleCalendar } from '@/components/CycleCalendar';
 import { ArrowRight, Shield, Activity, CalendarDays } from 'lucide-react';
 import { RelatedToolsWidget } from '@/components/RelatedToolsWidget';
 import { constructMetadata } from '@/lib/seo';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 export const metadata: Metadata = constructMetadata({
   path: '/',
@@ -102,6 +103,8 @@ export default function Home() {
 
       {/* Internal Traffic Engine - Related Tools Widget */}
       <RelatedToolsWidget />
+
+      <MedicalDisclaimer />
     </div>
   );
 }

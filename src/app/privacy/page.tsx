@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 
 export const metadata: Metadata = constructMetadata({
   title: 'Privacy Policy - CycleHub Data Protection & Local Storage',
@@ -11,7 +12,7 @@ export default function PrivacyPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
       <div>
-        <h1 className="heading-1 mb-4">Privacy Policy</h1>
+        <h1 className="heading-1 mb-4">Privacy Policy &ndash; LunaCycle&apos;s Commitment to Your Data Privacy</h1>
         <p className="text-[var(--muted)] text-lg">
           Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
         </p>
@@ -42,6 +43,8 @@ export default function PrivacyPage() {
           If we ever change how we handle data (for example, if we introduce an optional, encrypted cloud sync feature in the future), we will make it strictly opt-in and update this privacy policy to clearly explain the technical implementation.
         </p>
       </article>
+
+      <MedicalDisclaimer />
     </div>
   );
 }
