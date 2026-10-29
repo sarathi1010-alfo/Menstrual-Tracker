@@ -1,6 +1,46 @@
+# Autonomous Search Engine & Generative Engine Crawling Rules
 User-agent: *
 Allow: /
-Allow: /tools/
-Disallow: /api/
+
+# Answer Engine Optimization (AEO) Agents
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Cohere-ai
+Allow: /
+
+# Ahrefs & Major Search Bots
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: AhrefsSiteAudit
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
 
 Sitemap: https://lunacycle.alfo.online/sitemap.xml
