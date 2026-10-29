@@ -43,7 +43,7 @@ export function CycleCalendar() {
   };
 
   return (
-    <div className="card p-3 sm:p-4 md:p-6 w-full max-w-md mx-auto">
+    <div className="card px-2 py-3 sm:p-4 md:p-6 w-full max-w-md mx-auto">
       <div className="flex justify-between items-center mb-6">
         <button onClick={handlePreviousMonth} aria-label="Previous month" className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
           <ChevronLeft size={20} />
@@ -54,7 +54,7 @@ export function CycleCalendar() {
         </button>
       </div>
 
-      <div className="grid grid-cols-7 gap-1 mb-2">
+      <div className="grid grid-cols-7 gap-0.5 sm:gap-1 mb-2">
         {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((day) => (
           <div key={day} className="text-center text-sm font-medium text-[var(--muted)] py-2">
             {day}
@@ -62,7 +62,7 @@ export function CycleCalendar() {
         ))}
       </div>
 
-      <div className="grid grid-cols-7 gap-1">
+      <div className="grid grid-cols-7 gap-0.5 sm:gap-1">
         {days.map((day, idx) => {
           const isPeriod = isPeriodDay(day);
           const isPredicted = nextPeriodPrediction && isSameDay(day, nextPeriodPrediction);
@@ -74,7 +74,7 @@ export function CycleCalendar() {
               key={idx}
               onClick={() => handleDayClick(day)}
               className={cn(
-                "min-h-[44px] min-w-[44px] w-full rounded-full flex items-center justify-center text-sm transition-all select-none touch-manipulation",
+                "min-h-[44px] min-w-[44px] w-full aspect-square rounded-full flex items-center justify-center text-sm transition-all select-none touch-manipulation",
                 !isSameMonth(day, monthStart) && "text-gray-300 dark:text-gray-600",
                 isSameMonth(day, monthStart) && "hover:bg-gray-100 dark:hover:bg-gray-800",
                 isPeriod && "bg-[var(--accent)] text-red-900 font-bold hover:bg-[#F0A08E]",
