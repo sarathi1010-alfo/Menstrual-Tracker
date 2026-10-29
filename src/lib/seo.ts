@@ -2,12 +2,9 @@ import { Metadata } from 'next';
 
 // Centralized configuration for the site
 export const siteConfig = {
-  // Use environment variable in production, fallback for local dev
-
-  // Use environment variable in production, fallback to production domain
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://lunacycle.alfo.online',
-  name: 'CycleHub',
-  description: 'Track your cycle visually, predict key dates instantly, and save everything locally on your device.',
+  name: 'LunaCycle',
+  description: 'Free, privacy-first menstrual tracker and cycle calculator. Log symptoms, predict period and ovulation dates, and keep your health data private on your device.',
   creator: 'alfo.online',
   ecosystemHub: 'https://hub.alfo.online',
 };
@@ -36,9 +33,9 @@ export function absoluteUrl(path: string) {
  * Reusable metadata helper for consistent SEO across pages.
  */
 export function constructMetadata({
-  title = siteConfig.name,
+  title = 'LunaCycle - Menstrual Tracker & Period Calendar',
   description = siteConfig.description,
-  image = '/og-image.png', // Add a default og-image in public/ later
+  image = '/og-image.png',
   icons = '/favicon.ico',
   noIndex = false,
   path = '',

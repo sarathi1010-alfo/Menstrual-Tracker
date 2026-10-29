@@ -12,13 +12,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <TrackerProvider>
       <div className="min-h-screen flex flex-col bg-[var(--background)]">
+        <a
+          href="#main-content"
+          id="skip-link"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-[var(--primary)] focus:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--primary)] rounded-md"
+        >
+          Skip to content
+        </a>
         <header className="sticky top-0 z-10 bg-[var(--surface)]/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
           <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2 font-bold text-lg text-[var(--primary)]">
+            <Link href="/" className="flex items-center gap-2 font-bold text-lg text-[var(--primary)] min-h-[44px]">
               <div className="w-8 h-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center">
                 <Calendar size={18} />
               </div>
-              CycleHub
+              LunaCycle
             </Link>
 
             <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-[var(--muted)]">
@@ -26,7 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <button
                   onClick={() => setIsToolsDropdownOpen(!isToolsDropdownOpen)}
                   onBlur={() => setTimeout(() => setIsToolsDropdownOpen(false), 200)}
-                  className="flex items-center gap-1 hover:text-[var(--foreground)] transition-colors"
+                  className="flex items-center gap-1 hover:text-[var(--foreground)] transition-colors min-h-[44px]"
                 >
                   Tools Hub <ChevronDown size={14} />
                 </button>
@@ -42,14 +49,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <a href="https://pdfutility.app" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">PDF Utility</a>
                     <a href="https://paletteflow.alfo.online" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">Palette Flow</a>
                     <a href="https://qrgenerator.alfo.online" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">QR Generator</a>
-                    <a href="https://emicalculator.alfo.online" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">EMI Calculator</a>
+                    <a href="https://emicalculatorpro.alfo.online" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">EMI Calculator</a>
                   </div>
                 )}
               </div>
-              <Link href="/tracker" className="hover:text-[var(--foreground)] transition-colors">Tracker</Link>
-              <Link href="/guides" className="hover:text-[var(--foreground)] transition-colors">Blog</Link>
-              <Link href="/about" className="hover:text-[var(--foreground)] transition-colors">About</Link>
-              <Link href="/settings" className="hover:text-[var(--foreground)] transition-colors flex items-center" aria-label="Settings">
+              <Link href="/tracker" className="hover:text-[var(--foreground)] transition-colors min-h-[44px] flex items-center">Tracker</Link>
+              <Link href="/guides" className="hover:text-[var(--foreground)] transition-colors min-h-[44px] flex items-center">Blog</Link>
+              <Link href="/about" className="hover:text-[var(--foreground)] transition-colors min-h-[44px] flex items-center">About</Link>
+              <Link href="/settings" className="hover:text-[var(--foreground)] transition-colors flex items-center min-h-[44px]" aria-label="Settings">
                 <Settings size={18} />
               </Link>
             </nav>
@@ -61,22 +68,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <AdPlaceholder type="mobile" />
         </div>
 
-        <main className="flex-grow w-full max-w-5xl mx-auto p-4 md:p-8">
+        <main id="main-content" className="flex-grow w-full max-w-5xl mx-auto p-4 md:p-8">
           {children}
         </main>
 
         {/* Mobile Bottom Navigation */}
         <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--surface)] border-t border-gray-200 dark:border-gray-800 pb-[env(safe-area-inset-bottom)] z-10">
-          <div className="flex justify-around p-3">
-            <Link href="/" className="flex flex-col items-center gap-1 text-[var(--muted)] hover:text-[var(--primary)]">
+          <div className="flex justify-around p-2">
+            <Link href="/" className="flex flex-col items-center justify-center min-h-[44px] min-w-[44px] gap-1 text-[var(--muted)] hover:text-[var(--primary)]">
               <Home size={20} />
               <span className="text-xs">Home</span>
             </Link>
-            <Link href="/tracker" className="flex flex-col items-center gap-1 text-[var(--muted)] hover:text-[var(--primary)]">
+            <Link href="/tracker" className="flex flex-col items-center justify-center min-h-[44px] min-w-[44px] gap-1 text-[var(--muted)] hover:text-[var(--primary)]">
               <Calendar size={20} />
               <span className="text-xs">Tracker</span>
             </Link>
-            <Link href="/faq" className="flex flex-col items-center gap-1 text-[var(--muted)] hover:text-[var(--primary)]">
+            <Link href="/faq" className="flex flex-col items-center justify-center min-h-[44px] min-w-[44px] gap-1 text-[var(--muted)] hover:text-[var(--primary)]">
               <HelpCircle size={20} />
               <span className="text-xs">FAQ</span>
             </Link>
@@ -94,7 +101,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className="w-6 h-6 rounded-full bg-[var(--primary)] text-white flex items-center justify-center">
                   <Calendar size={14} />
                 </div>
-                CycleHub
+                LunaCycle
               </div>
               <p>Privacy-first menstrual cycle tracking. Save everything locally on your device.</p>
               <p className="mt-4">© {new Date().getFullYear()} <a href="https://alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)]">alfo.online</a>. All rights reserved.</p>
@@ -102,33 +109,33 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
             <div className="flex flex-col gap-2">
               <h3 className="font-semibold text-[var(--foreground)] mb-2">Cycle Tools</h3>
-              <Link href="/tools/next-period-predictor" className="hover:text-[var(--foreground)] transition-colors">Next Period Predictor</Link>
-              <Link href="/tools/safe-days-calculator" className="hover:text-[var(--foreground)] transition-colors">Safe Days Calculator</Link>
-              <Link href="/tools/ovulation-calculator" className="hover:text-[var(--foreground)] transition-colors">Ovulation Calculator</Link>
+              <Link href="/tools/next-period-predictor" className="hover:text-[var(--foreground)] transition-colors py-1">Next Period Predictor</Link>
+              <Link href="/tools/safe-days-calculator" className="hover:text-[var(--foreground)] transition-colors py-1">Safe Days Calculator</Link>
+              <Link href="/tools/ovulation-calculator" className="hover:text-[var(--foreground)] transition-colors py-1">Ovulation Calculator</Link>
             </div>
 
             <div className="flex flex-col gap-2">
               <h3 className="font-semibold text-[var(--foreground)] mb-2">Partner Tools</h3>
-              <a href="https://resumeforge.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors">Resume Forge</a>
-              <a href="https://pdfutility.app" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors">PDF Utility</a>
-              <a href="https://paletteflow.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors">Palette Flow</a>
-              <a href="https://qrgenerator.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors">QR Generator</a>
-              <a href="https://emicalculator.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors">EMI Calculator</a>
+              <a href="https://resumeforge.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors py-1">Resume Forge</a>
+              <a href="https://pdfutility.app" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors py-1">PDF Utility</a>
+              <a href="https://paletteflow.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors py-1">Palette Flow</a>
+              <a href="https://qrgenerator.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors py-1">QR Generator</a>
+              <a href="https://emicalculatorpro.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors py-1">EMI Calculator</a>
             </div>
 
             <div className="flex flex-col gap-2">
               <h3 className="font-semibold text-[var(--foreground)] mb-2">Legal</h3>
-              <Link href="/privacy" className="hover:text-[var(--foreground)] transition-colors">Privacy Policy</Link>
-              <Link href="/terms-of-service" className="hover:text-[var(--foreground)] transition-colors">Terms of Service</Link>
-              <Link href="/contact" className="hover:text-[var(--foreground)] transition-colors">Contact</Link>
-              <Link href="/about" className="hover:text-[var(--foreground)] transition-colors">About</Link>
+              <Link href="/privacy" className="hover:text-[var(--foreground)] transition-colors py-1">Privacy Policy</Link>
+              <Link href="/terms-of-service" className="hover:text-[var(--foreground)] transition-colors py-1">Terms of Service</Link>
+              <Link href="/contact" className="hover:text-[var(--foreground)] transition-colors py-1">Contact</Link>
+              <Link href="/about" className="hover:text-[var(--foreground)] transition-colors py-1">About</Link>
             </div>
 
             <div className="flex flex-col gap-2">
               <h3 className="font-semibold text-[var(--foreground)] mb-2">Social</h3>
-              <a href="#" className="hover:text-[var(--foreground)] transition-colors">Twitter / X</a>
-              <a href="#" className="hover:text-[var(--foreground)] transition-colors">GitHub</a>
-              <a href="#" className="hover:text-[var(--foreground)] transition-colors">LinkedIn</a>
+              <a href="https://twitter.com/alfo_online" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--foreground)] transition-colors py-1">Twitter / X</a>
+              <a href="https://github.com/sarathi1010-alfo" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--foreground)] transition-colors py-1">GitHub</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--foreground)] transition-colors py-1">LinkedIn</a>
             </div>
           </div>
         </footer>

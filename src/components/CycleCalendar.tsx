@@ -43,13 +43,13 @@ export function CycleCalendar() {
   };
 
   return (
-    <div className="card p-4 md:p-6 w-full max-w-md mx-auto">
+    <div className="card p-3 sm:p-4 md:p-6 w-full max-w-md mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <button onClick={handlePreviousMonth} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
+        <button onClick={handlePreviousMonth} aria-label="Previous month" className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
           <ChevronLeft size={20} />
         </button>
         <h2 className="heading-3">{format(currentMonth, 'MMMM yyyy')}</h2>
-        <button onClick={handleNextMonth} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
+        <button onClick={handleNextMonth} aria-label="Next month" className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
           <ChevronRight size={20} />
         </button>
       </div>
@@ -74,7 +74,7 @@ export function CycleCalendar() {
               key={idx}
               onClick={() => handleDayClick(day)}
               className={cn(
-                "h-10 w-full rounded-full flex items-center justify-center text-sm transition-all",
+                "min-h-[44px] min-w-[44px] w-full rounded-full flex items-center justify-center text-sm transition-all select-none touch-manipulation",
                 !isSameMonth(day, monthStart) && "text-gray-300 dark:text-gray-600",
                 isSameMonth(day, monthStart) && "hover:bg-gray-100 dark:hover:bg-gray-800",
                 isPeriod && "bg-[var(--accent)] text-red-900 font-bold hover:bg-[#F0A08E]",
