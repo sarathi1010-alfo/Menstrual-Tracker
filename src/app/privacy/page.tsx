@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
@@ -42,6 +43,7 @@ export default function PrivacyPage() {
           If we ever change how we handle data (for example, if we introduce an optional, encrypted cloud sync feature in the future), we will make it strictly opt-in and update this privacy policy to clearly explain the technical implementation.
         </p>
       </article>
+      <MedicalDisclaimer />
     </div>
   );
 }
