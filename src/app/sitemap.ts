@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getAllArticles } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
@@ -79,9 +79,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((tool) => ({
       url: absoluteUrl(`/tools/${tool.slug}`),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  const allArticles = getAllArticles() || [];
+  const blogRoutes: MetadataRoute.Sitemap = [
+    {
+      url: absoluteUrl('/blog'),
+      lastModified: currentDateStr,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    ...allArticles.map((article) => {
+      let slugPath = `/blog/${article.slug}`;
+      if (article.category === 'what-is') {
+        slugPath = `/${article.slug}`;
+      } else if (article.category === 'use-cases') {
+        slugPath = `/use-cases/${article.slug}`;
+      } else if (article.category === 'conditions') {
+        slugPath = `/conditions/${article.slug}`;
+      }
+
+      return {
+        url: absoluteUrl(slugPath),
+        lastModified: article.date || currentDateStr,
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      };
+    }),
+  ];
+
+  return [...staticRoutes, ...guideRoutes, ...toolRoutes, ...blogRoutes];
 }
