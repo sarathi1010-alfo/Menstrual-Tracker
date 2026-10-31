@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getArticleSlugs, getArticleBySlug } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
@@ -64,6 +64,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Dynamic programmatic SEO pages
   const guideSlugs = getGuideSlugs() || [];
+
+  const articleSlugs = getArticleSlugs() || [];
+  const articleRoutes = articleSlugs
+    .map((slug) => {
+      const article = getArticleBySlug(slug);
+      if (!article) return null;
+      let path = `/blog/${slug}`;
+      if (article.meta.category === 'what-is') path = `/${slug}`;
+      if (article.meta.category === 'use-cases') path = `/use-cases/${slug}`;
+      if (article.meta.category === 'conditions') path = `/conditions/${slug}`;
+
+      return {
+        url: absoluteUrl(path),
+        lastModified: currentDateStr,
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      };
+    })
+    .filter(Boolean) as MetadataRoute.Sitemap;
+
   const guideRoutes: MetadataRoute.Sitemap = guideSlugs
     .filter((slug) => slug && slug.trim() !== '')
     .map((slug) => ({
@@ -83,5 +103,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  return [...staticRoutes, ...guideRoutes, ...articleRoutes, ...toolRoutes];
 }
