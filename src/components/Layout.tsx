@@ -54,7 +54,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 )}
               </div>
               <Link href="/tracker" className="hover:text-[var(--foreground)] transition-colors min-h-[44px] flex items-center">Tracker</Link>
-              <Link href="/guides" className="hover:text-[var(--foreground)] transition-colors min-h-[44px] flex items-center">Blog</Link>
+              <Link href="/guides" className="hover:text-[var(--foreground)] transition-colors min-h-[44px] flex items-center">Guides</Link>
+              <Link href="/blog" className="hover:text-[var(--foreground)] transition-colors min-h-[44px] flex items-center">Blog</Link>
               <Link href="/about" className="hover:text-[var(--foreground)] transition-colors min-h-[44px] flex items-center">About</Link>
               <Link href="/settings" className="hover:text-[var(--foreground)] transition-colors flex items-center min-h-[44px]" aria-label="Settings">
                 <Settings size={18} />
