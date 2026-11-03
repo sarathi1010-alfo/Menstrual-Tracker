@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getArticleSlugs, getAllArticles } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
@@ -15,52 +15,53 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: absoluteUrl('/'),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 1,
     },
     {
       url: absoluteUrl('/tracker'),
       lastModified: currentDateStr,
-      changeFrequency: 'weekly',
+      changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
     {
       url: absoluteUrl('/guides'),
       lastModified: currentDateStr,
-      changeFrequency: 'weekly',
+      changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
     {
       url: absoluteUrl('/faq'),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
       url: absoluteUrl('/about'),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
     {
       url: absoluteUrl('/privacy'),
       lastModified: currentDateStr,
-      changeFrequency: 'yearly',
+      changeFrequency: 'yearly' as const,
       priority: 0.6,
     },
     {
       url: absoluteUrl('/terms-of-service'),
       lastModified: currentDateStr,
-      changeFrequency: 'yearly',
+      changeFrequency: 'yearly' as const,
       priority: 0.6,
     },
     {
       url: absoluteUrl('/contact'),
       lastModified: currentDateStr,
-      changeFrequency: 'yearly',
+      changeFrequency: 'yearly' as const,
       priority: 0.6,
     },
   ];
+
 
   // Dynamic programmatic SEO pages
   const guideSlugs = getGuideSlugs() || [];
@@ -69,19 +70,58 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((slug) => ({
       url: absoluteUrl(`/guides/${slug}`),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.7, // Internal programmatic pages get high but sub-core priority
     }));
 
+  const articles = getAllArticles() || [];
+
+  const blogRoutes: MetadataRoute.Sitemap = articles
+    .filter(a => a.category === 'blog')
+    .map((article) => ({
+      url: absoluteUrl(`/blog/${article.slug}`),
+      lastModified: currentDateStr,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }));
+
+  const whatIsRoutes: MetadataRoute.Sitemap = articles
+    .filter(a => a.category === 'what-is')
+    .map((article) => ({
+      url: absoluteUrl(`/${article.slug}`),
+      lastModified: currentDateStr,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }));
+
+  const useCaseRoutes: MetadataRoute.Sitemap = articles
+    .filter(a => a.category === 'use-cases')
+    .map((article) => ({
+      url: absoluteUrl(`/use-cases/${article.slug}`),
+      lastModified: currentDateStr,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }));
+
+  const conditionRoutes: MetadataRoute.Sitemap = articles
+    .filter(a => a.category === 'conditions')
+    .map((article) => ({
+      url: absoluteUrl(`/conditions/${article.slug}`),
+      lastModified: currentDateStr,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }));
+
   const toolsData = seoData || [];
+
   const toolRoutes: MetadataRoute.Sitemap = toolsData
     .filter((tool) => tool && tool.slug && tool.slug.trim() !== '')
     .map((tool) => ({
       url: absoluteUrl(`/tools/${tool.slug}`),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  return [...staticRoutes, ...guideRoutes, ...blogRoutes, ...whatIsRoutes, ...useCaseRoutes, ...conditionRoutes, ...toolRoutes];
 }
