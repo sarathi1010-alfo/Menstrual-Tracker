@@ -10,6 +10,8 @@ export const metadata = constructMetadata({
   path: '/faq',
 });
 
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
+
 export default function FAQPage() {
   const faqSchema = {
     "@context": "https://schema.org",
@@ -27,6 +29,7 @@ export default function FAQPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
       <SchemaMarkup schema={faqSchema} />
+      <MedicalDisclaimer />
       <div>
         <h1 className="heading-1 mb-4">Frequently Asked Questions</h1>
         <p className="text-[var(--muted)] text-lg">

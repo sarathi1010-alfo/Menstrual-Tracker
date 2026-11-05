@@ -176,9 +176,12 @@ const steps = [
   },
 ];
 
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
+
 export default function Home() {
   return (
     <div className="space-y-16 pb-8">
+      <MedicalDisclaimer />
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"

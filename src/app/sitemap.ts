@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getAllArticles } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
@@ -26,6 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl('/guides'),
+      lastModified: currentDateStr,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl('/blog'),
       lastModified: currentDateStr,
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -69,9 +75,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((slug) => ({
       url: absoluteUrl(`/guides/${slug}`),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.7, // Internal programmatic pages get high but sub-core priority
     }));
+
+  const allArticles = getAllArticles();
+  const articleRoutes: MetadataRoute.Sitemap = allArticles
+    .filter((article) => article.slug && article.slug.trim() !== '')
+    .map((article) => {
+      let route = `/blog/${article.slug}`;
+      if (article.category === 'what-is') route = `/${article.slug}`;
+      if (article.category === 'use-cases') route = `/use-cases/${article.slug}`;
+      if (article.category === 'conditions') route = `/conditions/${article.slug}`;
+
+      return {
+        url: absoluteUrl(route),
+        lastModified: currentDateStr,
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      };
+    });
 
   const toolsData = seoData || [];
   const toolRoutes: MetadataRoute.Sitemap = toolsData
@@ -79,9 +102,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((tool) => ({
       url: absoluteUrl(`/tools/${tool.slug}`),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  return [...staticRoutes, ...guideRoutes, ...articleRoutes, ...toolRoutes];
 }
