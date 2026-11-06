@@ -48,7 +48,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <a href="https://resumeforge.alfo.online" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">Resume Forge</a>
                     <a href="https://pdfutility.app" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">PDF Utility</a>
                     <a href="https://paletteflow.alfo.online" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">Palette Flow</a>
-                    <a href="https://qrgenerator.alfo.online" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">QR Generator</a>
+                    <a href="https://qr.alfo.online" rel="noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">QR Generator</a>
                     <a href="https://emicalculatorpro.alfo.online" rel="nofollow noopener" target="_blank" className="block px-4 py-2 hover:bg-[var(--background)] text-sm">EMI Calculator</a>
                   </div>
                 )}
@@ -119,7 +119,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <a href="https://resumeforge.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors py-1">Resume Forge</a>
               <a href="https://pdfutility.app" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors py-1">PDF Utility</a>
               <a href="https://paletteflow.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors py-1">Palette Flow</a>
-              <a href="https://qrgenerator.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors py-1">QR Generator</a>
+              <a href="https://qr.alfo.online" rel="noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors py-1">QR Generator</a>
               <a href="https://emicalculatorpro.alfo.online" rel="nofollow noopener" target="_blank" className="hover:text-[var(--foreground)] transition-colors py-1">EMI Calculator</a>
             </div>
 
@@ -133,9 +133,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
             <div className="flex flex-col gap-2">
               <h3 className="font-semibold text-[var(--foreground)] mb-2">Social</h3>
-              <a href="https://twitter.com/alfo_online" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--foreground)] transition-colors py-1">Twitter / X</a>
-              <a href="https://github.com/sarathi1010-alfo" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--foreground)] transition-colors py-1">GitHub</a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--foreground)] transition-colors py-1">LinkedIn</a>
+              <a href="https://twitter.com/alfo_online" target="_blank" rel="noopener" className="hover:text-[var(--foreground)] transition-colors py-1">Twitter / X</a>
+              <a href="https://github.com/sarathi1010-alfo" target="_blank" rel="noopener" className="hover:text-[var(--foreground)] transition-colors py-1">GitHub</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener" className="hover:text-[var(--foreground)] transition-colors py-1">LinkedIn</a>
             </div>
           </div>
         </footer>

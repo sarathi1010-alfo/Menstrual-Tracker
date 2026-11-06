@@ -5,6 +5,7 @@ import { useTracker } from './TrackerContext';
 import { DailyLog } from '../lib/types';
 import { X, Check } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
+import { trackEvent } from '@/lib/gtag';
 
 interface DailyLogModalProps {
   date: string; // ISO string
@@ -51,6 +52,15 @@ export function DailyLogModal({ date, isOpen, onClose }: DailyLogModalProps) {
   if (!isOpen) return null;
 
   const handleSave = () => {
+    trackEvent('log_cycle', {
+      is_period_start: isPeriodStart,
+      date,
+    });
+    trackEvent('save_data', {
+      type: 'daily_log',
+      date,
+    });
+
     // Handle period start toggle
     const existingCycle = cycles.find(c => c.startDate === date);
     if (isPeriodStart && !existingCycle) {

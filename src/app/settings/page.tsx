@@ -3,6 +3,7 @@
 import React, { useRef } from 'react';
 import { useTracker } from '@/components/TrackerContext';
 import { Download, Upload, Trash2, Settings2, RefreshCw } from 'lucide-react';
+import { trackEvent } from '@/lib/gtag';
 
 export default function SettingsPage() {
   const {
@@ -17,6 +18,7 @@ export default function SettingsPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleExport = () => {
+    trackEvent('save_data', { type: 'export_backup', total_cycles: cycles.length });
     const data = { cycles, dailyLogs, preferences };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);

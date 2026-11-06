@@ -26,13 +26,13 @@ export const ecosystemTools: EcosystemTool[] = [
   },
   {
     name: 'QR Generator',
-    url: 'https://qrgenerator.alfo.online',
+    url: 'https://qr.alfo.online',
     description: 'Create custom QR codes instantly.',
     tags: ['productivity', 'design', 'utility'],
   },
   {
     name: 'EMI Calculator',
-    url: 'https://emicalculator.alfo.online',
+    url: 'https://emicalculatorpro.alfo.online',
     description: 'Calculate loan EMIs and plan your finances.',
     tags: ['finance', 'utility'],
   },
