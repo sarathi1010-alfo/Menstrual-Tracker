@@ -2,8 +2,9 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { PredictionCard } from '@/components/PredictionCard';
 import { CycleCalendar } from '@/components/CycleCalendar';
-import { ArrowRight, Shield, Activity, CalendarDays, Heart, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Shield, Activity, CalendarDays, Heart, Sparkles } from 'lucide-react';
 import { RelatedToolsWidget } from '@/components/RelatedToolsWidget';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
@@ -321,6 +322,10 @@ export default function Home() {
 
       {/* Internal Traffic Engine - Related Tools Widget */}
       <RelatedToolsWidget />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-12">
+        <MedicalDisclaimer />
+      </div>
     </div>
   );
 }
