@@ -2,7 +2,7 @@
   {
     "id": "is-my-data-secure",
     "question": "Is my data secure?",
-    "answer": "Yes. We built CycleHub with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
+    "answer": "Yes. We built LunaCycle with a strict privacy-first architecture. Your data is stored locally on your device using your browser's local storage. We do not have servers, databases, or accounts. Your information never leaves your device."
   },
   {
     "id": "how-to-track",
@@ -17,6 +17,36 @@
   {
     "id": "birth-control",
     "question": "Can I use this for birth control?",
-    "answer": "No. CycleHub is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+    "answer": "No. LunaCycle is designed for educational and tracking purposes only. The fertile window estimations are based on standard calendar calculations, which are not reliable enough to prevent pregnancy. Please consult with a healthcare professional for reliable contraception methods."
+  },
+  {
+    "id": "export-data",
+    "question": "Can I export my cycle data?",
+    "answer": "Yes, you can export your complete cycle history and symptom logs directly to a local JSON file via the Settings page, allowing full data portability without external dependencies."
+  },
+  {
+    "id": "irregular-cycle",
+    "question": "What if my cycle is irregular?",
+    "answer": "If your cycle varies by more than 7 to 9 days between months, LunaCycle dynamically adjusts rolling averages to provide the most reliable prediction range possible, while recommending consultation with a healthcare provider."
+  },
+  {
+    "id": "how-many-cycles-to-log",
+    "question": "How many cycles do I need to log for accurate predictions?",
+    "answer": "Accuracy improves progressively as you log three or more consecutive cycles. However, LunaCycle will start providing estimations after you log your very first cycle."
+  },
+  {
+    "id": "fertile-window",
+    "question": "What is a fertile window?",
+    "answer": "The fertile window refers to the days in a menstrual cycle when pregnancy is possible. LunaCycle calculates your estimated ovulation day and identifies the 5-day preceding fertile window to assist with conception planning."
+  },
+  {
+    "id": "symptoms-tracking",
+    "question": "Can I track symptoms?",
+    "answer": "Yes, you can track daily symptoms including bleeding intensity, cramps, mood changes, and cervical fluid in your secure local log."
+  },
+  {
+    "id": "cost",
+    "question": "Is LunaCycle free to use?",
+    "answer": "Yes, LunaCycle is completely free to use. We do not require any accounts or subscriptions."
   }
 ]
