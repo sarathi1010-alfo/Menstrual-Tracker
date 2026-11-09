@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next';
-import { getGuideSlugs } from '@/lib/mdx';
+import { getGuideSlugs, getAllArticles } from '@/lib/mdx';
 import seoData from '@/data/pSeoData.json';
 import { absoluteUrl } from '@/lib/seo';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Use a string to ensure no timezone fluctuation for static generation,
   // Next.js MetadataRoute.Sitemap allows Date objects or strings,
   // but to avoid "Couldn't fetch" parsing errors from malformed date outputs,
@@ -69,7 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((slug) => ({
       url: absoluteUrl(`/guides/${slug}`),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.7, // Internal programmatic pages get high but sub-core priority
     }));
 
@@ -79,9 +79,47 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((tool) => ({
       url: absoluteUrl(`/tools/${tool.slug}`),
       lastModified: currentDateStr,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...guideRoutes, ...toolRoutes];
+  const allArticles = getAllArticles();
+
+  const blogRoutes: MetadataRoute.Sitemap = allArticles
+    .filter((a) => a.category === 'blog')
+    .map((article) => ({
+      url: absoluteUrl(`/blog/${article.slug}`),
+      lastModified: currentDateStr,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    }));
+
+  const whatIsRoutes: MetadataRoute.Sitemap = allArticles
+    .filter((a) => a.category === 'what-is')
+    .map((article) => ({
+      url: absoluteUrl(`/${article.slug}`),
+      lastModified: currentDateStr,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    }));
+
+  const useCaseRoutes: MetadataRoute.Sitemap = allArticles
+    .filter((a) => a.category === 'use-cases')
+    .map((article) => ({
+      url: absoluteUrl(`/use-cases/${article.slug}`),
+      lastModified: currentDateStr,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    }));
+
+  const conditionRoutes: MetadataRoute.Sitemap = allArticles
+    .filter((a) => a.category === 'conditions')
+    .map((article) => ({
+      url: absoluteUrl(`/conditions/${article.slug}`),
+      lastModified: currentDateStr,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    }));
+
+  return [...staticRoutes, ...guideRoutes, ...toolRoutes, ...blogRoutes, ...whatIsRoutes, ...useCaseRoutes, ...conditionRoutes];
 }

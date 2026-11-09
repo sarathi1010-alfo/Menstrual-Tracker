@@ -132,8 +132,8 @@ test.describe('16-Point Technical & SEO Verification Suite', () => {
       return new Promise<number>((resolve) => {
         let score = 0;
         const observer = new PerformanceObserver((list) => {
-          for (const entry of list.getEntries() as any[]) {
-            if (!entry.hadRecentInput) score += entry.value;
+          for (const entry of list.getEntries() as unknown as Record<string, unknown>[]) {
+            if (!(entry.hadRecentInput as boolean)) score += (entry.value as number);
           }
         });
         observer.observe({ type: 'layout-shift', buffered: true });
